@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jchangz01/bruinplanner/issues"
   },
-  "homepage": "https://github.com/jchangz01/bruinplanner#readme"
+  "homepage": "https://github.com/jchangz01/bruinplanner#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
