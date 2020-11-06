@@ -4,7 +4,8 @@
   "description": "Plan out your 4 years at UCLA with BruinPlanner!",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,9 @@
   "homepage": "https://github.com/jchangz01/bruinplanner#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^2.0.6",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
