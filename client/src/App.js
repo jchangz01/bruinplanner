@@ -1,8 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
+
+function PathNotFound() {
+  return (
+    <h3>Error 404 - Page Not Found!</h3>
+  )
+}
 
 function App() {
   return (
+    /*<Switch>
+      
+    </Switch>
+    */
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

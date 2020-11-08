@@ -4,7 +4,9 @@ var request = require('request')
 const app = express()
 const port = 8080
 
+//maps a major to appropriate courses
 const majorToCourse = new Map();
+//maps courses to their course numbers
 const courseToCourseNum = new Map();
 
 //Retrieve and filter API data to courseNames, courseNumbers, and courseMajors
