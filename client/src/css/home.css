@@ -1,0 +1,36 @@
+#home-header {
+    position: relative;
+    line-height: 12vh;
+    background-color: #2774AE;
+    z-index: 1000;
+}
+
+#home-header-content {
+    vertical-align: middle;
+    padding: 0 7vw
+}
+
+#home-header-title {
+    display: inline-block;
+    color: white;
+    font-size: calc(2vw + 1vh);
+    font-weight: 900;
+    font-family: 'Nunito';
+    letter-spacing: -0.1vw;
+}
+
+#home-header-logo {
+    color:#FFD100;
+    font-size: calc(2vw + 1vh);
+    padding-right: 0.5vw;
+}
+
+#home-header-navigation {
+    float: right;
+}
+    #home-header-navigation > *{
+        margin-left: 3vw;
+        color: white;
+        font-size: 2vh;
+        font-family: 'Nunito';
+    }
