@@ -1,8 +1,9 @@
 #home-header {
     position: relative;
-    line-height: 12vh;
+    line-height: 10.5vh;
     background-color: #2774AE;
     z-index: 1000;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
 }
 
 #home-header-content {
@@ -15,7 +16,7 @@
     color: white;
     font-size: calc(2vw + 1vh);
     font-weight: 900;
-    font-family: 'Nunito';
+    font-family: 'Catamaran';
     letter-spacing: -0.1vw;
 }
 
@@ -29,8 +30,70 @@
     float: right;
 }
     #home-header-navigation > *{
-        margin-left: 3vw;
+        margin-left: 2.5vw;
         color: white;
         font-size: 2vh;
         font-family: 'Nunito';
+        font-weight: bold;
     }
+    #home-header-navigation > *:hover {
+        opacity: 70%;
+    }
+
+.home-header-buttons {
+    background-color: white;
+    border: none;
+    border-radius: 5%;
+    padding: 1vw;
+}
+    .home-header-buttons:hover {
+        opacity: 70%;
+    }
+
+
+
+/*Section*/
+#home-section-mainimg {
+    width: 45vw;
+    height: 75vh;
+    margin-top: -9vh;
+    z-index: 0;
+}
+
+#home-section-title {
+    margin: 0 auto;
+    width: 60vw;
+    line-height: 6vh;
+    padding-top: 5.5vh;
+    color: #2774AE;
+    font-size: 2.5vw;
+    font-family: 'Catamaran';
+}
+
+#home-section-description {
+    margin: 0 auto;
+    width: 45vw;
+    line-height: 3vh;
+    padding-top: 2.5vh;
+    color: black;
+    font-weight: 100;
+    font-size: 1.2vw;
+    font-family: 'Nunito';
+}
+
+.home-section-button {
+    min-width: 10vw;
+    padding: 3vh 4vw;
+    border-radius: 7.5px;
+    margin-top: 3vh;
+    box-shadow: 0 5px 0 #003B5C;
+    color: white;
+    background-color: #2774AE;
+    border: none;
+    font-family: 'Catamaran';
+    font-size: 1vw;
+}
+
+.home-section-button:hover{
+    opacity: 70%;
+}
