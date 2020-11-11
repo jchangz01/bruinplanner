@@ -15,7 +15,7 @@
     display: inline-block;
     color: white;
     font-size: calc(2vw + 1vh);
-    font-weight: 900;
+   
     font-family: 'Catamaran';
     letter-spacing: -0.1vw;
 }
@@ -53,13 +53,6 @@
 
 
 /*Section*/
-#home-section-mainimg {
-    width: 45vw;
-    height: 75vh;
-    margin-top: -9vh;
-    z-index: 0;
-}
-
 #home-section-title {
     margin: 0 auto;
     width: 60vw;
@@ -92,8 +85,17 @@
     border: none;
     font-family: 'Catamaran';
     font-size: 1vw;
+    z-index: 200;
 }
+    .home-section-button:hover{
+        opacity: 70%;
+    }
 
-.home-section-button:hover{
-    opacity: 70%;
+
+#home-section-mainimg {
+    width: 45vw;
+    height: 75vh;
+    margin: -9vh;
+    z-index: -40;
+    position: relative;
 }

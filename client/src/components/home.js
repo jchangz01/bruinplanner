@@ -34,6 +34,7 @@ export default class Home extends React.Component {
                         </button>
                     </div>
                     <img id="home-section-mainimg" src={roycehall} alt="XXX"/>
+                    <div></div>
                 </section>
                 <h1>hi</h1>
             </div>
