@@ -1,3 +1,4 @@
+/*HEADER*/
 #home-header {
     position: relative;
     line-height: 10.5vh;
@@ -15,8 +16,6 @@
     display: inline-block;
     color: white;
     font-size: calc(2vw + 1vh);
-   
-    font-family: 'Catamaran';
     letter-spacing: -0.1vw;
 }
 
@@ -45,25 +44,24 @@
     border: none;
     border-radius: 5%;
     padding: 1vw;
+    font-weight: bold;
 }
     .home-header-buttons:hover {
         opacity: 70%;
+        cursor: pointer;
     }
 
-
-
-/*Section*/
-#home-section-title {
+/*Main Section*/
+#home-main-section-title {
     margin: 0 auto;
     width: 60vw;
     line-height: 6vh;
     padding-top: 5.5vh;
     color: #2774AE;
     font-size: 2.5vw;
-    font-family: 'Catamaran';
 }
 
-#home-section-description {
+#home-main-section-description {
     margin: 0 auto;
     width: 45vw;
     line-height: 3vh;
@@ -74,7 +72,7 @@
     font-family: 'Nunito';
 }
 
-.home-section-button {
+.home-main-section-button {
     min-width: 10vw;
     padding: 3vh 4vw;
     border-radius: 7.5px;
@@ -87,15 +85,77 @@
     font-size: 1vw;
     z-index: 200;
 }
-    .home-section-button:hover{
+    .home-main-section-button:hover{
         opacity: 70%;
+        cursor: pointer;
     }
 
 
-#home-section-mainimg {
+#home-main-section-mainimg {
     width: 45vw;
     height: 75vh;
     margin: -9vh;
     z-index: -40;
     position: relative;
 }
+
+
+.full-width-box {
+    margin-top: -9vh;
+    background-color: #8BB8E8;
+    width: 100%;
+    height: 25vh;
+    border: none;
+  }
+  
+/* Sub Section */
+#home-sub-section-content {
+    background-color: #2774AE;
+    text-align: center;
+    padding-bottom: 4vh;
+}
+
+#home-sub-section-title {
+    margin: 0 auto;
+    width: 50vw;
+    line-height: 6vh;
+    padding-top: 7vh;
+    color: white;
+    font-size: calc(2vw + 0.25vh);
+    font-weight: lighter;
+}
+
+#home-sub-section-claims {
+    margin: 0 auto;
+    width: 65vw;
+    padding: 5vh 0;
+}
+
+.claim {
+    vertical-align: text-top;
+    display: inline-block;
+    width: 30%;
+}
+
+.circle {
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 80%;
+    line-height: 15.6vw;
+    background-color: #FFC72C;
+}
+
+.claim-icon {
+    vertical-align: middle;
+    color: white;
+    min-width: 50%;
+    height: auto;
+}
+
+.claim-description {
+    color: white;
+    margin-top: 2vh;
+    min-width: 80%;
+    font-family: 'Nunito';
+}
+
