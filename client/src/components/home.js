@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/Home.css'
 import roycehall from '../roycehall.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faAddressBook, faAmbulance, faPlane } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faAddressBook, faAmbulance } from '@fortawesome/free-solid-svg-icons'
 
 function DynamicCircle () {
     var container = document.getElementsByClassName('claim')
@@ -17,16 +17,6 @@ function DynamicCircle () {
 
 
 export default class Home extends React.Component {
-    /*componentDidMount() {
-        var container = document.getElementsByClassName('claim')
-        var circleRadius = container[0].offsetWidth;
-        console.log (circleRadius * 0.8)
-        
-        var circles = document.getElementsByClassName('circle')
-        for (var i = 0; i < circles.length; i++)
-            circles[i].style.height = circleRadius * 0.8 + "px";
-        
-    }*/
     render() {
         return (
             <div>
@@ -55,8 +45,8 @@ export default class Home extends React.Component {
                             <button className="home-main-section-button">GET STARTED</button>
                         </a>
                     </div>
-                    <img id="home-main-section-mainimg" src={roycehall} alt="XXX"/>
-                    <div class="full-width-box"></div>
+                    <img id="home-main-section-mainimg" class="fade-in" src={roycehall} alt="XXX"/>
+                    <div class="full-width-box lightblue" style={{"margin-top": "-9vh"}}></div>
                 </section>
                 <section>
                     <div id="home-sub-section-content">
@@ -82,7 +72,7 @@ export default class Home extends React.Component {
                             </article>
                             <article className="claim" style={{"marginLeft": "2.5vw"}}>
                                 <div className="circle">
-                                    <FontAwesomeIcon className="claim-icon" icon={faPlane} />
+                                    <FontAwesomeIcon className="claim-icon" icon={faAmbulance} />
                                 </div>
                                 <p className="claim-description">
                                     Lorem voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
@@ -92,6 +82,17 @@ export default class Home extends React.Component {
                         </div>
                     </div>
                 </section>
+                <section>
+                    <div class="full-width-box white" style={{height: "35vh"}}>
+                        <h2 id="home-final-section-title" style={{margin: "0"}}>Have any questions or concerns? Let us know!</h2>
+                        <a href="/contact">
+                            <button className="home-main-section-button">ASK A QUESTION</button>
+                        </a>
+                    </div>
+                </section>
+                <footer>
+                    <div className="full-width-box darkblue" style={{height: "85px"}}></div>
+                </footer>
             </div>
         )
     }
