@@ -61,7 +61,7 @@ export default class Home extends React.Component {
                                     invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
                                 </p>
                             </article>
-                            <article className="claim" style={{"marginLeft": "2.5vw"}}>
+                            <article className="claim">
                                 <div className="circle">
                                     <FontAwesomeIcon className="claim-icon" icon={faAddressBook} />
                                 </div>
@@ -70,7 +70,7 @@ export default class Home extends React.Component {
                                     invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
                                 </p>
                             </article>
-                            <article className="claim" style={{"marginLeft": "2.5vw"}}>
+                            <article className="claim">
                                 <div className="circle">
                                     <FontAwesomeIcon className="claim-icon" icon={faAmbulance} />
                                 </div>
