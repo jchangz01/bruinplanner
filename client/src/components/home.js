@@ -39,14 +39,14 @@ export default class Home extends React.Component {
                         <p id="home-main-section-description"> 
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
                             invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et 
-                            accusam et justo duo dolores et ea rebum. et justo duo dolores et ea rebum
+                            accusam et justo duo dolores et ea rebum. et justo duo dolores et ea rebum. 
                         </p>
                         <a href="/">
                             <button className="home-main-section-button">GET STARTED</button>
                         </a>
                     </div>
                     <img id="home-main-section-mainimg" class="fade-in" src={roycehall} alt="XXX"/>
-                    <div class="full-width-box lightblue" style={{"margin-top": "-9vh"}}></div>
+                    <div class="full-width-box lightblue" style={{"margin-top": "-132px"}}></div>
                 </section>
                 <section>
                     <div id="home-sub-section-content">
@@ -83,8 +83,8 @@ export default class Home extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div class="full-width-box white" style={{height: "35vh"}}>
-                        <h2 id="home-final-section-title" style={{margin: "0"}}>Have any questions or concerns? Let us know!</h2>
+                    <div class="full-width-box white" style={{height: "245px"}}>
+                        <h2 id="home-final-section-title" >Have any questions or concerns? Let us know!</h2>
                         <a href="/contact">
                             <button className="home-main-section-button">ASK A QUESTION</button>
                         </a>
