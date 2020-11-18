@@ -4,18 +4,6 @@ import roycehall from '../roycehall.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faAddressBook, faAmbulance } from '@fortawesome/free-solid-svg-icons'
 
-function DynamicCircle () {
-    var container = document.getElementsByClassName('claim')
-    var containerProps = container[0].getBoundingClientRect();
-    var circleRadius = containerProps.width;
-
-
-    return (
-        <div className="circle" style={{height: circleRadius, width: circleRadius}}></div>
-    )
-}
-
-
 export default class Home extends React.Component {
     render() {
         return (
@@ -23,12 +11,12 @@ export default class Home extends React.Component {
                 <header id="home-header">
                     <div id="home-header-content">
                         <FontAwesomeIcon id="home-header-logo" icon = { faCalendar } />
-                        <a href="/"><h1 id="home-header-title"><span style={{color: "#FFD100", "letter-spacing": 0}}>Bruin</span>Planner</h1></a>
+                        <a href="/"><h1 id="home-header-title"><span class="gold" style={{"letter-spacing": 0}}>Bruin</span>Planner</h1></a>
                         <nav id="home-header-navigation">
                             <a href="/about">ABOUT</a>
                             <a href="/contact">CONTACT</a>
-                            <a href="/signup"><button className="home-header-buttons" style={{color: "#FFD100"}}>SIGN UP</button></a>
-                            <a href="/login"><button className="home-header-buttons" style={{color: "#2774AE"}}>LOG IN</button></a>
+                            <a href="/signup"><button className="home-header-buttons gold">SIGN UP</button></a>
+                            <a href="/login"><button className="home-header-buttons blue">LOG IN</button></a>
                         </nav>
                     </div>
                 </header>
@@ -46,7 +34,7 @@ export default class Home extends React.Component {
                         </a>
                     </div>
                     <img id="home-main-section-mainimg" class="fade-in" src={roycehall} alt="XXX"/>
-                    <div class="full-width-box lightblue" style={{"margin-top": "-132px"}}></div>
+                    <div class="full-width-box lightblue-br" style={{"margin-top": "-132px"}}></div>
                 </section>
                 <section>
                     <div id="home-sub-section-content">
@@ -83,7 +71,7 @@ export default class Home extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div class="full-width-box white" style={{height: "245px"}}>
+                    <div class="full-width-box white-br" style={{height: "245px"}}>
                         <h2 id="home-final-section-title" >Have any questions or concerns? Let us know!</h2>
                         <a href="/contact">
                             <button className="home-main-section-button">ASK A QUESTION</button>
@@ -91,7 +79,7 @@ export default class Home extends React.Component {
                     </div>
                 </section>
                 <footer>
-                    <div className="full-width-box darkblue" style={{height: "85px"}}></div>
+                    <div className="full-width-box darkblue-br" style={{height: "85px"}}></div>
                 </footer>
             </div>
         )

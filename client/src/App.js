@@ -1,6 +1,7 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
+import Login from './components/Login'
 
 function PathNotFound() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
     <main>
       <Switch>
         <Route path="/" component={Home} exact />
+        <Route path="/login" component={Login} exact/>
         <Route component={PathNotFound} />
       </Switch>
     </main>

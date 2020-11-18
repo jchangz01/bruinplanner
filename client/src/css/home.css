@@ -48,10 +48,6 @@
     font-size: 14px;
     font-weight: bold;
 }
-    .home-header-buttons:hover {
-        opacity: 70%;
-        cursor: pointer;
-    }
 
 /*Main Section*/
 #home-main-section-title {
@@ -87,10 +83,6 @@
     font-size: 14.2px;
     z-index: 200;
 }
-    .home-main-section-button:hover{
-        opacity: 70%;
-        cursor: pointer;
-    }
 
 
 #home-main-section-mainimg {
