@@ -45,9 +45,8 @@
 }
 
 .login-inputs {
-    width: 320px;
-    margin-top: 25px;
-    color: white;
+    width: 100%;
+    border-color: blue;
 }
 
 #login-prompt-buttons {
