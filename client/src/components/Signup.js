@@ -11,7 +11,7 @@ const theme = createMuiTheme({
         main: "#000",
         },
     },
-    });
+});
     
 
 export default class Signup extends React.Component {
@@ -33,12 +33,12 @@ export default class Signup extends React.Component {
                             <ThemeProvider
                                 theme={theme}
                             >
-                                <TextField className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Username" color="primary"/>
-                                <TextField className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Email" color="primary" />
-                                <TextField className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Password" type="password" color="primary"/>
-                                <TextField className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Re-enter Password" type="password" color="primary" />
+                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Username" color="primary"/>
+                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Email" color="primary" />
+                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Password" type="password" color="primary"/>
+                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Re-enter Password" type="password" color="primary" />
                             </ThemeProvider>
-                            <button className="login-button blue-br white" style={{float: "right", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Create-account</button>
+                            <button className="logSign-button blue-br white" style={{float: "right", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Create-account</button>
                         </form>
                     </div>
                 </section>

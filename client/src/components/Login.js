@@ -34,22 +34,22 @@ function OptionsOrPrompt (props) {
                             <ThemeProvider
                                 theme={theme}
                             >
-                                <TextField autoFocus className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} label="Email" color="primary"/>
-                                <TextField className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} margin="normal" label="Password" type="password" color="primary" />
+                                <TextField autoFocus className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} label="Email" color="primary"/>
+                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} margin="normal" label="Password" type="password" color="primary" />
                             </ThemeProvider>
                             <div id="login-prompt-buttons">
                                 <span class="Login-back" onClick={onClick}>
                                     <FontAwesomeIcon className="Login-back-arrow" icon={faArrowAltCircleLeft}/>
                                     <p className="Login-back-phrase">Back</p>
                                 </span>
-                                <button className="login-button lightblue-br white" style={{float: "right", verticalAlign: "center", width: "160px"}}>Log-In</button>
+                                <button className="logSign-button lightblue-br white" style={{float: "right", verticalAlign: "center", width: "160px"}}>Log-In</button>
                             </div>
                         </form>
                     </React.Fragment> :
                     <React.Fragment>    
                         <div id="login-buttons-container">
-                            <button class="login-button lightblue-br white" style={{float: "left"}} onClick={onClick}>Log-in with email</button>
-                            <a href="/sign-up"><button className="login-button blue-br white" style={{float: "right", border: "#8BB8E8 2px solid"}}>Sign-up</button></a>
+                            <button class="logSign-button lightblue-br white" style={{float: "left"}} onClick={onClick}>Log-in with email</button>
+                            <a href="/sign-up"><button className="logSign-button blue-br white" style={{float: "right", border: "#8BB8E8 2px solid"}}>Sign-up</button></a>
                         </div>
                         <p style={{marginTop:"30px", width: "400px", fontSize:"15px"}}>Still unsure about creating an account? <a href='/' className="white" style={{"text-decoration": "underline", fontWeight:"bold"}}>Learn more!</a>
                         </p>

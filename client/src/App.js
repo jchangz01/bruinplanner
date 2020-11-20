@@ -1,8 +1,9 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
-import Login from './components/Login'
-import Signup from './components/Signup'
+import About from './components/About';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 function PathNotFound() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
     <main>
       <Switch>
         <Route path="/" component={Home} exact />
+        <Route path="/about" component={About} exact/>
         <Route path="/log-in" component={Login} exact/>
         <Route path="/sign-up" component={Signup} exact/>
         <Route component={PathNotFound} />

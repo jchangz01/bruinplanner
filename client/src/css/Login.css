@@ -35,19 +35,6 @@
     width: 320px;
 }
 
-.login-button {
-    border: none;
-    border-radius: 3px;
-    padding: 10px 30px ;
-    font-size: 16px;
-    height: 50px;
-    font-weight: bold;
-}
-
-.login-inputs {
-    width: 100%;
-}
-
 #login-prompt-buttons {
     line-height: 50px;
     width: 320px;

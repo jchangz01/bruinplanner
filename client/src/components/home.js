@@ -8,15 +8,15 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                <header id="home-header">
-                    <div id="home-header-content">
-                        <FontAwesomeIcon id="home-header-logo" icon = { faCalendar } />
-                        <a href="/"><h1 id="home-header-title"><span class="gold" style={{"letter-spacing": 0}}>Bruin</span>Planner</h1></a>
-                        <nav id="home-header-navigation">
+                <header id="header">
+                    <div id="header-content">
+                        <FontAwesomeIcon id="header-logo" icon = { faCalendar } />
+                        <a href="/"><h1 id="header-title"><span class="gold" style={{"letter-spacing": 0}}>Bruin</span>Planner</h1></a>
+                        <nav id="header-navigation">
                             <a href="/about">ABOUT</a>
                             <a href="/contact">CONTACT</a>
-                            <a href="/sign-up"><button className="home-header-buttons gold">SIGN UP</button></a>
-                            <a href="/log-in"><button className="home-header-buttons blue">LOG IN</button></a>
+                            <a href="/sign-up"><button className="header-buttons gold">SIGN UP</button></a>
+                            <a href="/log-in"><button className="header-buttons blue">LOG IN</button></a>
                         </nav>
                     </div>
                 </header>
