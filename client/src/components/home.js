@@ -15,8 +15,8 @@ export default class Home extends React.Component {
                         <nav id="home-header-navigation">
                             <a href="/about">ABOUT</a>
                             <a href="/contact">CONTACT</a>
-                            <a href="/signup"><button className="home-header-buttons gold">SIGN UP</button></a>
-                            <a href="/login"><button className="home-header-buttons blue">LOG IN</button></a>
+                            <a href="/sign-up"><button className="home-header-buttons gold">SIGN UP</button></a>
+                            <a href="/log-in"><button className="home-header-buttons blue">LOG IN</button></a>
                         </nav>
                     </div>
                 </header>
@@ -29,7 +29,7 @@ export default class Home extends React.Component {
                             invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et 
                             accusam et justo duo dolores et ea rebum. et justo duo dolores et ea rebum. 
                         </p>
-                        <a href="/">
+                        <a href="/log-in">
                             <button className="home-main-section-button">GET STARTED</button>
                         </a>
                     </div>

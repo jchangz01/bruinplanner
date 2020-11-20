@@ -34,8 +34,8 @@ function OptionsOrPrompt (props) {
                             <ThemeProvider
                                 theme={theme}
                             >
-                                <TextField className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} label="Email" color="primary"/>
-                                <TextField className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} margin="normal" label="Password" color="primary" />
+                                <TextField autoFocus className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} label="Email" color="primary"/>
+                                <TextField className="login-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} margin="normal" label="Password" type="password" color="primary" />
                             </ThemeProvider>
                             <div id="login-prompt-buttons">
                                 <span class="Login-back" onClick={onClick}>
@@ -48,8 +48,8 @@ function OptionsOrPrompt (props) {
                     </React.Fragment> :
                     <React.Fragment>    
                         <div id="login-buttons-container">
-                            <a href="#"><button class="login-button lightblue-br white" style={{float: "left"}} onClick={onClick}>Log-in with email</button></a>
-                            <button className="login-button blue-br white" style={{float: "right", border: "#8BB8E8 2px solid"}}>Sign-up</button>
+                            <button class="login-button lightblue-br white" style={{float: "left"}} onClick={onClick}>Log-in with email</button>
+                            <a href="/sign-up"><button className="login-button blue-br white" style={{float: "right", border: "#8BB8E8 2px solid"}}>Sign-up</button></a>
                         </div>
                         <p style={{marginTop:"30px", width: "400px", fontSize:"15px"}}>Still unsure about creating an account? <a href='/' className="white" style={{"text-decoration": "underline", fontWeight:"bold"}}>Learn more!</a>
                         </p>
