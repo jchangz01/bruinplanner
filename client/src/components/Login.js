@@ -29,20 +29,20 @@ function OptionsOrPrompt (props) {
                 <h1 id="Login-title">BruinPlanner</h1>
                 {form ? 
                     <React.Fragment>
-                        <form style={{width: "320px"}}>
+                        <form action="/log-in" method="POST" style={{width: "320px"}}>
                             {/* Use ThemeProvider to provide desired color for your Materials-UI elements */}
                             <ThemeProvider
                                 theme={theme}
                             >
-                                <TextField autoFocus className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} label="Email" color="primary"/>
-                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} margin="normal" label="Password" type="password" color="primary" />
+                                <TextField name="email" type="email" className="logSign-inputs" label="Email" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} color="primary" autoFocus />
+                                <TextField name="password" type="password" className="logSign-inputs" label="Password" inputProps={{ style: { fontFamily: 'Nunito', color: 'white'}}} margin="normal" color="primary" />
                             </ThemeProvider>
                             <div id="login-prompt-buttons">
                                 <span class="Login-back" onClick={onClick}>
                                     <FontAwesomeIcon className="Login-back-arrow" icon={faArrowAltCircleLeft}/>
                                     <p className="Login-back-phrase">Back</p>
                                 </span>
-                                <button className="logSign-button lightblue-br white" style={{float: "right", verticalAlign: "center", width: "160px"}}>Log-In</button>
+                                <button type="submit" className="logSign-button lightblue-br white" style={{float: "right", verticalAlign: "center", width: "160px"}}>Log-In</button>
                             </div>
                         </form>
                     </React.Fragment> :

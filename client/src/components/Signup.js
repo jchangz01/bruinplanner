@@ -11,8 +11,7 @@ const theme = createMuiTheme({
         main: "#000",
         },
     },
-});
-    
+}); 
 
 export default class Signup extends React.Component {
     render () {
@@ -28,17 +27,17 @@ export default class Signup extends React.Component {
                     <div id="signup-main-content">
                         <h2 id="signup-main-heading">Create your account</h2>
                         <h3 id="signup-main-subheading">Start planning your next 4 years at UCLA now!</h3>
-                        <form style={{width: "500px"}}>
+                        <form action="/sign-up" method="POST" style={{width: "500px"}}>
                             {/* Use ThemeProvider to provide desired color for your Materials-UI elements */}
                             <ThemeProvider
                                 theme={theme}
                             >
-                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Username" color="primary"/>
-                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Email" color="primary" />
-                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Password" type="password" color="primary"/>
-                                <TextField className="logSign-inputs" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" label="Re-enter Password" type="password" color="primary" />
+                                <TextField name="user" type="text" className="logSign-inputs" label="Username" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" color="primary" required/>
+                                <TextField name="email" type="email" className="logSign-inputs" label="Email" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal"  color="primary" required/>
+                                <TextField name="password" type="password" className="logSign-inputs" label="Password" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal"  color="primary" required/>
+                                <TextField name="passwordConfirm" type="password" className="logSign-inputs" label="Re-enter Password" inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} margin="normal" color="primary" required/>
                             </ThemeProvider>
-                            <button className="logSign-button blue-br white" style={{float: "right", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Create-account</button>
+                            <button type="submit" className="logSign-button blue-br white" style={{float: "right", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Create-account</button>
                         </form>
                     </div>
                 </section>

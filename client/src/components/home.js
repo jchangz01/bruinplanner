@@ -27,14 +27,14 @@ export default class Home extends React.Component {
                         <p id="home-main-section-description"> 
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
                             invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et 
-                            accusam et justo duo dolores et ea rebum. et justo duo dolores et ea rebum. 
+                            accusam et justo duo dolores et ea rebum. et justo duo dolores et ea rebum. Et justo duo dolores et ea rebum. et justo duo dolores et ea rebum. 
                         </p>
                         <a href="/log-in">
                             <button className="home-main-section-button">GET STARTED</button>
                         </a>
                     </div>
                     <img id="home-main-section-mainimg" class="fade-in" src={roycehall} alt="XXX"/>
-                    <div class="full-width-box lightblue-br" style={{"margin-top": "-132px"}}></div>
+                    <div class="full-width-box lightblue-br" style={{"margin-top": "-130px"}}></div>
                 </section>
                 <section>
                     <div id="home-sub-section-content">
