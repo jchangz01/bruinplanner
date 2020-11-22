@@ -37,18 +37,18 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.post('/log-in', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/account/', //+ users.user,
+    successRedirect: '/account', //+ users.user,
     failureRedirect: '/log-in',
     failureFlash: true
 }))
 
-app.post('/sign-up', checkNotAuthenticated, (req, res) => { 
+app.post('/sign-up', checkNotAuthenticated, async (req, res) => { 
     try {
-        const hashedPassword = bcrypt.hash(req.body.password, 10);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
         users.push ({
             id: Date.now().toString(), //auto generated with db
             user: req.body.user,
-            eamil: req.body.eamil,
+            email: req.body.email,
             password: hashedPassword
         })
         res.redirect('/log-in')
