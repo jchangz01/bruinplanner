@@ -16,6 +16,7 @@ palette: {
 
 
 function OptionsOrPrompt (props) {
+    
     const [form, toggleForm] = React.useState(false);
     const onClick = () => toggleForm(!form);
 

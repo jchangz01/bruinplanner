@@ -15,6 +15,7 @@ const session = require ('express-session')
 // configure express 
 app.use (express.urlencoded({ extended: false })); //tells app to access 'name' input fields in req of HTTP calls
 app.use(express.static(__dirname + '/client/build')); // using react static
+app.use(express.json({limit:'1mb'})) //enables fetch post request on frontend
 app.use (flash())
 app.use (session ({
     secret: process.env.SESSION_SECRET,
@@ -24,17 +25,8 @@ app.use (session ({
 app.use(passport.initialize())
 app.use(passport.session())
 
-/* initialize authentication passport */
-const users = [];
-const passportConfig = require ('./js/passport-config')
-passportConfig.init (
-    passport, 
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
-)
 
-
-/* settting up database mongoDb */
+/* Settting up database mongoDb */
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection
@@ -42,8 +34,23 @@ db.on('error', error => console.log(error))
 db.once('open', () => console.log('Connected to Mongoose'))
 
 
+/* initialize authentication passport */
+const passportConfig = require ('./js/passport-config')
+passportConfig.init (
+    passport, 
+    email => db.collection('authCredentials').findOne( {"email" : email}),
+    id => db.collection('authCredentials').findOne({"_id" : id})
+)
+
+
+
 //HELP HERE
 app.get('/account', checkAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
+app.get('/log-in', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
+app.get('/sign-up', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
+
+// MUST BE LAST!!
+app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
 
 /*Post Routes */
@@ -57,6 +64,8 @@ app.post('/log-in', checkNotAuthenticated, passport.authenticate('local', {
 
 //Redirects to appropriate route based on signing-up credentials
 app.post('/sign-up', checkNotAuthenticated, async (req, res) => { 
+    console.log(req.body)
+    var info = {};
     try {
         // make sure that an account w/ the same username or email doesn't already exist
         const userLookup = await db.collection('authCredentials').findOne( {"user": req.body.user } );
@@ -64,17 +73,20 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
         if (userLookup != null)
         {
             console.log("new user attempted to make account with an existing username");
-            res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
+            //res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
+            info = { redirect: "/sign-up", errorType: "username", message: "The username you entered already exist, please enter a new username"}   
         }
-        if (emailLookup != null)
+        else if (emailLookup != null)
         {
             console.log("new user attempted to make account with an existing email");
-            res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
+            //res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
+            info = { redirect: "/sign-up", errorType: "email", message: "The email you entered already exist, please enter a new email"}   
         }
         else if (req.body.password !== req.body.passwordConfirm)
         {
             console.log("new user's password field and password confirm field don't match")
-            res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
+            //res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
+            info = { redirect: "/sign-up", errorType: "password", message: "The password field and re-entered password field do not match, please try again"}   
         }
         else 
         {
@@ -88,11 +100,16 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
                 if (err) throw err; 
                 console.log("Record inserted Successfully");           
             }); 
-            res.redirect('/log-in') // INTERACT w/ REACT FRONTEND
+            //res.redirect('/log-in') // INTERACT w/ REACT FRONTEND
+            info = { redirect: "/log-in", message: "Successful"}   
         }
     } catch {
-        res.redirect('/sign-up')
+        //res.redirect('/sign-up')
+        info = { redirect: "/sign-up", message: "ERROR! An error has occured please try again"}   
+    } finally {
+        return res.json (info);
     }
+
 })
 
 

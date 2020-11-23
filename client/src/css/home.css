@@ -37,12 +37,12 @@
 
 
 #home-main-section-mainimg {
-    width: 639px;
-    height: 540px;
-    margin-top: -85px;
-    z-index: -40;
-    position: relative;
-    -webkit-animation: jump 1.2s cubic-bezier(0.3, 1.2, 0.8, 1.2);
+  width: 639px;
+  height: 540px;
+  margin-top: -85px;
+  z-index: -40;
+  position: relative;
+  -webkit-animation: jump 1.2s cubic-bezier(0.3, 1.2, 0.8, 1.2);
   animation: jump 1.2s cubic-bezier(0.3, 1.2, 0.8, 1.2);
 }
 @-webkit-keyframes jump {

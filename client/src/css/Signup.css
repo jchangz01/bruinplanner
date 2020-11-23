@@ -27,7 +27,7 @@
 
 #signup-main-content {
     margin: 0 auto;
-    min-height: calc(99vh - 75px);
+    min-height: calc(99vh - 125px);
     width: 500px;
     display: flex;
     flex-direction: column;
@@ -46,4 +46,30 @@
     font-family: 'Nunito';
     font-size: 16px;
     margin: 10px;
+}
+
+#message-container {
+    line-height: 50px;
+    background-color: #FF9494;    
+    animation:mymove 2s ease-out forwards;
+
+    /* Safari and Chrome */
+    -webkit-animation:mymove 2s;
+    }
+
+    @keyframes mymove
+    {   
+        from {opacity: 0}
+        to { opacity: 1}
+    }
+
+    @-webkit-keyframes mymove /* Safari and Chrome */
+    {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+#message-container-content {
+    font-size: 15px;
+    font-family: 'Nunito';
 }
