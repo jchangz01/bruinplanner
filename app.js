@@ -12,15 +12,6 @@ const passport = require ('passport')
 const flash = require ('express-flash')
 const session = require ('express-session')
 
-// initialize authentication passport
-const users = [];
-const passportConfig = require ('./js/passport-config')
-passportConfig.init (
-    passport, 
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
-)
-
 // configure express 
 app.use (express.urlencoded({ extended: false })); //tells app to access 'name' input fields in req of HTTP calls
 app.use(express.static(__dirname + '/client/build')); // using react static
@@ -33,6 +24,15 @@ app.use (session ({
 app.use(passport.initialize())
 app.use(passport.session())
 
+/* initialize authentication passport */
+const users = [];
+const passportConfig = require ('./js/passport-config')
+passportConfig.init (
+    passport, 
+    email => users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
+)
+
 
 /* settting up database mongoDb */
 const mongoose = require('mongoose')
@@ -42,7 +42,7 @@ db.on('error', error => console.log(error))
 db.once('open', () => console.log('Connected to Mongoose'))
 
 
-
+//HELP HERE
 app.get('/account', checkAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
 
