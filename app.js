@@ -35,7 +35,8 @@ db.once('open', () => console.log('Connected to Mongoose'))
 
 
 /* initialize authentication passport */
-const passportConfig = require ('./js/passport-config')
+const passportConfig = require ('./js/passport-config');
+const { json } = require('express');
 passportConfig.init (
     passport, 
     email => db.collection('authCredentials').findOne( {"email" : email}),
@@ -56,11 +57,22 @@ app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html')
 /*Post Routes */
 
 //Redirects to appropriate route based on passport authentication
-app.post('/log-in', checkNotAuthenticated, passport.authenticate('local', {
+/*app.post('/log-in', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/account',
     failureRedirect: '/log-in',
     failureFlash: true
-}))
+}))*/
+app.post('/log-in', 
+    passport.authenticate('local', { failWithError: true }),
+    function(req, res, next) {
+        // handle success
+        return res.json ({ redirect: "/account" })
+    },
+    function(err, req, res, next) {
+        // handle error
+        return res.json()
+    }
+);
 
 //Redirects to appropriate route based on signing-up credentials
 app.post('/sign-up', checkNotAuthenticated, async (req, res) => { 
@@ -73,19 +85,16 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
         if (userLookup != null)
         {
             console.log("new user attempted to make account with an existing username");
-            //res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
             info = { redirect: "/sign-up", errorType: "username", message: "The username you entered already exist, please enter a new username"}   
         }
         else if (emailLookup != null)
         {
             console.log("new user attempted to make account with an existing email");
-            //res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
             info = { redirect: "/sign-up", errorType: "email", message: "The email you entered already exist, please enter a new email"}   
         }
         else if (req.body.password !== req.body.passwordConfirm)
         {
             console.log("new user's password field and password confirm field don't match")
-            //res.redirect('/sign-up'); // INTERACT w/ REACT FRONTEND
             info = { redirect: "/sign-up", errorType: "password", message: "The password field and re-entered password field do not match, please try again"}   
         }
         else 
@@ -100,7 +109,6 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
                 if (err) throw err; 
                 console.log("Record inserted Successfully");           
             }); 
-            //res.redirect('/log-in') // INTERACT w/ REACT FRONTEND
             info = { redirect: "/log-in", message: "Successful"}   
         }
     } catch {
