@@ -15,6 +15,7 @@ function init (passport, getUserByEmail, getUserbyId) {
 
         try {
             if (await bcrypt.compare(password, user.password)) {
+                console.log("User [" + user.user + "] has successfully logged in");
                 return done (null, user, { message: "Success"})
             } else {
                 req.authErrorType = "password"

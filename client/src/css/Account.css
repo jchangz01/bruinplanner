@@ -1,0 +1,141 @@
+#account-header {
+    position: relative;
+    line-height: 70px;
+    border-bottom: #2774AE 3px solid;
+}
+
+#account-header-content {
+    vertical-align: middle;
+    padding: 0 100px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+#account-header-title {
+    display: inline-block;
+    font-size: 36px;
+    letter-spacing: -1.5px;
+}
+  
+#account-header-logo {
+color:#FFD100;
+font-size: 36px;
+padding-right: 7px;
+}
+
+#account-header-userinfo {
+    float: right;
+  }
+    #account-header-userinfo > *{
+        margin-left: 36px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+.account-header-userinfo-buttons {
+    background-color: white;
+    border: 1px solid #2774AE;
+    border-radius: 0.25rem;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 140px;
+    }
+    .account-header-userinfo-buttons:hover {
+        background-color: #2774AE;
+        color: white;
+        opacity: 1;
+    }
+
+
+#account-main-content {
+    margin: 0 auto;
+    min-height: calc(99vh - 75px);
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+#account-main-heading {
+    font-family: 'Nunito';
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+#account-main-subheading {
+    font-family: 'Nunito';
+    font-size: 16px;
+    margin: 10px;
+}
+
+#account-main-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    width: 100%;
+    margin: 25px 0 30px 0;
+}
+
+.account-main-button:first-of-type {
+    width: 30%;
+    height: 50px;
+    border-radius: 0.25rem;
+    background-color: white;
+    border: 1px solid #4BB543;
+    color: #4BB543;
+}
+    .account-main-button:first-of-type:hover {
+        background-color: #4BB543;
+        color: white;
+        opacity: 1;
+    }
+
+.account-main-button:nth-of-type(2) {
+    width: 30%;
+    height: 50px;
+    border-radius: 0.25rem;
+    background-color: white;
+    border: 1px solid #FFD100;
+    color: #FFD100;
+}
+    .account-main-button:nth-of-type(2):hover {
+        background-color: #FFD100;
+        color: white;
+        opacity: 1;
+    }    
+
+.account-main-button:nth-of-type(3) {
+    width: 30%;
+    height: 50px;
+    border-radius: 0.25rem;
+    background-color: white;
+    border: 1px solid #FF9494;
+    color: #FF9494;
+}
+    .account-main-button:nth-of-type(3):hover {
+        background-color: #FF9494;
+        color: white;
+        opacity: 1;
+    }    
+
+#account-main-planners {
+    width: 100%;
+    height: 300px;
+    margin: 10px 0 30px 0;
+    overflow-y: scroll;
+}
+
+.account-main-planner {
+    color: black;
+    border: 1px black solid;
+    border-radius: 0.25rem;
+    margin-bottom: 20px;
+    width: 100%;
+    line-height: 40px;
+}
+    .account-main-planner:hover {
+        background-color: whitesmoke;
+    }

@@ -4,7 +4,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import PlannerManager from './components/PlannerManager';
+import Account from './components/Account';
 
 function PathNotFound() {
   return (
@@ -20,7 +20,7 @@ export default function App() {
         <Route path="/about" component={About} exact/>
         <Route path="/log-in" component={Login} exact/>
         <Route path="/sign-up" component={Signup} exact/>
-        <Route path="/account" component={PlannerManager} exact/>
+        <Route path="/account" component={Account} exact/>
         <Route component={PathNotFound} />
       </Switch>
     </main>

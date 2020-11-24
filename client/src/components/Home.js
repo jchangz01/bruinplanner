@@ -1,6 +1,6 @@
 import React from 'react'
 import '../css/Home.css'
-import roycehall from '../roycehall.png'
+import roycehall from '../images/roycehall.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faAddressBook, faAmbulance } from '@fortawesome/free-solid-svg-icons'
 

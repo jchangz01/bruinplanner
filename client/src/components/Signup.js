@@ -49,11 +49,13 @@ export default class Signup extends React.Component {
             "passwordConfirm": this.state.passwordConfirm_value
         }
     
+        //retrieve backend data for potential redirect or display error message
         axios.post ('/sign-up', data)
         .then(res => {
             if (res.data.redirect === '/log-in') {
                 this.setState ({ messageColor: "green" })
-                window.location = "/log-in"
+                this.props.history.push ({ pathname: '/log-in', state: { message: "Account successfully created" }})
+                //window.location = "/log-in"
             }
             else if (res.data.redirect === '/sign-up') {
                 if (res.data.errorType === "username")
@@ -64,14 +66,14 @@ export default class Signup extends React.Component {
                     this.setState ({ password_value: "", passwordConfirm_value: "" })
                 this.setState ({ messageColor: "red" })
             }
-            this.setState ({message: res.data.message})
+            this.setState ({message: res.data.message}) //set our state message to message retrieved from backend server
 
             console.log(res.data.redirect)
             console.log(res.data.message)
         })
         .catch (error => { 
             console.error (error);
-            this.setState ({message: "ERROR! An error has occured please try again", messageColor: "red"})
+            this.setState ({message: "ERROR! An error has occured please try again", messageColor: "red"}) //in case of error, set state message to error
         })
         //we are updating our updateKey so that message rerenders and animation can replay 
         .finally (() => this.setState(prevState => {

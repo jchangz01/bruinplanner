@@ -43,20 +43,18 @@ passportConfig.init (
 )
 
 
+/* TOP LEVEL ROUTES *//
 
-//HELP HERE
+/* GET ROUTES */
+//Get routes must be in this order due to redirecting checking being from top to bottom!
 app.get('/account', checkAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 app.get('/log-in', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 app.get('/sign-up', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
-var accountCreated = false
-app.get('/accountCreated', (req, res) => {
-    if (accountCreated)
-    {
-        res.json({ message: "Account successfully created" })
-        accountCreated = false
-    }
-})
+//Provide user info to frontend
+app.get('/getUserInfo', checkAuthenticated,  (req, res) => {
+    console.log( req.user)
+    res.json ({ username: req.user.user })})
 
 // MUST BE LAST!!
 app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
@@ -117,7 +115,6 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
                 if (err) throw err; 
                 console.log("Record inserted Successfully");           
             }); 
-            accountCreated = true;
             info = { redirect: "/log-in", message: "Successful"}   
         }
     } catch {

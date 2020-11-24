@@ -151,13 +151,22 @@ export default class Login extends React.Component {
     }
 
     componentDidMount () {
-        axios.get ('/accountCreated')
-        .then ( res => {
-            if (res.data.message) 
-                this.setState ({ form: true, message: res.data.message, messageColor: "green" })
-        })
-        .catch ( error => {
-            console.error (error)
-        })
+        // axios.get ('/accountCreated')
+        // .then ( res => {
+        //     if (res.data.message) 
+        //         this.setState ({ form: true, message: res.data.message, messageColor: "green" })
+        // })
+        // .catch ( error => {
+        //     console.error (error)
+        // }) 
+        try {
+            if (this.props.location.state.message) {
+                this.setState ({ form: true, message: this.props.location.state.message, messageColor: "green" })
+            }
+            console.log("Account created")
+        }
+        catch {
+            console.log("Normal navigation")
+        }
     }
 }

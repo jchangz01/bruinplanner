@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 export default class About extends React.Component {
+    constructor (props) {
+        window.location = '/log-in'
+    }
     render() {
         return (
             <div>
@@ -22,4 +25,5 @@ export default class About extends React.Component {
             </div>
         )
     }
+
 }
