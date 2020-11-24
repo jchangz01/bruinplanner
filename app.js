@@ -36,7 +36,6 @@ db.once('open', () => console.log('Connected to Mongoose'))
 
 /* initialize authentication passport */
 const passportConfig = require ('./js/passport-config');
-const { json } = require('express');
 passportConfig.init (
     passport, 
     email => db.collection('authCredentials').findOne( {"email" : email}),
@@ -49,6 +48,15 @@ passportConfig.init (
 app.get('/account', checkAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 app.get('/log-in', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 app.get('/sign-up', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
+
+var accountCreated = false
+app.get('/accountCreated', (req, res) => {
+    if (accountCreated)
+    {
+        res.json({ message: "Account successfully created" })
+        accountCreated = false
+    }
+})
 
 // MUST BE LAST!!
 app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
@@ -109,6 +117,7 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
                 if (err) throw err; 
                 console.log("Record inserted Successfully");           
             }); 
+            accountCreated = true;
             info = { redirect: "/log-in", message: "Successful"}   
         }
     } catch {

@@ -20,7 +20,7 @@ function Message (props)
     return (
         props.message ? 
             //key is used to replay our fade-in animation when form is resubmitted
-            <div key={props.key} id="message-container">
+            <div key={props.key} className={props.color === "green" ? "success-green-br" : "error-red-br"} id="message-container">
                 <p id="message-container-content" class="white">{props.message}</p>
             </div> 
             : null
@@ -35,6 +35,7 @@ export default class Signup extends React.Component {
         password_value: "",
         passwordConfirm_value: "",
         message: "",
+        messageColor: "",
         updateKey: 0 //used to update and rerender states that don't change
     })
 
@@ -51,6 +52,7 @@ export default class Signup extends React.Component {
         axios.post ('/sign-up', data)
         .then(res => {
             if (res.data.redirect === '/log-in') {
+                this.setState ({ messageColor: "green" })
                 window.location = "/log-in"
             }
             else if (res.data.redirect === '/sign-up') {
@@ -60,6 +62,7 @@ export default class Signup extends React.Component {
                     this.setState ({ email_value: "" })
                 else if (res.data.errorType === "password")
                     this.setState ({ password_value: "", passwordConfirm_value: "" })
+                this.setState ({ messageColor: "red" })
             }
             this.setState ({message: res.data.message})
 
@@ -68,7 +71,7 @@ export default class Signup extends React.Component {
         })
         .catch (error => { 
             console.error (error);
-            this.setState ({message: "ERROR! An error has occured please try again"})
+            this.setState ({message: "ERROR! An error has occured please try again", messageColor: "red"})
         })
         //we are updating our updateKey so that message rerenders and animation can replay 
         .finally (() => this.setState(prevState => {
@@ -86,7 +89,7 @@ export default class Signup extends React.Component {
                     </a></span>
                 </header>
                 <section>
-                    <Message key={this.state.updateKey} message={this.state.message}></Message>
+                    <Message key={this.state.updateKey} color={this.state.messageColor} message={this.state.message}></Message>
                     <div id="signup-main-content">
                         <h2 id="signup-main-heading">Create your account</h2>
                         <h3 id="signup-main-subheading">Start planning your next 4 years at UCLA now!</h3>
