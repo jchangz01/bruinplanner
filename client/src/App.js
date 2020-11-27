@@ -5,6 +5,7 @@ import About from './components/About';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Account from './components/Account';
+import Planner from './components/Planner'
 
 function PathNotFound() {
   return (
@@ -12,6 +13,8 @@ function PathNotFound() {
   )
 }
 
+
+//Front-end routing to corresponding pages
 export default function App() {
   return (
     <main>
@@ -21,6 +24,7 @@ export default function App() {
         <Route path="/log-in" component={Login} exact/>
         <Route path="/sign-up" component={Signup} exact/>
         <Route path="/account" component={Account} exact/>
+        <Route path="/planner" component={Planner} exact/>
         <Route component={PathNotFound} />
       </Switch>
     </main>

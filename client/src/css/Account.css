@@ -28,7 +28,7 @@ padding-right: 7px;
   }
     #account-header-userinfo > *{
         margin-left: 36px;
-        font-size: 14px;
+        font-size: 17px;
         font-weight: bold;
     }
 
@@ -37,9 +37,10 @@ padding-right: 7px;
     border: 1px solid #2774AE;
     border-radius: 0.25rem;
     padding: 14px;
-    font-size: 14px;
-    font-weight: bold;
     min-width: 140px;
+    outline: none;
+    font-size: 17px;
+    font-weight: bold;
     }
     .account-header-userinfo-buttons:hover {
         background-color: #2774AE;
@@ -47,7 +48,42 @@ padding-right: 7px;
         opacity: 1;
     }
 
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+    /* Content inside the dropdown */
+    .dropdown-content div {
+        line-height: 40px;
+        vertical-align: middle;
+        text-align: center;
+        cursor: pointer;
+    }  
+    /* Change color of dropdown links on hover */
+    .dropdown-content div:hover {background-color: #ddd;}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {display: block;}
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .account-header-userinfo-buttons {
+        background-color: #2774AE;
+        color: white;
+        opacity: 1; 
+    }
+
+/*Styling for page title and subtitle 
+///////////////////////////////////*/
 #account-main-content {
     margin: 0 auto;
     min-height: calc(99vh - 75px);
@@ -71,6 +107,10 @@ padding-right: 7px;
     margin: 10px;
 }
 
+
+/* Styling for planner editing buttons 
+//////////////////////////////////////*/
+
 #account-main-buttons {
     display: flex;
     justify-content: space-between;
@@ -86,12 +126,20 @@ padding-right: 7px;
     background-color: white;
     border: 1px solid #4BB543;
     color: #4BB543;
+    font-size: 14px;
+    outline: none;
 }
     .account-main-button:first-of-type:hover {
         background-color: #4BB543;
         color: white;
-        opacity: 1;
+        opacity: 0.7;
     }
+    .selected:first-of-type {
+        background-color: #4BB543;
+        color: white;
+        opacity: 1;
+        border: 1px solid black
+    }    
 
 .account-main-button:nth-of-type(2) {
     width: 30%;
@@ -100,12 +148,20 @@ padding-right: 7px;
     background-color: white;
     border: 1px solid #FFD100;
     color: #FFD100;
+    font-size: 14px;
+    outline: none;
 }
     .account-main-button:nth-of-type(2):hover {
         background-color: #FFD100;
         color: white;
+        opacity: 0.7;
+    } 
+    .selected:nth-of-type(2) {
+        background-color: #FFD100;
+        color: white;
         opacity: 1;
-    }    
+        border: 1px solid black
+    }       
 
 .account-main-button:nth-of-type(3) {
     width: 30%;
@@ -114,28 +170,124 @@ padding-right: 7px;
     background-color: white;
     border: 1px solid #FF9494;
     color: #FF9494;
+    font-size: 14px;
+    outline: none;
 }
     .account-main-button:nth-of-type(3):hover {
         background-color: #FF9494;
         color: white;
-        opacity: 1;
+        opacity: 0.7;
     }    
+    .selected:nth-of-type(3) {
+        background-color: #FF9494;
+        color: white;
+        opacity: 1;
+        border: 1px solid black
+    }
+
+
+/* Styling for name of planner's display 
+//////////////////////////////////////*/
 
 #account-main-planners {
     width: 100%;
-    height: 300px;
-    margin: 10px 0 30px 0;
-    overflow-y: scroll;
+    max-height: 300px;
+    margin: 5px 0 30px 0;
+    overflow: auto;
 }
 
 .account-main-planner {
+    display: inline-block;
     color: black;
     border: 1px black solid;
     border-radius: 0.25rem;
     margin-bottom: 20px;
-    width: 100%;
-    line-height: 40px;
+    width: 90%;
+    margin: 0 0 20px auto;
 }
     .account-main-planner:hover {
         background-color: whitesmoke;
     }
+
+
+.delete-mode-icon {
+    display: inline;
+    margin: 0px 10px 5px;
+    width: 15px;
+    height: auto;
+    color: lightgray;
+}
+    .delete-mode-icon:hover {
+        color: #FF9494
+    }
+
+.account-main-plan-name {
+    margin-top: 10px;
+    font-size: 25px;
+    height: auto
+}
+
+.account-main-plan-major {
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+/* Styling for pop-up prompt 
+//////////////////////////*/
+
+.popup-box {
+    position: fixed;
+    background: #00000050;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
+   
+    .box {
+        position: relative;
+        width: 50%;
+        margin: 0 auto;
+        height: auto;
+        max-height: 70vh;
+        margin-top: calc(100vh - 85vh - 20px);
+        background: #fff;
+        border-radius: 0.75rem;
+        padding: 20px;
+        border: 1px solid #999;
+        overflow: auto;
+    }
+
+    #popup-box-title {
+        margin: 14px;
+        font-size: 32px;
+        text-align: center;
+    }
+    .popup-box-field {
+        display: inline-block;
+        margin: 10px 0 ;
+        font-size: 22px  
+    } 
+
+
+    .popup-box-input {
+        width: 100%;
+        border-radius: 0.25rem;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        font-size: 18px;
+        height: 35px;
+    }
+
+    .popup-box-submit {
+        margin: 10px 0;
+        width: 100%;
+        width: 100%;
+        border-radius: 0.50rem;
+        height: 50px;
+        border: none;
+        font-size: 22px;
+        color: white;
+    }
+
+  

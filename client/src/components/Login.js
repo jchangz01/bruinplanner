@@ -32,7 +32,6 @@ function OptionsOrPrompt (props)
         <React.Fragment>
         {props.form ? 
             <React.Fragment>
-                {/*<form action="/log-in" method="POST" style={{width: "320px"}}>*/}
                 <form onSubmit={props.onSubmit} style={{width: "320px"}}>
                     {/* Use ThemeProvider to provide desired color for your Materials-UI elements */}
                     <ThemeProvider theme={theme}>
@@ -112,20 +111,17 @@ export default class Login extends React.Component {
 
         axios.post ('/log-in', data)
         .then(res => {
-            if (res.data.redirect === '/account') 
-                window.location = "/account"
+            if (res.data.redirect === '/account') {
+                this.props.history.push ({ pathname: res.data.redirect, state: { username: res.data.username, planners: res.data.data }})
+            }
          })
         .catch (error => { 
             console.error (error);
             this.setState ({email_value: "", password_value: "", message: "Email/Password is invalid, please try again", messageColor: "red"})
             this.setState(prevState => {
-                return {updateKey: prevState.updateKey + 1}
+                return {updateKey: prevState.updateKey + 1} //we are updating our updateKey so that message rerenders and animation can replay 
             })
         })
-        //we are updating our updateKey so that message rerenders and animation can replay 
-        /*.finally (() => this.setState(prevState => {
-            return {updateKey: prevState.updateKey + 1}
-        }))*/
     }
 
     render() {
@@ -151,14 +147,6 @@ export default class Login extends React.Component {
     }
 
     componentDidMount () {
-        // axios.get ('/accountCreated')
-        // .then ( res => {
-        //     if (res.data.message) 
-        //         this.setState ({ form: true, message: res.data.message, messageColor: "green" })
-        // })
-        // .catch ( error => {
-        //     console.error (error)
-        // }) 
         try {
             if (this.props.location.state.message) {
                 this.setState ({ form: true, message: this.props.location.state.message, messageColor: "green" })

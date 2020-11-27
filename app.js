@@ -28,6 +28,7 @@ app.use(passport.session())
 
 /* Settting up database mongoDb */
 const mongoose = require('mongoose')
+var ObjectID=require('mongodb').ObjectID;
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection
 db.on('error', error => console.log(error))
@@ -39,7 +40,7 @@ const passportConfig = require ('./js/passport-config');
 passportConfig.init (
     passport, 
     email => db.collection('authCredentials').findOne( {"email" : email}),
-    id => db.collection('authCredentials').findOne({"_id" : id})
+    id => db.collection('authCredentials').findOne({"_id" : ObjectID(id)})
 )
 
 
@@ -51,28 +52,47 @@ app.get('/account', checkAuthenticated, (req, res) => res.sendFile(__dirname + '
 app.get('/log-in', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 app.get('/sign-up', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
-//Provide user info to frontend
-app.get('/getUserInfo', checkAuthenticated,  (req, res) => {
-    console.log( req.user)
-    res.json ({ username: req.user.user })})
+app.get('/getUserInfo', checkAuthenticated, async (req, res) => {
+    const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
+    return res.json({ username: userInfo.user, planners: userInfo.data })
+})
+
 
 // MUST BE LAST!!
 app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
 
 /*Post Routes */
+//create new planner 
+app.post('/create-planner', checkAuthenticated, (req, res) => {
+    const newPlanner = { name: req.body.name, major: req.body.major }
+    db.collection('authCredentials').findOneAndUpdate({"_id": ObjectID(req.session.passport.user)},{ $addToSet: { data : newPlanner } } )
+})
+
+//modify existing planner 
+app.post('/modify-planner', checkAuthenticated, (req, res) => {
+    var index = req.body.plannerIndex;
+    var editName = "data." + index + ".name"
+    var editMajor = "data." + index + ".major"
+    console.log(req.body.name)
+    console.log(req.body.major)
+    if (req.body.plannerIndex)
+    {
+        db.collection('authCredentials').updateOne(
+            {"_id": ObjectID(req.session.passport.user)},
+            { $set: { [editName] : req.body.name, [editMajor] : req.body.major } }
+        )
+    }
+})
 
 //Redirects to appropriate route based on passport authentication
-/*app.post('/log-in', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/account',
-    failureRedirect: '/log-in',
-    failureFlash: true
-}))*/
 app.post('/log-in', 
     passport.authenticate('local', { failWithError: true }),
     function(req, res, next) {
         // handle success
-        return res.json ({ redirect: "/account" })
+        console.log(req.user.user)
+        console.log(req.user.data)
+        return res.json ({ redirect: "/account", username: req.user.user, data: req.user.data })
     },
     function(err, req, res, next) {
         // handle error
@@ -109,7 +129,8 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
             var data = {
                 user: req.body.user,
                 email: req.body.email,
-                password: hashedPassword
+                password: hashedPassword,
+                data: []
             }
             db.collection('authCredentials').insertOne(data,function(err, collection){ 
                 if (err) throw err; 

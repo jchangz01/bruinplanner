@@ -1,15 +1,156 @@
 import React from 'react'
 import axios from  'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faTimes, faCaretDown, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import '../css/Account.css'
+
+function PopupPrompt (props) {
+    return (
+    <React.Fragment>
+      <div className="popup-box">
+        <div className="popup-box" onClick={props.handleClose} ></div>
+        <form onSubmit={props.handleSubmit} className="box">
+            <h2 id="popup-box-title">{props.title}</h2>
+                <hr></hr>
+                <label className="popup-box-field">Planner Name:</label>
+                <input className="popup-box-input" placeholder="My Planner" value={props.name} onChange={ props.nameChange } required></input>
+                <label className="popup-box-field">Major:</label>
+                <select className="popup-box-input" defaultValue="" value={props.major} onChange={ props.majorChange } required>
+                    <option value="">Select a Major . . .</option>
+                    <option key="0">Aerospace Engineering</option>
+                    <option key="1">Bioengineering</option>
+                    <option key="2">Chemical Engineering</option>
+                    <option key="3">Civil Engineering</option>
+                    <option key="4">Computer Engineering</option>
+                    <option key="5">Computer Science</option>
+                    <option key="6">Computer Science and Engineering</option>
+                    <option key="7">Electrical Engineering</option>
+                    <option key="8">Materials Engineering</option>
+                    <option key="9">Mechanical Engineering</option>
+                    <option key="10">Other</option>
+                </select>
+            <button className="popup-box-submit blue-br">{props.action}</button>
+        </form>
+      </div>
+    </React.Fragment>
+    );
+  };
+
+class Planners extends React.Component {
+
+    navigateToPlanner = event => {
+        console.log(this.props.index)
+        console.log(this.props.plan)
+        this.props.history.push ({ pathname: '/planner', state: { planner: this.props.plan, plannerNumber: this.props.index }})
+    }
+
+    render () {
+        const width = this.props.deleteMode ? "90%" : "100%"
+        return (
+            <React.Fragment>
+                {this.props.deleteMode ? <FontAwesomeIcon icon={faTimes} class="delete-mode-icon"/>  : null }
+                <li className="account-main-planner" value={this.props.index} style={{width: width}} onClick={this.props.modifyMode ?  this.props.modifySelected : this.navigateToPlanner}>
+                    <div className="account-main-plan-name">{this.props.plan.name}</div>
+                    <div className="account-main-plan-major">{this.props.plan.major}</div>
+                </li>
+            </React.Fragment>
+        )
+    }
+}
 
 export default class Account extends React.Component {
     state = ({
         username: "",
-        plannerList: []
-    })
+        createMode: false,
+        modifyMode: false,
+        modifySelected: null, //tracks position/index of planner selected to be modified
+        deleteMode: false,
+        plannerList: [], //keeps full list of planners
+        plannerName: "",
+        plannerMajor: "",
+    })  
+
+    logOut = () => {
+
+    }
+
+    createPlanner = event => {
+        event.preventDefault();
+        console.log(this.state.plannerName)
+        console.log(this.state.plannerMajor)
+        const data = {
+            name: this.state.plannerName,
+            major: this.state.plannerMajor,
+        }
+        axios.post('/create-planner', data)
+        .then( res => {
+            console.log("HI")
+        })
+        .catch ( err => {
+            console.log(err)
+        })
+    }
+
+    modifyPlanner = event => {
+        event.preventDefault();
+        const data = {
+            name: this.state.plannerName,
+            major: this.state.plannerMajor,
+            plannerIndex: this.state.modifySelected,
+        }
+        const planners = this.state.plannerList.slice() //copy the plannerList array
+            planners[data.plannerIndex].name = data.name; //execute the manipulations
+            planners[data.plannerIndex].major = data.major; //execute the manipulations
+            this.setState({plannerList: planners, modifySelected: null, plannerName: "", plannerMajor: ""}) //set the new state
+        axios.post('/modify-planner', data) 
+        .then ( res => {
+            console.log("meow")
+        })
+        .catch ( err => {
+            console.log("woof")
+        })
+    }
+   
+    
+    enterExitMode = (mode) => {
+        this.setState ({
+            createMode: mode === "create" ? !this.state.createMode : false,
+            modifyMode: mode === "modify" ? !this.state.modifyMode : false,
+            modifySelected: null,
+            deleteMode: mode === "delete" ? !this.state.deleteMode : false,
+            plannerName: "",
+            plannerMajor: ""
+        })
+    }
+
     render () {
+        /* Create popup prompts when createMode or modifyMode is active */
+        var createPrompt, modifyPrompt = null;
+        if (this.state.createMode) {
+            createPrompt = <PopupPrompt 
+            title="Create New Planner"
+            action="Create" 
+            name={this.state.plannerName} 
+            nameChange={ event => this.setState({plannerName: event.target.value })} 
+            major={this.state.plannerMajor} 
+            majorChange={ event => this.setState({plannerMajor: event.target.value })} 
+            handleClose={() => this.enterExitMode("create")} 
+            handleSubmit={this.createPlanner}
+            /> 
+        }
+        else if (this.state.modifyMode && this.state.modifySelected !== null) {
+            modifyPrompt = <PopupPrompt 
+                title="Modify Existing Planner"
+                action="Modify" 
+                name={this.state.plannerName} 
+                nameChange={ event => this.setState({plannerName: event.target.value })} 
+                major={this.state.plannerMajor} 
+                majorChange={ event => this.setState({plannerMajor: event.target.value })} 
+                handleClose={() => this.enterExitMode("modify")} 
+                handleSubmit={this.modifyPlanner}
+            /> 
+        }
+
         return (
             <div>
                 <header id="account-header">
@@ -19,30 +160,40 @@ export default class Account extends React.Component {
                             <h1 id="account-header-title" className="blue"><span class="gold" style={{"letter-spacing": 0}}>Bruin</span>Planner</h1>
                         </a></span>
                         <nav id="account-header-userinfo">
-                            <button className="account-header-userinfo-buttons blue">{this.state.username}</button>
+                            <div class="dropdown">
+                                <button class="account-header-userinfo-buttons blue">
+                                    {this.state.username} <FontAwesomeIcon icon={faCaretDown}/>    
+                                </button>
+                                <div class="dropdown-content">
+                                    <div>Log-out <FontAwesomeIcon icon={faSignOutAlt}/></div>
+                                </div>
+                            </div>
                         </nav>
                     </div>
                 </header>
+                {createPrompt} {/*Prompt to create a planner*/}
+                {modifyPrompt} {/*Prompt to modify a planner*/}
                 <section>
                     <div id="account-main-content">
-                        <h2 id="account-main-heading">Welcome {this.state.username}!</h2>
+                        <h2 id="account-main-heading">Welcome <span style={{textDecoration: 'underline'}}>{this.state.username}</span>!</h2>
                         <h3 id="account-main-subheading">Modify, create, and delete your UCLA Planners here</h3>
                         <div id="account-main-buttons">
-                            <button className="account-main-button">Modify</button>
-                            <button className="account-main-button">Create</button>
-                            <button className="account-main-button">Delete</button>
+                            <button className="account-main-button" onClick={() => this.enterExitMode("create")}>Create</button>
+                            <button className={this.state.modifyMode ? "account-main-button selected":"account-main-button"} onClick={() => this.enterExitMode("modify")}>Modify</button>
+                            <button className={this.state.deleteMode ? "account-main-button selected":"account-main-button"} onClick={() => this.enterExitMode("delete")}>Delete</button>
                         </div>
-                        <div id="account-main-planners">
-                            <div className="account-main-planner">Meow</div>
-                            <div className="account-main-planner">Meow</div>
-                            <div className="account-main-planner">Meow</div>
-                            <div className="account-main-planner">Meow</div>
-                            <div className="account-main-planner">Meow</div>     
-                            
-                            <div className="account-main-planner">Meow</div>
-                            <div className="account-main-planner">Meow</div>     
-                                
-                        </div>
+                        <ul id="account-main-planners">
+                        {(this.state.plannerList || []).map((plan, index) => (
+                            <Planners 
+                                plan={plan} 
+                                index={index}  
+                                history={this.props.history} 
+                                modifyMode={this.state.modifyMode} 
+                                modifySelected={() => this.setState({ plannerName: this.state.plannerList[index].name, plannerMajor: this.state.plannerList[index].major,  modifySelected: index})} 
+                                deleteMode={this.state.deleteMode}
+                            />
+                        ))}
+                        </ul>
                     </div>
                 </section>
             </div>
@@ -50,15 +201,17 @@ export default class Account extends React.Component {
     }
 
     componentDidMount () {
-        console.log('hi')
-        axios.get('/getUserInfo')
-        .then ( res => {
-                this.setState ({ username: res.data.username})
+        try {
+            if (this.props.location.state.username) {
+                this.setState ({
+                    username: this.props.location.state.username,
+                    plannerList: this.props.location.state.planners
+                })
             }
-        )
-        .catch ( err => {
-            console.error (err)
-            window.location = '/' //If error, occurs redirect user to homepage
-        })
+            console.log("Account created")
+        }
+        catch {
+            console.log("Development")
+        }
     }
 }
