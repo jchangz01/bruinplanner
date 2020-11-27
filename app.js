@@ -57,12 +57,11 @@ app.get('/getUserInfo', checkAuthenticated, async (req, res) => {
     return res.json({ username: userInfo.user, planners: userInfo.data })
 })
 
-
 // MUST BE LAST!!
 app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
 
-/*Post Routes */
+/*Post and Delete Routes */
 //create new planner 
 app.post('/create-planner', checkAuthenticated, (req, res) => {
     const newPlanner = { name: req.body.name, major: req.body.major }
@@ -72,17 +71,37 @@ app.post('/create-planner', checkAuthenticated, (req, res) => {
 //modify existing planner 
 app.post('/modify-planner', checkAuthenticated, (req, res) => {
     var index = req.body.plannerIndex;
+    console.log(index)
     var editName = "data." + index + ".name"
     var editMajor = "data." + index + ".major"
     console.log(req.body.name)
     console.log(req.body.major)
-    if (req.body.plannerIndex)
+    if (req.body.plannerIndex !== null)
     {
         db.collection('authCredentials').updateOne(
             {"_id": ObjectID(req.session.passport.user)},
             { $set: { [editName] : req.body.name, [editMajor] : req.body.major } }
         )
     }
+    return res.json();
+})
+
+//delete existing planner 
+app.post('/delete-planner', checkAuthenticated, (req, res) => {
+    console.log(req.body.plannerIndex)
+    var deletePlanner = 'data.' + req.body.plannerIndex;
+
+    //deletes an array element entry of a document using index
+    //https://www.tutorialspoint.com/how-do-you-remove-an-array-element-by-its-index-in-mongodb
+    db.collection('authCredentials').updateOne(
+        {"_id": ObjectID(req.session.passport.user)},
+        {$unset:{ [deletePlanner] : 1}}
+    );
+    db.collection('authCredentials').updateOne(
+        {"_id": ObjectID(req.session.passport.user)},
+        {$pull:{ data : null}}
+    );
+    return res.json();
 })
 
 //Redirects to appropriate route based on passport authentication
@@ -139,7 +158,6 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
             info = { redirect: "/log-in", message: "Successful"}   
         }
     } catch {
-        //res.redirect('/sign-up')
         info = { redirect: "/sign-up", message: "ERROR! An error has occured please try again"}   
     } finally {
         return res.json (info);

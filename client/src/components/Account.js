@@ -48,7 +48,7 @@ class Planners extends React.Component {
         const width = this.props.deleteMode ? "90%" : "100%"
         return (
             <React.Fragment>
-                {this.props.deleteMode ? <FontAwesomeIcon icon={faTimes} class="delete-mode-icon"/>  : null }
+                {this.props.deleteMode ? <FontAwesomeIcon icon={faTimes} class="delete-mode-icon" onClick={this.props.handleDelete}/>  : null }
                 <li className="account-main-planner" value={this.props.index} style={{width: width}} onClick={this.props.modifyMode ?  this.props.modifySelected : this.navigateToPlanner}>
                     <div className="account-main-plan-name">{this.props.plan.name}</div>
                     <div className="account-main-plan-major">{this.props.plan.major}</div>
@@ -98,20 +98,35 @@ export default class Account extends React.Component {
             major: this.state.plannerMajor,
             plannerIndex: this.state.modifySelected,
         }
-        const planners = this.state.plannerList.slice() //copy the plannerList array
+        
+        axios.post('/modify-planner', data) 
+        .then ( res => {
+            const planners = this.state.plannerList.slice() //copy the plannerList array
             planners[data.plannerIndex].name = data.name; //execute the manipulations
             planners[data.plannerIndex].major = data.major; //execute the manipulations
             this.setState({plannerList: planners, modifySelected: null, plannerName: "", plannerMajor: ""}) //set the new state
-        axios.post('/modify-planner', data) 
-        .then ( res => {
-            console.log("meow")
         })
         .catch ( err => {
-            console.log("woof")
+            console.log(err)
         })
     }
-   
-    
+
+    deletePlanner = index => {
+        console.log(index)
+        const data = {
+            plannerIndex: index
+        }
+        axios.post('/delete-planner', data)
+        .then ( res => {
+            const planners = this.state.plannerList.slice() //copy the plannerList array
+            planners.splice(data.plannerIndex, 1)
+            this.setState ({ plannerList: planners})
+        })
+        .catch ( err => {
+            console.error(err)
+        })
+    }
+
     enterExitMode = (mode) => {
         this.setState ({
             createMode: mode === "create" ? !this.state.createMode : false,
@@ -191,6 +206,7 @@ export default class Account extends React.Component {
                                 modifyMode={this.state.modifyMode} 
                                 modifySelected={() => this.setState({ plannerName: this.state.plannerList[index].name, plannerMajor: this.state.plannerList[index].major,  modifySelected: index})} 
                                 deleteMode={this.state.deleteMode}
+                                handleDelete={() => this.deletePlanner(index)}
                             />
                         ))}
                         </ul>
