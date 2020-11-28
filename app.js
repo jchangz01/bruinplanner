@@ -11,6 +11,7 @@ const bcrypt = require ('bcrypt')
 const passport = require ('passport')
 const flash = require ('express-flash')
 const session = require ('express-session')
+const methodOverride = require('method-override')
 
 // configure express 
 app.use (express.urlencoded({ extended: false })); //tells app to access 'name' input fields in req of HTTP calls
@@ -24,6 +25,7 @@ app.use (session ({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(methodOverride('_method'))
 
 
 /* Settting up database mongoDb */
@@ -165,6 +167,11 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
 
 })
 
+app.delete('/log-out', (req, res) => {
+    console.log('meow')
+    req.logOut() //provided by passport.js library
+    return res.json ({ redirect: '/log-in' })
+})
 
 /* MIDDLEWARE */ 
 function checkAuthenticated(req, res, next)

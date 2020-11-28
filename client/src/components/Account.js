@@ -71,7 +71,15 @@ export default class Account extends React.Component {
     })  
 
     logOut = () => {
+        console.log('hi')
+        axios.delete('/log-out')
+        .then( res => {
+            if (res.data.redirect === '/log-in')
+                window.location='/log-in'
+        })
+        .catch( err => {
 
+        })
     }
 
     createPlanner = event => {
@@ -172,15 +180,15 @@ export default class Account extends React.Component {
                     <div id="account-header-content">
                         <span><a href="/">
                             <FontAwesomeIcon id="account-header-logo" icon = { faCalendar } />
-                            <h1 id="account-header-title" className="blue"><span class="gold" style={{"letter-spacing": 0}}>Bruin</span>Planner</h1>
+                            <h1 id="account-header-title" className="blue"><span className="gold" style={{"letterSpacing": 0}}>Bruin</span>Planner</h1>
                         </a></span>
                         <nav id="account-header-userinfo">
-                            <div class="dropdown">
-                                <button class="account-header-userinfo-buttons blue">
+                            <div className="dropdown">
+                                <button className="account-header-userinfo-buttons blue">
                                     {this.state.username} <FontAwesomeIcon icon={faCaretDown}/>    
                                 </button>
-                                <div class="dropdown-content">
-                                    <div>Log-out <FontAwesomeIcon icon={faSignOutAlt}/></div>
+                                <div className="dropdown-content">
+                                    <div onClick={this.logOut}>Log-out <FontAwesomeIcon icon={faSignOutAlt}/></div>
                                 </div>
                             </div>
                         </nav>
@@ -217,17 +225,13 @@ export default class Account extends React.Component {
     }
 
     componentDidMount () {
-        try {
-            if (this.props.location.state.username) {
-                this.setState ({
-                    username: this.props.location.state.username,
-                    plannerList: this.props.location.state.planners
-                })
-            }
-            console.log("Account created")
-        }
-        catch {
-            console.log("Development")
-        }
+        axios.get ('/getUserInfo')
+        .then ( res => {
+            this.setState ({ username: res.data.username, plannerList: res.data.planners })
+        })
+        .catch ( err => {
+            window.location = '/'
+            console.error(err)
+        })
     }
 }
