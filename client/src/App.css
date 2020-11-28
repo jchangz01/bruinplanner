@@ -67,9 +67,10 @@
   width: 100%;
 }
 
-
+/* Used across all pages */
 #message-container {
   line-height: 50px; 
+  text-align: center;
   width: 100vw;
   animation:mymove 2s ease-out forwards;
 

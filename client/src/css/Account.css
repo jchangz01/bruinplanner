@@ -60,6 +60,7 @@ padding-right: 7px;
     position: absolute;
     background-color: white;
     min-width: 140px;
+    z-index: 2000;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
     /* Content inside the dropdown */
@@ -133,6 +134,7 @@ padding-right: 7px;
         background-color: #4BB543;
         color: white;
         opacity: 0.7;
+        z-index: 0;
     }
     .selected:first-of-type {
         background-color: #4BB543;
@@ -246,6 +248,7 @@ padding-right: 7px;
    
     .box {
         position: relative;
+        z-index: 1000;
         width: 50%;
         margin: 0 auto;
         height: auto;

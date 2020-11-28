@@ -4,6 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faTimes, faCaretDown, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import '../css/Account.css'
 
+
+function Message (props)
+{
+    return (
+        props.message ? 
+            //key is used to replay our fade-in animation when form is resubmitted
+            <div key={props.key} className={props.color === "green" ? "success-green-br" : "error-red-br"} id="message-container" style={{position:"absolute"}}>
+                <p id="message-container-content" className="white">{props.message}</p>
+            </div> 
+            : null
+    ) 
+}
+
 function PopupPrompt (props) {
     return (
     <React.Fragment>
@@ -67,6 +80,9 @@ export default class Account extends React.Component {
         plannerList: [], //keeps full list of planners
         plannerName: "",
         plannerMajor: "",
+        message: "",
+        messageColor: "red",
+        updateKey: 0 //used to update and rerender states that don't change
     })  
 
     logOut = () => {
@@ -76,6 +92,7 @@ export default class Account extends React.Component {
                 window.location='/log-in'
         })
         .catch( err => {
+            
             console.error(err)
         })
     }
@@ -93,6 +110,7 @@ export default class Account extends React.Component {
             this.props.history.push ({ pathname: window.location.pathname + '/planner/' + res.data.index })
         })
         .catch ( err => {
+            this.setState({message: "An error occured when creating new planner", messageColor: "red", updateKey: this.state.updateKey + 1,})
             console.log(err)
         })
     }
@@ -110,10 +128,19 @@ export default class Account extends React.Component {
             const planners = this.state.plannerList.slice() //copy the plannerList array
             planners[data.plannerIndex].name = data.name; //execute the manipulations
             planners[data.plannerIndex].major = data.major; //execute the manipulations
-            this.setState({plannerList: planners, modifySelected: null, plannerName: "", plannerMajor: ""}) //set the new state
+            this.setState({
+                plannerList: planners, 
+                modifySelected: null, 
+                plannerName: "", 
+                plannerMajor: "", 
+                message: "Selected planner has been successfully modified", 
+                messageColor: "green",
+                updateKey: this.state.updateKey + 1,
+            }) //set the new state
         })
         .catch ( err => {
             console.error(err)
+            this.setState({message: "An error occured when modifying existing planner", messageColor: "red", updateKey: this.state.updateKey + 1,})
         })
     }
 
@@ -126,10 +153,11 @@ export default class Account extends React.Component {
         .then ( res => {
             const planners = this.state.plannerList.slice() //copy the plannerList array
             planners.splice(data.plannerIndex, 1)
-            this.setState ({ plannerList: planners})
+            this.setState ({ plannerList: planners, message: "Selected planner has been successfully deleted", messageColor: "green", updateKey: this.state.updateKey + 1,})
         })
         .catch ( err => {
             console.error(err)
+            this.setState({message: "An error occured when deleting existing planner", messageColor: "red", updateKey: this.state.updateKey + 1,})
         })
     }
 
@@ -192,6 +220,7 @@ export default class Account extends React.Component {
                         </nav>
                     </div>
                 </header>
+                <Message key={this.state.updateKey} color={this.state.messageColor} message={this.state.message}></Message>
                 {createPrompt} {/*Prompt to create a planner*/}
                 {modifyPrompt} {/*Prompt to modify a planner*/}
                 <section>
