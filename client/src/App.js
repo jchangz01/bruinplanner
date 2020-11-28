@@ -23,8 +23,8 @@ export default function App() {
         <Route path="/about" component={About} exact/>
         <Route path="/log-in" component={Login} exact/>
         <Route path="/sign-up" component={Signup} exact/>
-        <Route path="/account" component={Account} exact/>
-        <Route path="/planner" component={Planner} exact/>
+        <Route path="/account/:username" component={Account} exact/>
+        <Route path="/account/:username/planner/:index" component={Planner} exact/>
         <Route component={PathNotFound} />
       </Switch>
     </main>

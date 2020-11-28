@@ -11,7 +11,7 @@ export default class Home extends React.Component {
                 <header id="header">
                     <div id="header-content">
                         <FontAwesomeIcon id="header-logo" icon = { faCalendar } />
-                        <a href="/"><h1 id="header-title"><span class="gold" style={{"letter-spacing": 0}}>Bruin</span>Planner</h1></a>
+                        <a href="/"><h1 id="header-title"><span class="gold" style={{"letterSpacing": 0}}>Bruin</span>Planner</h1></a>
                         <nav id="header-navigation">
                             <a href="/about">ABOUT</a>
                             <a href="/contact">CONTACT</a>
@@ -34,7 +34,7 @@ export default class Home extends React.Component {
                         </a>
                     </div>
                     <img id="home-main-section-mainimg" class="fade-in" src={roycehall} alt="XXX"/>
-                    <div class="full-width-box lightblue-br" style={{"margin-top": "-130px"}}></div>
+                    <div class="full-width-box lightblue-br" style={{"marginTop": "-130px"}}></div>
                 </section>
                 <section>
                     <div id="home-sub-section-content">

@@ -13,6 +13,9 @@ const flash = require ('express-flash')
 const session = require ('express-session')
 const methodOverride = require('method-override')
 
+// internal package imports 
+const planner = require ('./js/planner-structure')
+
 // configure express 
 app.use (express.urlencoded({ extended: false })); //tells app to access 'name' input fields in req of HTTP calls
 app.use(express.static(__dirname + '/client/build')); // using react static
@@ -26,7 +29,6 @@ app.use (session ({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
-
 
 /* Settting up database mongoDb */
 const mongoose = require('mongoose')
@@ -50,7 +52,8 @@ passportConfig.init (
 
 /* GET ROUTES */
 //Get routes must be in this order due to redirecting checking being from top to bottom!
-app.get('/account', checkAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
+app.get('/account/:username', checkAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
+app.get('/account/:username/planner/:index', checkAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 app.get('/log-in', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 app.get('/sign-up', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
@@ -65,9 +68,15 @@ app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html')
 
 /*Post and Delete Routes */
 //create new planner 
-app.post('/create-planner', checkAuthenticated, (req, res) => {
-    const newPlanner = { name: req.body.name, major: req.body.major }
+app.post('/create-planner', checkAuthenticated, async (req, res) => {
+    const newPlanner = planner.getPlannerStructure();
+    newPlanner.name = req.body.name;
+    newPlanner.major = req.body.major;
+    console.log(newPlanner) //display the contents of the new planner created
     db.collection('authCredentials').findOneAndUpdate({"_id": ObjectID(req.session.passport.user)},{ $addToSet: { data : newPlanner } } )
+
+    const userInfo = await db.collection('authCredentials').findOne({"_id": ObjectID(req.session.passport.user)})
+    return res.json( {index: [userInfo.data.length - 1]} )
 })
 
 //modify existing planner 
@@ -129,7 +138,12 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
         // make sure that an account w/ the same username or email doesn't already exist
         const userLookup = await db.collection('authCredentials').findOne( {"user": req.body.user } );
         const emailLookup = await db.collection('authCredentials').findOne( {"email": req.body.email} );
-        if (userLookup != null)
+        if ( req.body.user.includes('/') )
+        {
+            console.log("new user attempted to use a username with a '/' character")
+            info = { redirect: "/sign-up", errorType: "username", message: "The username you entered has an invalid character '/'"}
+        }
+        else if (userLookup != null)
         {
             console.log("new user attempted to make account with an existing username");
             info = { redirect: "/sign-up", errorType: "username", message: "The username you entered already exist, please enter a new username"}   
@@ -180,9 +194,12 @@ function checkAuthenticated(req, res, next)
     res.redirect('/log-in'); // INTERACT w/ REACT FRONTEND
 }
 
-function checkNotAuthenticated(req, res, next)
+async function checkNotAuthenticated(req, res, next)
 {
-    if (req.isAuthenticated()) { return res.redirect('/account'); } // INTERACT w/ REACT FRONTEND
+    if (req.isAuthenticated()) { 
+        const userInfo = await db.collection('authCredentials').findOne({"_id": ObjectID(req.session.passport.user)})
+        return res.redirect('/account/' + userInfo.user); 
+    } // INTERACT w/ REACT FRONTEND
     next(); 
 }
 

@@ -37,11 +37,10 @@ function PopupPrompt (props) {
   };
 
 class Planners extends React.Component {
-
     navigateToPlanner = event => {
         console.log(this.props.index)
         console.log(this.props.plan)
-        this.props.history.push ({ pathname: '/planner', state: { planner: this.props.plan, plannerNumber: this.props.index }})
+        this.props.history.push ({ pathname: window.location.pathname + '/planner/' + this.props.index , state: { planner: this.props.plan, plannerNumber: this.props.index }})
     }
 
     render () {
@@ -71,14 +70,13 @@ export default class Account extends React.Component {
     })  
 
     logOut = () => {
-        console.log('hi')
         axios.delete('/log-out')
         .then( res => {
             if (res.data.redirect === '/log-in')
                 window.location='/log-in'
         })
         .catch( err => {
-
+            console.error(err)
         })
     }
 
@@ -92,7 +90,7 @@ export default class Account extends React.Component {
         }
         axios.post('/create-planner', data)
         .then( res => {
-            console.log("HI")
+            this.props.history.push ({ pathname: window.location.pathname + '/planner/' + res.data.index })
         })
         .catch ( err => {
             console.log(err)
@@ -115,12 +113,12 @@ export default class Account extends React.Component {
             this.setState({plannerList: planners, modifySelected: null, plannerName: "", plannerMajor: ""}) //set the new state
         })
         .catch ( err => {
-            console.log(err)
+            console.error(err)
         })
     }
 
     deletePlanner = index => {
-        console.log(index)
+        console.log("Planner position: " + index)
         const data = {
             plannerIndex: index
         }
@@ -225,9 +223,14 @@ export default class Account extends React.Component {
     }
 
     componentDidMount () {
+        var path = window.location.pathname
+        var accountUsername = path.split('/').pop()
         axios.get ('/getUserInfo')
         .then ( res => {
-            this.setState ({ username: res.data.username, plannerList: res.data.planners })
+            if (res.data.username === accountUsername)
+                this.setState ({ username: res.data.username, plannerList: res.data.planners })
+            else 
+                window.location = '/error'
         })
         .catch ( err => {
             window.location = '/'

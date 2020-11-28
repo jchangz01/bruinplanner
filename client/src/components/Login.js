@@ -112,7 +112,7 @@ export default class Login extends React.Component {
         axios.post ('/log-in', data)
         .then(res => {
             if (res.data.redirect === '/account') {
-                this.props.history.push ({ pathname: res.data.redirect }) //redirect to /account 
+                this.props.history.push ({ pathname: res.data.redirect + "/" + res.data.username }) //redirect to /account 
             }
          })
         .catch (error => { 
