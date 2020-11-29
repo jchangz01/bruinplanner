@@ -2,6 +2,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
+import Contact from './components/Contact'
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Account from './components/Account';
@@ -21,6 +22,7 @@ export default function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/about" component={About} exact/>
+        <Route path="/contact" component={Contact}/>
         <Route path="/log-in" component={Login} exact/>
         <Route path="/sign-up" component={Signup} exact/>
         <Route path="/account/:username" component={Account} exact/>
