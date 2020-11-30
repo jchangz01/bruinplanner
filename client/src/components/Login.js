@@ -130,19 +130,19 @@ export default class Login extends React.Component {
                 <Message key={this.state.updateKey} message={this.state.message} color={this.state.messageColor} />
                 <div id="login-main-content">
                     <div className="login-icon-circle">
-                    <FontAwesomeIcon class="login-icon" icon ={faCalendar}/>
+                       <FontAwesomeIcon class="login-icon" icon ={faCalendar}/>
+                    </div>
+                    <h1 id="Login-title">BruinPlanner</h1>
+                    <OptionsOrPrompt
+                    form={this.state.form} 
+                    onSubmit={this.handleSubmit} 
+                    onChange={this.handleChange} 
+                    onClick={this.toggleForm} 
+                    email_value={this.state.email_value} 
+                    password_value={this.state.password_value} 
+                    />
                 </div>
-                <h1 id="Login-title">BruinPlanner</h1>
-                <OptionsOrPrompt
-                form={this.state.form} 
-                onSubmit={this.handleSubmit} 
-                onChange={this.handleChange} 
-                onClick={this.toggleForm} 
-                email_value={this.state.email_value} 
-                password_value={this.state.password_value} 
-                />
-            </div>
-        </section>
+            </section>
         )
     }
 

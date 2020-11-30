@@ -1,0 +1,149 @@
+#planner-sidebar {
+    height: 100%;
+    width: 15vw;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 2vh;
+    text-align: center;
+    background-color: #003B5C;
+    box-shadow: 5px 0 5px -2px #888;
+} 
+  
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+#planner-sidebar-title {
+    display: inline-block;
+    font-size: calc(1.5vw + 1vh);
+    letter-spacing: -1.5px;
+}
+#planner-sidebar-logo {
+color:#FFD100;
+font-size: calc(1.5vw + 1vh);
+padding-right: 0.3vw;
+}
+
+.planner-sidebar-content {
+    text-align: left;
+    padding-left: 1vw;
+    color: white;
+    font-size: calc(1vw + 0.5vh);
+    line-height: 8vh;
+    vertical-align: middle;
+}
+    .planner-sidebar-content:hover {
+        background-color: #2774AE;
+        cursor: pointer;
+    }
+
+
+#planner-sidebar-user {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 15vw;
+    background-color: #2774AE;
+    line-height: 8vh;
+    vertical-align: middle;
+    font-size: calc(1vw + 0.5vh);
+    color: white;
+    overflow: auto;
+}
+ 
+/* Styling for planner grid
+/////////////////////////*/
+#planner {
+    margin-left: 15vw;
+    width: calc(100% - 15vw);
+    height: 63vh;
+    padding-top: 2vh
+}
+
+#planner-description {
+    width: 80vw;
+    margin: 0 auto;
+    text-align: left;
+}
+    #planner-title {
+        font-size: calc(1.5vw + 1vh);
+        display: inline;
+    }
+
+    #planner-major {
+        font-size: 1vw;
+        font-weight: lighter;
+        display: inline;
+    }
+
+#planner-container {
+    width: 80vw;
+    margin: 0 auto;
+    border: black solid 0.1vw;
+    background-color: white;
+    height: 54vh;
+    display: flex;
+    justify-content: space-between;
+    overflow: auto;
+}
+    .planner-quarter:first-of-type {
+        margin-left: 0;
+    }
+    .planner-quarter {
+        width: 6.3vw;
+        background-color: #C3D7EE;
+    }
+    .planner-quarter-title {
+        font-size: 1vw;
+        margin-top: 1.2vh;
+    }
+    .planner-quarter-line {
+        width: 90%;
+        border: 0.1vw solid white;
+        margin: 1vh
+    }
+
+    .planner-class-container {
+        height: 5.5vw;
+        width: 5.5vw;
+        border: black solid 0.1vw;
+        border-radius: 0.25rem;
+        background: white;
+        margin: 0 auto 1.2vh;
+    }
+
+/* Styling for searching classes
+///////////////////////////////*/
+#search-class {
+    margin-left: 15vw;
+    width: calc(100% - 15vw);
+    border: black solid 0.1vw;
+    height: 37vh;
+    padding-top: 2vh
+}
+
+#search-class-description {
+    width: 80vw;
+    margin: 0 auto;
+    text-align: left;
+}
+    #search-class-title {
+        font-size: calc(1vw + 1vh);
+        display: inline;
+    }
+
+    #search-class-input {
+        width: 100%;
+        border-radius: 0.25rem;
+        border: 0.1vw solid gray;
+        margin-bottom: 10px;
+        font-size: 1vw;
+        height: 4vh;
+        display: block;
+    }
+    #search-class-input::placeholder {
+        font-size: 1vw;
+    }
