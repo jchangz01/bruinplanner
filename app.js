@@ -6,7 +6,6 @@ if (process.env.NODE_ENV !== 'production') {
 // external package imports
 const express = require('express')
 const app = express();
-const request = require('request')
 const bcrypt = require ('bcrypt')
 const passport = require ('passport')
 const flash = require ('express-flash')
@@ -15,6 +14,9 @@ const methodOverride = require('method-override')
 
 // internal package imports 
 const planner = require ('./js/planner-structure')
+//const classes = require ('./js/retrieve-courses')
+const allCourses = require ('./courselist.json') //retrieves an array of objects containing all course names and ids
+
 
 // configure express 
 app.use (express.urlencoded({ extended: false })); //tells app to access 'name' input fields in req of HTTP calls
@@ -29,6 +31,7 @@ app.use (session ({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
+
 
 /* Settting up database mongoDb */
 const mongoose = require('mongoose')
@@ -61,12 +64,23 @@ app.get('/getUserInfo', checkAuthenticated, async (req, res) => {
     const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
     return res.json({ username: userInfo.user, planners: userInfo.data })
 })
+app.get('/getCourses', (req, res) => {
+    console.log( allCourses.length )
+    return res.json ({ allCourses : allCourses })
+})
 
 // MUST BE LAST!!
 app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
 
 /*Post and Delete Routes */
+//gets specific planner by its index in the list of all planners
+app.post('/getPlannerInfo', checkAuthenticated, async (req, res) => {
+    console.log(req.body)
+    const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
+    return res.json({ username: userInfo.user, plannerInfo: userInfo.data[req.body.index] })
+})
+
 //create new planner 
 app.post('/create-planner', checkAuthenticated, async (req, res) => {
     const newPlanner = planner.getPlannerStructure();
@@ -202,60 +216,6 @@ async function checkNotAuthenticated(req, res, next)
     } // INTERACT w/ REACT FRONTEND
     next(); 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Extract course info from devX API */
-const majorToCourse = new Map();
-const courseToCourseNum = new Map();
-//Retrieve and filter API data to courseNames, courseNumbers, and courseMajors
-request("http://api.ucladevx.com/courses", function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        var parsedBody = JSON.parse(body);
-        var removeDuplicates = new Set();
-
-        for (var i = 0; i < parsedBody.length; i++)
-        {
-            if (!courseToCourseNum.get(parsedBody[i].courseTitle))
-            {
-                let generalCourseNum = parsedBody[i].courseNum.replace(/-.*/g, '')
-
-                courseToCourseNum.set(parsedBody[i].courseTitle, generalCourseNum)
-
-                if (majorToCourse.get(parsedBody[i].major))
-                    majorToCourse.get(parsedBody[i].major).push(parsedBody[i].courseTitle)
-                else    
-                    majorToCourse.set(parsedBody[i].major, [parsedBody[i].courseTitle])
-            }
-        }
-    }
-})
-
-app.get('/', (req, res) => {
-    res.send(courseToCourseNum.get("Introduction to Computer Science I"))
-    console.log("hi")
-})
-
-app.get('/course', (req, res) => {
-    res.send(majorToCourse.get("COM SCI"))
-})
-
 
 
 // server port used to run our backend 

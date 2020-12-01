@@ -8,7 +8,10 @@ const terms = ["Year 1 Fall", "Year 1 Winter", "Year 1 Spring", "Year 2 Fall", "
 
 function Course (props) {
     return (
-        <div className="planner-class-container"></div>
+        <div className="course-box">
+            <h2 className="course-id">{props.courseID}</h2>
+            <p className="course-name">{props.courseName}</p>
+        </div>
     )
 }
 
@@ -30,15 +33,107 @@ class PlannerQuarters extends React.Component {
     }
 }
 
+class SearchCourses extends React.Component {
+    static defaultProperty = {
+        courses: []
+    };
+    constructor(props) {
+        super(props);
+        this.state = {
+        filteredCourses: [],
+        showCourses: false,
+        userInput: ""
+        };
+    }
+
+    onChange = event => {
+        const { courses } = this.props;
+        //const courses = ["apple", "banana", "moon", "meow"]
+        const userInput = event.currentTarget.value;
+
+        /*const filteredCourses = courses.filter( course =>
+            {if (filteredCourses.length > 35)
+                return true;
+            course.courseName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+            }
+        );*/
+
+        const filteredCourses = []
+        var i = 0;
+        var filteredCoursesCount = 0;
+        while (filteredCoursesCount < 36 && i < courses.length)
+        {
+            if (courses[i].courseName.toLowerCase().indexOf(userInput.toLowerCase()) > -1)
+            {
+                filteredCourses[filteredCoursesCount] = courses[i]
+                filteredCoursesCount++
+            }
+            i++;
+        }
+        console.log(filteredCourses)
+        this.setState({
+            filteredCourses,
+            showCourses: true,
+            userInput: event.currentTarget.value
+        });
+    };
+    
+    
+    render () {
+        console.log(this.state.filteredCourses[0])
+        const {
+            state: {
+                filteredCourses,
+                showCourses,
+                userInput
+            }
+            } = this;
+            var courseListComponent = (<div id="search-class-container"></div>);
+            if (showCourses && userInput) {
+            if (filteredCourses.length) {
+                courseListComponent = (
+                <div id="search-class-container">
+                    {filteredCourses.map((course, index) => {
+                        return (
+                            <div class="search-class-course-container">
+                                <Course courseName={course.courseName} courseID={course.courseID}/>
+                            </div>
+                        );
+                    })}
+                </div>
+                );
+            } else {
+                courseListComponent = (
+                <div className="search-class-noMatch">
+                    <em>Search result does not match our courses</em>
+                </div>
+                );
+            }
+            console.log(courseListComponent)
+        }
+        return ( 
+            <div id="search-class">
+                <div id="search-class-description">
+                    <h1 id="search-class-title">Search for Classes </h1>
+                    <p id="search-class-title-des">(MAX 36 classes displayed per search)</p>
+                    <input type="search" id="search-class-input" placeholder="Search class by course name" value={this.state.userInput} onChange={this.onChange}></input>
+                </div>
+                
+            {courseListComponent}
+            </div>
+        )
+    }
+}
+
 export default class Account extends React.Component {
     state = {
         username: "Username",
-        classSearch: "",
         planner: {
             name: "Planner name",
             major: "Planner major"
         },
         plannerIndex: null,
+        allCourses: []
     }
 
     logOut = () => {
@@ -85,13 +180,7 @@ export default class Account extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div id="search-class">
-                        <div id="search-class-description">
-                            <h1 id="search-class-title">Search for Classes</h1>
-                            <input id="search-class-input" placeholder="Search class by course name" value={this.state.classSearch} onChange={ (event) => this.setState({ classSearch: event.target.value })}></input>
-                        </div>
-
-                    </div>
+                    <SearchCourses courses={this.state.allCourses}/>
                 </section>
             </div>
         )
@@ -106,7 +195,8 @@ export default class Account extends React.Component {
 
         axios.get('/getCourses')
         .then ( res => {
-            console.log(res.data.allCourses)
+            console.log( res.data.allCourses )
+            this.setState({ allCourses: res.data.allCourses })
         })
 
         axios.post ('/getPlannerInfo', { "index" : plannerIndex })
@@ -116,9 +206,9 @@ export default class Account extends React.Component {
             /*else 
                 window.location = '/error'*/
         })
-        .catch ( err => {
+        /*.catch ( err => {
             window.location = '/'
             console.error(err)
-        })
+        })*/
     }
 }

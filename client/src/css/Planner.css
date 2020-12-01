@@ -1,6 +1,6 @@
 #planner-sidebar {
     height: 100%;
-    width: 15vw;
+    width: 14vw;
     position: fixed;
     z-index: 100;
     top: 0;
@@ -9,7 +9,7 @@
     padding-top: 2vh;
     text-align: center;
     background-color: #003B5C;
-    box-shadow: 5px 0 5px -2px #888;
+    box-shadow: 6.5px 0 5px -2px #888;
 } 
   
 @media screen and (max-height: 450px) {
@@ -45,7 +45,7 @@ padding-right: 0.3vw;
     position: fixed;
     bottom: 0;
     text-align: center;
-    width: 15vw;
+    width: 14vw;
     background-color: #2774AE;
     line-height: 8vh;
     vertical-align: middle;
@@ -57,14 +57,14 @@ padding-right: 0.3vw;
 /* Styling for planner grid
 /////////////////////////*/
 #planner {
-    margin-left: 15vw;
-    width: calc(100% - 15vw);
+    margin-left: 14vw;
+    width: calc(100% - 14vw);
     height: 63vh;
     padding-top: 2vh
 }
 
 #planner-description {
-    width: 80vw;
+    width: 83vw;
     margin: 0 auto;
     text-align: left;
 }
@@ -80,10 +80,10 @@ padding-right: 0.3vw;
     }
 
 #planner-container {
-    width: 80vw;
+    width: 83vw;
     margin: 0 auto;
     border: black solid 0.1vw;
-    background-color: white;
+    background-color: #C3D7EE;
     height: 54vh;
     display: flex;
     justify-content: space-between;
@@ -93,8 +93,7 @@ padding-right: 0.3vw;
         margin-left: 0;
     }
     .planner-quarter {
-        width: 6.3vw;
-        background-color: #C3D7EE;
+        width: 6.75vw;
     }
     .planner-quarter-title {
         font-size: 1vw;
@@ -102,36 +101,56 @@ padding-right: 0.3vw;
     }
     .planner-quarter-line {
         width: 90%;
-        border: 0.1vw solid white;
+        border: 0.1vw solid black;
+        background-color: black;
+        margin: 0 auto;
         margin: 1vh
     }
 
-    .planner-class-container {
-        height: 5.5vw;
-        width: 5.5vw;
+    .course-box {
+        height: 6.5vw;
+        width: 6.2vw;
         border: black solid 0.1vw;
         border-radius: 0.25rem;
         background: white;
         margin: 0 auto 1.2vh;
+        overflow: auto;
+        position: relative;
+    }
+    .course-name {
+        line-height: 2vh;
+        font-size: 0.7vw;
+        
+    }
+    .course-id {
+        padding-top: 1vh;
+        line-height: 1.5vh;
+        font-size: 0.8vw;
+        font-weight: bold;
     }
 
 /* Styling for searching classes
 ///////////////////////////////*/
 #search-class {
-    margin-left: 15vw;
-    width: calc(100% - 15vw);
+    margin-left: 14vw;
+    width: calc(100% - 14vw);
     border: black solid 0.1vw;
     height: 37vh;
     padding-top: 2vh
 }
 
 #search-class-description {
-    width: 80vw;
+    width: 83vw;
     margin: 0 auto;
     text-align: left;
 }
     #search-class-title {
         font-size: calc(1vw + 1vh);
+        display: inline;
+    }
+    #search-class-title-des {
+        font-size: 0.7vw;
+        font-weight: lighter;
         display: inline;
     }
 
@@ -147,3 +166,29 @@ padding-right: 0.3vw;
     #search-class-input::placeholder {
         font-size: 1vw;
     }
+
+    #search-class-container {
+        width: 83vw;
+        padding-top: 1vh;
+        margin: 1vh auto;
+        border: black solid 0.1vw;
+        background-color: white;
+        height: 25.6vh;
+        display: flex;
+        overflow: auto;
+        flex-wrap: wrap;
+    }
+    
+    .search-class-course-container {
+        flex-basis: calc(100%/12);
+    } 
+
+.search-class-noMatch {
+    width: 83vw;
+    margin: 1vh auto;
+    border: black solid 0.1vw;
+    background-color: white;
+    line-height: 25.3vh;
+    font-size: 1vw;
+    vertical-align: middle;
+}
