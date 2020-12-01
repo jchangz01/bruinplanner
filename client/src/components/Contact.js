@@ -104,7 +104,7 @@ export default class Contact extends React.Component {
                                     type="text" 
                                     className="contact-inputs" 
                                     label="Message" 
-                                    rows={8}
+                                    rows={10}
                                     multiline
                                     inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} 
                                     margin="normal" 
@@ -112,7 +112,7 @@ export default class Contact extends React.Component {
                                     variant="outlined"
                                     required/>
                             </ThemeProvider>
-                            <button type="submit" className="logSign-button blue-br white" style={{float: "right", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Create-account</button>
+                            <button type="submit" className="logSign-button blue-br white" style={{float: "center", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Send</button>
                         </form>
                     </div>
                 </section>
