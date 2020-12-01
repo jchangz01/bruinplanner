@@ -1,36 +1,58 @@
 import React from 'react'
 import axios from 'axios'
+import { DndProvider, useDrag, useDrop } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
 import '../css/Planner.css'
 
 const terms = ["Year 1 Fall", "Year 1 Winter", "Year 1 Spring", "Year 2 Fall", "Year 2 Winter", "Year 2 Spring", "Year 3 Fall", "Year 3 Winter", "Year 3 Spring", "Year 4 Fall", "Year 4 Winter", "Year 4 Spring" ]
 
+
 function Course (props) {
+    const [{ isDragging }, drag] = useDrag({
+        item: { 
+            type: 'course',
+            name: props.courseName,
+            id: props.courseID,
+            allCourseIndex: props.courseIndex,
+            displayedCourses: props.displayedCourses,
+            displayedCoursesIndex: props.displayedCoursesIndex
+        },
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging() //if dragging is detected, return true in isDragging 
+        })
+    })
+    
+
     return (
-        <div className="course-box">
+        <div className="course-box" ref={drag} style={{ opacity: isDragging ? 0.5 : 1, cursor: 'move' }}>
             <h2 className="course-id">{props.courseID}</h2>
             <p className="course-name">{props.courseName}</p>
         </div>
     )
 }
 
-class PlannerQuarters extends React.Component {
-    render() {
-        return (
-            <div className="planner-quarter">
-                <h4 className="planner-quarter-title">{this.props.term}</h4>
-                <hr className="planner-quarter-line"></hr>
-                <Course />
-                <Course />
-                <Course />
-                <Course />
-                <Course />
-                <Course />
-                <Course />
-            </div>
-        )
-    }
+function PlannerQuarters (props) {
+    const [{ isOver }, drop] = useDrop({
+        accept: 'course',
+        drop: (item, monitor) => {
+            props.addClass (props.termClasses, item.name, item.id, item.index, item.displayedCourses, item.displayedCoursesIndex)
+        },
+        collect: monitor => ({
+            isOver: !!monitor.isOver(), //if dragged object is hovering over dropzone, return true in isOver
+        }),
+    })
+
+    return (    
+    <div ref={drop} className="planner-quarter" style={isOver ? {backgroundColor: "white"} : null}>
+        <h4 className="planner-quarter-title">{props.term}</h4>
+        <hr className="planner-quarter-line"></hr>
+        { (props.termClasses || []).map ( course => (
+            <Course courseID={course.courseID} courseName={course.courseName}/>
+        ))}
+    </div>
+    )
 }
 
 class SearchCourses extends React.Component {
@@ -48,15 +70,7 @@ class SearchCourses extends React.Component {
 
     onChange = event => {
         const { courses } = this.props;
-        //const courses = ["apple", "banana", "moon", "meow"]
         const userInput = event.currentTarget.value;
-
-        /*const filteredCourses = courses.filter( course =>
-            {if (filteredCourses.length > 35)
-                return true;
-            course.courseName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-            }
-        );*/
 
         const filteredCourses = []
         var i = 0;
@@ -66,6 +80,7 @@ class SearchCourses extends React.Component {
             if (courses[i].courseName.toLowerCase().indexOf(userInput.toLowerCase()) > -1)
             {
                 filteredCourses[filteredCoursesCount] = courses[i]
+                filteredCourses[filteredCoursesCount].courseIndex = i;
                 filteredCoursesCount++
             }
             i++;
@@ -80,7 +95,6 @@ class SearchCourses extends React.Component {
     
     
     render () {
-        console.log(this.state.filteredCourses[0])
         const {
             state: {
                 filteredCourses,
@@ -96,7 +110,7 @@ class SearchCourses extends React.Component {
                     {filteredCourses.map((course, index) => {
                         return (
                             <div class="search-class-course-container">
-                                <Course courseName={course.courseName} courseID={course.courseID}/>
+                                <Course courseName={course.courseName} courseID={course.courseID} courseIndex={course.index} displayedCourses={filteredCourses} displayedCoursesIndex={index}/>
                             </div>
                         );
                     })}
@@ -130,10 +144,22 @@ export default class Account extends React.Component {
         username: "Username",
         planner: {
             name: "Planner name",
-            major: "Planner major"
+            major: "Planner major",
+            "Year 1 Fall": [],
+            "Year 1 Winter": [],
+            "Year 1 Spring": [],
+            "Year 2 Fall": [], 
+            "Year 2 Winter": [], 
+            "Year 2 Spring": [],
+            "Year 3 Fall": [],
+            "Year 3 Winter": [],
+            "Year 3 Spring": [],
+            "Year 4 Fall": [],
+            "Year 4 Winter": [],
+            "Year 4 Spring": [],
         },
         plannerIndex: null,
-        allCourses: []
+        allCourses: [],
     }
 
     logOut = () => {
@@ -146,6 +172,19 @@ export default class Account extends React.Component {
             
             console.error(err)
         })
+    }
+
+    addClassToPlanner = (quarter, name, id, allCourseIndex, displayedCourses, displayedCoursesIndex) => {
+        quarter.push({courseID: id, courseName: name})
+
+        var allCoursesCopy = this.state.allCourses.slice();
+        allCoursesCopy.splice(allCourseIndex, 1)
+        displayedCourses.splice(displayedCoursesIndex, 1)
+        this.setState({ allCourses: allCoursesCopy })
+    }
+
+    alterClassInPlanner = (quarterFrom, quarterTo, name, id) => {
+        
     }
 
     render () {
@@ -166,22 +205,24 @@ export default class Account extends React.Component {
                         <h2><FontAwesomeIcon icon={faUser}/> {this.state.username}</h2>
                     </div>
                 </div>
-                <section>
-                    <div id="planner">
-                        <div id="planner-description">
-                            <h1 id="planner-title">{this.state.planner.name}, </h1>           
-                            <p id="planner-major">{this.state.planner.major}</p>            
+                <DndProvider backend={HTML5Backend}>
+                    <section>
+                        <div id="planner">
+                            <div id="planner-description">
+                                <h1 id="planner-title">{this.state.planner.name}, </h1>           
+                                <p id="planner-major">{this.state.planner.major}</p>            
+                            </div>
+                            <div id="planner-container">
+                            { terms.map ( term => (
+                                <PlannerQuarters updateKey={this.state.updateKey} addClass={this.addClassToPlanner} term={term} termClasses={this.state.planner[term]}/>
+                            ))}
+                            </div>
                         </div>
-                        <div id="planner-container">
-                        { terms.map ( term => (
-                            <PlannerQuarters term={term}/>
-                        ))}
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <SearchCourses courses={this.state.allCourses}/>
-                </section>
+                    </section>
+                    <section>
+                        <SearchCourses courses={this.state.allCourses}/>
+                    </section>
+                </DndProvider>
             </div>
         )
     }
