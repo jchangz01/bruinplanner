@@ -81,6 +81,21 @@ app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html')
 
 
 /*Post and Delete Routes */
+//receive feedback from contact form in the front end
+app.post('/sendFeedback', async (req, res) => {
+    const feedback = {
+        "firstName": req.body.firstName, 
+        "lastName": req.body.lastName,
+        "email": req.body.email,
+        "subject": req.body.subject,
+        "content": req.body.content,
+    }
+
+    db.collection('feedbackData').insertOne (feedback);
+    console.log("Feedback inserted successfully")
+    return res.json();
+})
+
 //gets specific planner by its index in the list of all planners
 app.post('/getPlannerInfo', checkAuthenticated, async (req, res) => {
     const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
@@ -98,7 +113,6 @@ app.post('/getFilteredCourses', async (req, res) => {
     return res.json({ filteredCourses: filteredCourses})
 })
 
-app.post('/')
 //save work in progress planner
 app.post('/savePlanner', async (req, res) => {
     console.log ('Attempting to save planner')

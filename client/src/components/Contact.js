@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import '../css/Contact.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +15,18 @@ const theme = createMuiTheme({
     },
 }); 
 
+function Message (props)
+{
+    return (
+        props.message ? 
+            //key is used to replay our fade-in animation when form is resubmitted
+            <div key={props.key} className={props.color === "green" ? "success-green-br" : "error-red-br"} id="message-container" style={{position:"absolute"}}>
+                <p id="message-container-content" className="white">{props.message}</p>
+            </div> 
+            : null
+    ) 
+}
+
 export default class Contact extends React.Component {
     constructor(props) {
         super(props);
@@ -22,10 +35,45 @@ export default class Contact extends React.Component {
           lastName:'',
           email: '',
           subject:'',
-          message: ''
+          content: '',
+          message: '',
+          updateKey: 0,
         }
       }
     
+      handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state.firstName)
+        const feedback = {
+            "firstName": this.state.firstName, 
+            "lastName": this.state.lastName,
+            "email": this.state.email,
+            "subject": this.state.subject,
+            "content": this.state.content,
+        }
+
+        axios.post('/sendFeedback', feedback)
+        .then (res => {
+            this.setState ({
+                firstName: '', 
+                lastName: '',
+                email: '',
+                subject: '',
+                content: '',
+                message: "Feedback has been successfully sent!",
+                messageColor: "green",
+                updateKey: this.state.updateKey + 1
+            })
+        })
+        .catch (err => {
+            this.setState ({
+                message: "An error has occured, please try again",
+                messageColor: "red",
+                updateKey: this.state.updateKey + 1
+            })
+        })
+    }
+
     render() {
         return (
             <div>
@@ -41,11 +89,11 @@ export default class Contact extends React.Component {
                         </nav>
                     </div>
                 </header>
+                <Message message={this.state.message} color={this.state.messageColor} key={this.state.updateKey}/>
                 <section>
                     <div id="contact-main-content">
                         <h2 id="contact-main-heading">Contact Us</h2>
                         <h3 id="contact-main-subheading">Let us know your questions, comments, or suggestions!</h3>
-                        {/*<form action="/sign-up" method="POST" style={{width: "500px"}}> */}
                         <form onSubmit={this.handleSubmit} style={{width: "500px"}}>  
                             {/* Use ThemeProvider to provide desired color for your Materials-UI elements */}
                             <ThemeProvider theme={theme}>
@@ -98,9 +146,9 @@ export default class Contact extends React.Component {
                                     variant="outlined"
                                     required/>
                                 <TextField 
-                                    onChange={event => this.setState({message: event.target.value})} 
-                                    value={this.state.message} 
-                                    name="message" 
+                                    onChange={event => this.setState({content: event.target.value})} 
+                                    value={this.state.content} 
+                                    name="content" 
                                     type="text" 
                                     className="contact-inputs" 
                                     label="Message" 
@@ -120,21 +168,6 @@ export default class Contact extends React.Component {
                 
         )
     }
-    onNameChange(event) {
-        this.setState({name: event.target.value})
-      }
-    
-      onEmailChange(event) {
-        this.setState({email: event.target.value})
-      }
-    
-      onMessageChange(event) {
-        this.setState({message: event.target.value})
-      }
-    
-      handleSubmit(event) {
-      }
-
 }
 
 
