@@ -22,12 +22,13 @@ export default class Home extends React.Component {
                 </header>
                 <section>
                     <div> 
-                        <h2 id="home-main-section-title">Lorem ipsum dolor sit amet, consetetur tempor meow meow meow
-                            invidunt ut labore et dolore</h2>
+                        <h2 id="home-main-section-title">It's Finally Here: The UCLA 4 Year Planner
+                            For the Henry Samueli School of Engineering</h2>
                         <p id="home-main-section-description"> 
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et 
-                            accusam et justo duo dolores et ea rebum. et justo duo dolores et ea rebum. Et justo duo dolores et ea rebum. et justo duo dolores et ea rebum. 
+                            For far too long, Engineering Students at UCLA have had to hunt 
+                            through endless html webpages and outdated course requisite lists. Now, your pains
+                            are lessened, with our app that lets you dynamically construct a 4 Year Plan. Create an account to get started,
+                         	and we'll help with the rest!
                         </p>
                         <a href="/log-in">
                             <button className="home-main-section-button">GET STARTED</button>
@@ -38,15 +39,15 @@ export default class Home extends React.Component {
                 </section>
                 <section>
                     <div id="home-sub-section-content">
-                        <h2 id="home-sub-section-title">Lorem ipsum dolor sit amet, consetetur tempor meow</h2>
+                        <h2 id="home-sub-section-title">Want to Learn More about our Application?</h2>
                         <div id="home-sub-section-claims">
                             <article className="claim" >
                                 <div className="circle">
                                     <FontAwesomeIcon className="claim-icon" icon={faCalendar} />
                                 </div>
                                 <p className="claim-description">
-                                    Lorem voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                                    See your classes displayed on a dynamic calendar instead of on HTML lists. Visualize the schedules that
+                                    you could have, with no fuss and an easy search system to boot.
                                 </p>
                             </article>
                             <article className="claim">
@@ -54,8 +55,8 @@ export default class Home extends React.Component {
                                     <FontAwesomeIcon className="claim-icon" icon={faAddressBook} />
                                 </div>
                                 <p className="claim-description">
-                                    Lorem voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                                    Quick and easy sign up through email. Don't worry, we're not selling your data (yet). It just 
+                                    helps you manage your different plans from a centralized hub.
                                 </p>
                             </article>
                             <article className="claim">
@@ -63,8 +64,8 @@ export default class Home extends React.Component {
                                     <FontAwesomeIcon className="claim-icon" icon={faAmbulance} />
                                 </div>
                                 <p className="claim-description">
-                                    Lorem voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                                    Last minute emergencies? First pass was too late and now your entire plan is in shambles? Don't worry,
+                                    we store your previous plans, so that you can edit whenever you need.
                                 </p>
                             </article>
                         </div>
