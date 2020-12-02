@@ -262,7 +262,7 @@ export default class Account extends React.Component {
                 window.location = '/error'
         })
         .catch ( err => {
-            window.location = '/'
+            window.location = '/error'
             console.error(err)
         })
     }

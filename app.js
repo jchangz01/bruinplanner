@@ -104,7 +104,7 @@ app.post('/getPlannerInfo', checkAuthenticated, async (req, res) => {
 })
 
 //gets list of all courses with courses already in planner filtered out
-app.post('/getFilteredCourses', async (req, res) => {
+app.post('/getFilteredCourses', checkAuthenticated, async (req, res) => {
     console.log( "Filtering master course list before sending to client" )
     const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
     const activePlanner = userInfo.data[req.body.index]
@@ -114,7 +114,7 @@ app.post('/getFilteredCourses', async (req, res) => {
 })
 
 //save work in progress planner
-app.post('/savePlanner', async (req, res) => {
+app.post('/savePlanner', checkAuthenticated, async (req, res) => {
     console.log ('Attempting to save planner')
     const userInfo = await db.collection('authCredentials').findOne({"_id": ObjectID(req.session.passport.user)})
     if (userInfo.data[req.body.plannerIndex].name === req.body.planner.name)

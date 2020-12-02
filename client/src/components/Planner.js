@@ -328,18 +328,21 @@ export default class Account extends React.Component {
         .then ( res => {
             if (res.data.username === accountUsername)
                 this.setState ({ username: res.data.username, planner: res.data.plannerInfo, plannerIndex: plannerIndex })
-            /*else 
-                window.location = '/error'*/
+                window.location = '/error'
         })
-        /*.catch ( err => {
-            window.location = '/'
+        .catch ( err => {
+            window.location = '/error'
             console.error(err)
-        })*/
+        })
         
         axios.post('/getFilteredCourses', {"index" : plannerIndex })
         .then ( res => {
             console.log( res.data.filteredCourses )
             this.setState({ allCourses: res.data.filteredCourses, fetchingForInitialData: false })
+        })
+        .catch ( err => {
+            window.location = '/error'
+            console.error(err)
         })
     }
 }

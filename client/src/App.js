@@ -14,6 +14,11 @@ function PathNotFound() {
   )
 }
 
+function Error() {
+  return (
+    <h3>An error has occured</h3>
+  )
+}
 
 //Front-end routing to corresponding pages
 export default function App() {
@@ -27,6 +32,7 @@ export default function App() {
         <Route path="/sign-up" component={Signup} exact/>
         <Route path="/account/:username" component={Account} exact/>
         <Route path="/account/:username/planner/:index" component={Planner} exact/>
+        <Route path="/error" component={Error} exact/>
         <Route component={PathNotFound} />
       </Switch>
     </main>
