@@ -65,7 +65,7 @@ function PlannerQuarters (props) {
                 props.alterClass (item.removeFrom, item.removeFromIndex, props.term, item.name, item.id )
             }
             else {  
-                props.addClass (props.termClasses, item.name, item.id, item.index, item.removeFrom, item.removeFromIndex)
+                props.addClass (props.termClasses, item.name, item.id, item.allCourseIndex, item.removeFrom, item.removeFromIndex)
             }
         },
         collect: monitor => ({
@@ -139,7 +139,7 @@ class SearchCourses extends React.Component {
                     {filteredCourses.map((course, index) => {
                         return (
                             <div class="search-class-course-container">
-                                <Course courseName={course.courseName} courseID={course.courseID} type='searchCourse' courseIndex={course.index} displayedCourses={filteredCourses} displayedCoursesIndex={index}/>
+                                <Course courseName={course.courseName} courseID={course.courseID} type='searchCourse' courseIndex={course.courseIndex} displayedCourses={filteredCourses} displayedCoursesIndex={index}/>
                             </div>
                         );
                     })}
@@ -255,6 +255,8 @@ export default class Account extends React.Component {
         displayedCourses.splice(displayedCoursesIndex, 1) //remove course from search box display
 
         var allCoursesCopy = this.state.allCourses.slice();
+        console.log(allCoursesCopy[allCourseIndex])
+        console.log(allCourseIndex)
         allCoursesCopy.splice(allCourseIndex, 1)
         this.setState({ allCourses: allCoursesCopy }) //remove course from master course list
     }
