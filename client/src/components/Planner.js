@@ -328,10 +328,11 @@ export default class Account extends React.Component {
         .then ( res => {
             if (res.data.username === accountUsername)
                 this.setState ({ username: res.data.username, planner: res.data.plannerInfo, plannerIndex: plannerIndex })
+            else 
                 window.location = '/error'
         })
         .catch ( err => {
-            window.location = '/error'
+            window.location = '/'
             console.error(err)
         })
         
@@ -341,7 +342,7 @@ export default class Account extends React.Component {
             this.setState({ allCourses: res.data.filteredCourses, fetchingForInitialData: false })
         })
         .catch ( err => {
-            window.location = '/error'
+            window.location = '/'
             console.error(err)
         })
     }
