@@ -124,7 +124,7 @@ padding-right: 0.3vw;
 #planner-container {
     width: 83vw;
     margin: 0 auto;
-    border: black solid 0.1vw;
+    border: 0.1vw solid gray;
     background-color: #C3D7EE;
     height: 54vh;
     display: flex;
@@ -149,16 +149,11 @@ padding-right: 0.3vw;
         width: 6.2vw;
         border: black solid 0.1vw;
         border-radius: 0.25rem;
-        background: white;
+        background: #FFE552;
         margin: 0 auto 1.2vh;
         overflow-y: auto;
         position: relative;
     }
-    @keyframes scale {
-        to {
-          transform: scale(0);
-        }
-      }
     .course-name {
         line-height: 2vh;
         font-size: 0.7vw;
@@ -211,7 +206,7 @@ padding-right: 0.3vw;
         width: 83vw;
         padding-top: 1vh;
         margin: 1vh auto;
-        border: black solid 0.1vw;
+        border: 0.1vw solid gray;
         background-color: #C3D7EE;
         height: 25.6vh;
         display: flex;
@@ -226,7 +221,7 @@ padding-right: 0.3vw;
 .search-class-noMatch {
     width: 83vw;
     margin: 1vh auto;
-    border: black solid 0.1vw;
+    border: 0.1vw solid gray;
     background-color: #C3D7EE;
     line-height: 25.3vh;
     font-size: 1vw;

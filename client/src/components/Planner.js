@@ -26,7 +26,10 @@ function Course (props) {
     
 
     return (
-        <div className="course-box" ref={drag} style={{ opacity: isDragging ? 0.5 : 1, cursor: 'move' }}>
+        <div className="course-box" ref={drag} 
+            style={ props.type === 'searchCourse' ? {backgroundColor: "white", opacity: isDragging ? 0.5 : 1, cursor: 'move'} 
+            : { opacity: isDragging ? 0.5 : 1, cursor: 'move' }}>
+
             <h2 className="course-id">{props.courseID}</h2>
             <p className="course-name">{props.courseName}</p>
         </div>
