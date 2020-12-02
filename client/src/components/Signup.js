@@ -143,7 +143,7 @@ export default class Signup extends React.Component {
                                     color="primary" 
                                     required/>
                             </ThemeProvider>
-                            <button type="submit" className="logSign-button blue-br white" style={{float: "right", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Create-account</button>
+                            <button type="submit" className="logSign-button blue-br white" style={{float: "center", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Create-account</button>
                         </form>
                     </div>
                 </section>
