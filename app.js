@@ -1,3 +1,6 @@
+// this is the main backend for BruinPlanner
+console.log("Starting BruinPlanner Server");
+
 // load env vars for .env file
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
@@ -81,6 +84,23 @@ app.post('/getPlannerInfo', checkAuthenticated, async (req, res) => {
     return res.json({ username: userInfo.user, plannerInfo: userInfo.data[req.body.index] })
 })
 
+//save work in progress planner
+app.post('/savePlanner', async (req, res) => {
+    const userInfo = await db.collection('authCredentials').findOne({"_id": ObjectID(req.session.passport.user)})
+    if (userInfo.data[req.body.plannerIndex].name === req.body.planner.name)
+    {
+        let editPlanner = "data." + req.body.plannerIndex
+        db.collection('authCredentials').updateOne(
+            {"_id": ObjectID(req.session.passport.user)},
+            { $set: {  [editPlanner] : req.body.planner } }
+        )
+        return res.json({ result: 'saved' })
+    }
+    else
+        return res.json();
+})
+
+
 //create new planner 
 app.post('/create-planner', checkAuthenticated, async (req, res) => {
     const newPlanner = planner.getPlannerStructure();
@@ -110,7 +130,6 @@ app.post('/modify-planner', checkAuthenticated, (req, res) => {
     }
     return res.json();
 })
-
 //delete existing planner 
 app.post('/delete-planner', checkAuthenticated, (req, res) => {
     console.log(req.body.plannerIndex)
@@ -196,7 +215,6 @@ app.post('/sign-up', checkNotAuthenticated, async (req, res) => {
 })
 
 app.delete('/log-out', (req, res) => {
-    console.log('meow')
     req.logOut() //provided by passport.js library
     return res.json ({ redirect: '/log-in' })
 })

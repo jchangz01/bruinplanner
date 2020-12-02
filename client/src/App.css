@@ -110,6 +110,15 @@
   color: white;
 }
 
+.success-green {
+  color: #4BB543;
+}
+
+.error-red {
+  color: #FF9494;   
+}
+
+
 .blue-br {
   background-color: #2774AE;
 }
@@ -132,4 +141,21 @@
 
 .error-red-br {
   background-color: #FF9494;   
+}
+
+
+/*//////////////////
+General Animations 
+//////////////////*/
+.spin {
+  animation: App-logo-spin infinite 3s linear;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

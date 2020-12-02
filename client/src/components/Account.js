@@ -145,7 +145,6 @@ export default class Account extends React.Component {
     }
 
     deletePlanner = index => {
-        console.log("Planner position: " + index)
         const data = {
             plannerIndex: index
         }

@@ -40,7 +40,23 @@ padding-right: 0.3vw;
         cursor: pointer;
     }
 
+#planner-sidebar-recycling-area {
+    line-height: 18vh;
+    min-height: 18vh;
+    width: 14vw;
+    margin: 45vh auto 0;
+    background-color: #C3D7EE;
+}
 
+#planner-sidebar-recycling-area {
+    font-size: 4vw;
+    color:whitesmoke;
+}
+
+#planner-sidebar-recycling-des {
+    font-size: 1vw;
+    display: block;
+}
 #planner-sidebar-user {
     position: fixed;
     bottom: 0;
@@ -59,8 +75,8 @@ padding-right: 0.3vw;
 #planner {
     margin-left: 14vw;
     width: calc(100% - 14vw);
-    height: 63vh;
-    padding-top: 2vh
+    height: 60vh;
+    margin-top: 3vh;
 }
 
 #planner-description {
@@ -79,6 +95,32 @@ padding-right: 0.3vw;
         display: inline;
     }
 
+    #planner-save-button-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-right: 2vw;
+        margin-top: 1.2vh;
+    }
+
+    #planner-save-button {
+        background-color:#44c767;
+        border-radius:0.25rem;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-size:1vw;
+        padding: 0.9vh 1vw;
+        width: 9vw;
+    }
+
+    .planner-save-button-message {
+        font-size: 0.8vw;
+        text-decoration: underline;
+        margin-right: 1vw;
+    }
+
 #planner-container {
     width: 83vw;
     margin: 0 auto;
@@ -89,9 +131,6 @@ padding-right: 0.3vw;
     justify-content: space-between;
     overflow: auto;
 }
-    .planner-quarter:first-of-type {
-        margin-left: 0;
-    }
     .planner-quarter {
         width: 6.75vw;
     }
@@ -100,10 +139,8 @@ padding-right: 0.3vw;
         margin-top: 1.2vh;
     }
     .planner-quarter-line {
-        width: 90%;
-        border: 0.1vw solid black;
+        border: 0.1vh solid black;
         background-color: black;
-        margin: 0 auto;
         margin: 1vh
     }
 
@@ -134,9 +171,7 @@ padding-right: 0.3vw;
 #search-class {
     margin-left: 14vw;
     width: calc(100% - 14vw);
-    border: black solid 0.1vw;
     height: 37vh;
-    padding-top: 2vh
 }
 
 #search-class-description {
@@ -172,7 +207,7 @@ padding-right: 0.3vw;
         padding-top: 1vh;
         margin: 1vh auto;
         border: black solid 0.1vw;
-        background-color: white;
+        background-color: #C3D7EE;
         height: 25.6vh;
         display: flex;
         overflow: auto;
@@ -187,7 +222,7 @@ padding-right: 0.3vw;
     width: 83vw;
     margin: 1vh auto;
     border: black solid 0.1vw;
-    background-color: white;
+    background-color: #C3D7EE;
     line-height: 25.3vh;
     font-size: 1vw;
     vertical-align: middle;

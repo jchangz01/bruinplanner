@@ -3,7 +3,7 @@ import axios from 'axios'
 import { DndProvider, useDrag, useDrop } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faSignOutAlt, faSpinner, faUser, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import '../css/Planner.css'
 
 const terms = ["Year 1 Fall", "Year 1 Winter", "Year 1 Spring", "Year 2 Fall", "Year 2 Winter", "Year 2 Spring", "Year 3 Fall", "Year 3 Winter", "Year 3 Spring", "Year 4 Fall", "Year 4 Winter", "Year 4 Spring" ]
@@ -15,9 +15,10 @@ function Course (props) {
             type: 'course',
             name: props.courseName,
             id: props.courseID,
-            allCourseIndex: props.courseIndex,
-            displayedCourses: props.displayedCourses,
-            displayedCoursesIndex: props.displayedCoursesIndex
+            dragSource: props.source,
+            allCourseIndex: props.courseIndex, //position of course within the master course list
+            removeFrom: props.displayedCourses, //we will remove the course from the array passed by this list to take the course-box out of display
+            removeFromIndex: props.displayedCoursesIndex //course index within the array specified in removeFrom
         },
         collect: monitor => ({
             isDragging: !!monitor.isDragging() //if dragging is detected, return true in isDragging 
@@ -33,23 +34,37 @@ function Course (props) {
     )
 }
 
+function RecylingBin (props) {
+    return (
+        <div id="planner-sidebar-recycling-area">
+            <FontAwesomeIcon id="planner-sidebar-recycling-bin" icon={faTrashAlt} />
+        </div>
+    )
+}
+
+
 function PlannerQuarters (props) {
     const [{ isOver }, drop] = useDrop({
         accept: 'course',
         drop: (item, monitor) => {
-            props.addClass (props.termClasses, item.name, item.id, item.index, item.displayedCourses, item.displayedCoursesIndex)
+            if (item.dragSource === 'planner') {
+                props.alterClass (item.removeFrom, item.removeFromIndex, props.term, item.name, item.id )
+            }
+            else {  
+                props.addClass (props.termClasses, item.name, item.id, item.index, item.removeFrom, item.removeFromIndex)
+            }
         },
         collect: monitor => ({
             isOver: !!monitor.isOver(), //if dragged object is hovering over dropzone, return true in isOver
-        }),
+        }), 
     })
 
     return (    
     <div ref={drop} className="planner-quarter" style={isOver ? {backgroundColor: "white"} : null}>
         <h4 className="planner-quarter-title">{props.term}</h4>
         <hr className="planner-quarter-line"></hr>
-        { (props.termClasses || []).map ( course => (
-            <Course courseID={course.courseID} courseName={course.courseName}/>
+        { (props.termClasses || []).map ( (course, index) => (
+            <Course courseID={course.courseID} courseName={course.courseName} source='planner' displayedCourses={props.term} displayedCoursesIndex={index}/>
         ))}
     </div>
     )
@@ -110,7 +125,7 @@ class SearchCourses extends React.Component {
                     {filteredCourses.map((course, index) => {
                         return (
                             <div class="search-class-course-container">
-                                <Course courseName={course.courseName} courseID={course.courseID} courseIndex={course.index} displayedCourses={filteredCourses} displayedCoursesIndex={index}/>
+                                <Course courseName={course.courseName} courseID={course.courseID} source='search' courseIndex={course.index} displayedCourses={filteredCourses} displayedCoursesIndex={index}/>
                             </div>
                         );
                     })}
@@ -123,7 +138,6 @@ class SearchCourses extends React.Component {
                 </div>
                 );
             }
-            console.log(courseListComponent)
         }
         return ( 
             <div id="search-class">
@@ -138,6 +152,52 @@ class SearchCourses extends React.Component {
         )
     }
 }
+
+class PlannerSaveButton extends React.Component {
+    state = {
+        loading: false,
+        error: false,
+        success: false,
+    }
+    
+    savePlanner = () => {
+        this.setState({loading: true, error: false, success: false})
+        const data = {
+            planner: this.props.planner,
+            plannerIndex: this.props.plannerIndex
+        }
+        axios.post ('/savePlanner', data)
+        .then ( res=> {
+            if (res.data.result === 'saved')
+                this.setState({loading: false, success: true})
+            else
+                this.setState({loading: false, error: false})
+        })
+        .catch ( err => {
+            this.setState({loading: false, error: false})
+        })
+    }
+
+    render() {
+        return (
+            <div id="planner-save-button-container">
+                { this.state.error ? 
+                    <span class="planner-save-button-message error-red">An error occured when saving your planner</span> : null
+                }
+                { this.state.success ?
+                    <span class="planner-save-button-message success-green">Your plan was successfully saved!</span> : null
+                }
+                { this.state.loading ? 
+                <button id="planner-save-button">
+                    Saving <FontAwesomeIcon className="spin" icon={faSpinner} />
+                </button>
+                : <button id="planner-save-button" onClick={this.savePlanner}>Save Planner</button>
+                }
+            </div>
+        )
+    }
+}
+
 
 export default class Account extends React.Component {
     state = {
@@ -175,16 +235,24 @@ export default class Account extends React.Component {
     }
 
     addClassToPlanner = (quarter, name, id, allCourseIndex, displayedCourses, displayedCoursesIndex) => {
-        quarter.push({courseID: id, courseName: name})
+        quarter.push({courseID: id, courseName: name}) //add course to the specified quarter
+
+        displayedCourses.splice(displayedCoursesIndex, 1) //remove course from search box display
 
         var allCoursesCopy = this.state.allCourses.slice();
         allCoursesCopy.splice(allCourseIndex, 1)
-        displayedCourses.splice(displayedCoursesIndex, 1)
-        this.setState({ allCourses: allCoursesCopy })
+        this.setState({ allCourses: allCoursesCopy }) //remove course from master course list
     }
 
-    alterClassInPlanner = (quarterFrom, quarterTo, name, id) => {
-        
+    alterClassInPlanner = (quarterFrom, quarterFromIndex, quarterTo, name, id) => {
+        let plannerCopy = Object.assign({}, this.state.planner);
+        plannerCopy[quarterFrom].splice (quarterFromIndex, 1) //remove course from the quarter that originally held the class
+        plannerCopy[quarterTo].push ({courseID: id, courseName: name}) //add course to the specified planner
+        this.setState({ planner: plannerCopy })
+    }
+
+    removeClassFromPlanner = () => {
+
     }
 
     render () {
@@ -201,6 +269,7 @@ export default class Account extends React.Component {
                     <div class="planner-sidebar-content" onClick={this.logOut}>
                         <h2><FontAwesomeIcon icon={faSignOutAlt}/> Log-out</h2>
                     </div>
+                    <RecylingBin />
                     <div id="planner-sidebar-user">
                         <h2><FontAwesomeIcon icon={faUser}/> {this.state.username}</h2>
                     </div>
@@ -210,11 +279,12 @@ export default class Account extends React.Component {
                         <div id="planner">
                             <div id="planner-description">
                                 <h1 id="planner-title">{this.state.planner.name}, </h1>           
-                                <p id="planner-major">{this.state.planner.major}</p>            
+                                <p id="planner-major">{this.state.planner.major}</p>  
+                                <PlannerSaveButton planner={this.state.planner} plannerIndex={this.state.plannerIndex} />
                             </div>
                             <div id="planner-container">
                             { terms.map ( term => (
-                                <PlannerQuarters updateKey={this.state.updateKey} addClass={this.addClassToPlanner} term={term} termClasses={this.state.planner[term]}/>
+                                <PlannerQuarters updateKey={this.state.updateKey} addClass={this.addClassToPlanner} alterClass={this.alterClassInPlanner} term={term} termClasses={this.state.planner[term]}/>
                             ))}
                             </div>
                         </div>
@@ -231,8 +301,6 @@ export default class Account extends React.Component {
         var path = window.location.pathname.split('/')
         var plannerIndex = path[path.length - 1]//get planner number from url
         var accountUsername = path[path.length - 3] //get account username from url
-        console.log (plannerIndex)
-        console.log (accountUsername)
 
         axios.get('/getCourses')
         .then ( res => {
