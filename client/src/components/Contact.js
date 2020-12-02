@@ -42,9 +42,9 @@ export default class Contact extends React.Component {
                     </div>
                 </header>
                 <section>
-                    <div id="signup-main-content">
-                        <h2 id="signup-main-heading">Contact Us</h2>
-                        <h3 id="signup-main-subheading">Start planning your next 4 years at UCLA now!</h3>
+                    <div id="contact-main-content">
+                        <h2 id="contact-main-heading">Contact Us</h2>
+                        <h3 id="contact-main-subheading">Let us know your questions, comments, or suggestions!</h3>
                         {/*<form action="/sign-up" method="POST" style={{width: "500px"}}> */}
                         <form onSubmit={this.handleSubmit} style={{width: "500px"}}>  
                             {/* Use ThemeProvider to provide desired color for your Materials-UI elements */}
