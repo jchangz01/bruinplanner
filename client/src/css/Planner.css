@@ -151,9 +151,14 @@ padding-right: 0.3vw;
         border-radius: 0.25rem;
         background: white;
         margin: 0 auto 1.2vh;
-        overflow: auto;
+        overflow-y: auto;
         position: relative;
     }
+    @keyframes scale {
+        to {
+          transform: scale(0);
+        }
+      }
     .course-name {
         line-height: 2vh;
         font-size: 0.7vw;

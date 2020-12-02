@@ -12,12 +12,11 @@ const terms = ["Year 1 Fall", "Year 1 Winter", "Year 1 Spring", "Year 2 Fall", "
 function Course (props) {
     const [{ isDragging }, drag] = useDrag({
         item: { 
-            type: 'course',
+            type: props.type,
             name: props.courseName,
             id: props.courseID,
-            dragSource: props.source,
             allCourseIndex: props.courseIndex, //position of course within the master course list
-            removeFrom: props.displayedCourses, //we will remove the course from the array passed by this list to take the course-box out of display
+            removeFrom: props.displayedCourses, //we will remove the course from the array passed by this list or string property to a list to take the course-box out of display
             removeFromIndex: props.displayedCoursesIndex //course index within the array specified in removeFrom
         },
         collect: monitor => ({
@@ -35,9 +34,21 @@ function Course (props) {
 }
 
 function RecylingBin (props) {
+  
+    const [{ isOver }, drop] = useDrop({
+        accept: 'plannerCourse',
+        drop: item => {
+            props.removeClass(item.removeFrom, item.removeFromIndex)
+        },
+        collect: monitor => ({
+            isOver: !!monitor.isOver() 
+        }),
+        
+    })
+
     return (
-        <div id="planner-sidebar-recycling-area">
-            <FontAwesomeIcon id="planner-sidebar-recycling-bin" icon={faTrashAlt} />
+        <div id="planner-sidebar-recycling-area" ref={drop} style={isOver ? {backgroundColor: "#d11a2a"} : null}>
+            <FontAwesomeIcon id="planner-sidebar-recycling-bin" icon={faTrashAlt} style={isOver ? {color: "white"} : null}/>
         </div>
     )
 }
@@ -45,9 +56,9 @@ function RecylingBin (props) {
 
 function PlannerQuarters (props) {
     const [{ isOver }, drop] = useDrop({
-        accept: 'course',
-        drop: (item, monitor) => {
-            if (item.dragSource === 'planner') {
+        accept: ['plannerCourse', 'searchCourse'],
+        drop: item => {
+            if (item.type === 'plannerCourse') {
                 props.alterClass (item.removeFrom, item.removeFromIndex, props.term, item.name, item.id )
             }
             else {  
@@ -64,7 +75,7 @@ function PlannerQuarters (props) {
         <h4 className="planner-quarter-title">{props.term}</h4>
         <hr className="planner-quarter-line"></hr>
         { (props.termClasses || []).map ( (course, index) => (
-            <Course courseID={course.courseID} courseName={course.courseName} source='planner' displayedCourses={props.term} displayedCoursesIndex={index}/>
+            <Course courseID={course.courseID} courseName={course.courseName} type='plannerCourse' displayedCourses={props.term} displayedCoursesIndex={index}/>
         ))}
     </div>
     )
@@ -125,7 +136,7 @@ class SearchCourses extends React.Component {
                     {filteredCourses.map((course, index) => {
                         return (
                             <div class="search-class-course-container">
-                                <Course courseName={course.courseName} courseID={course.courseID} source='search' courseIndex={course.index} displayedCourses={filteredCourses} displayedCoursesIndex={index}/>
+                                <Course courseName={course.courseName} courseID={course.courseID} type='searchCourse' courseIndex={course.index} displayedCourses={filteredCourses} displayedCoursesIndex={index}/>
                             </div>
                         );
                     })}
@@ -251,30 +262,36 @@ export default class Account extends React.Component {
         this.setState({ planner: plannerCopy })
     }
 
-    removeClassFromPlanner = () => {
+    removeClassFromPlanner = (quarterFrom, quarterFromIndex) => {
+        let plannerCopy = Object.assign({}, this.state.planner);
+        let recycledCourse = plannerCopy[quarterFrom][quarterFromIndex]; 
+        plannerCopy[quarterFrom].splice (quarterFromIndex, 1) //remove course from the quarter that originally held the class
 
+        var allCoursesCopy = this.state.allCourses.slice();
+        allCoursesCopy.push(recycledCourse)
+        this.setState({ planner: plannerCopy, allCourses: allCoursesCopy })
     }
 
     render () {
         return (
             <div>
-                <div id="planner-sidebar" >
-                    <div style={{margin: "2vh 0 4vh 0"}}><a href="/">
-                        <h1 id="planner-sidebar-title" className="white"><span className="gold" style={{"letterSpacing": 0}}>Bruin</span>Planner</h1>
-                    </a></div>
-                    <hr style={{margin: "1vh auto", width: "90%" }}></hr>
-                    <a href={"/account/" + this.state.username}><div class="planner-sidebar-content">
-                        <h2><FontAwesomeIcon icon={faCalendar}/> Planners</h2>
-                    </div></a>
-                    <div class="planner-sidebar-content" onClick={this.logOut}>
-                        <h2><FontAwesomeIcon icon={faSignOutAlt}/> Log-out</h2>
-                    </div>
-                    <RecylingBin />
-                    <div id="planner-sidebar-user">
-                        <h2><FontAwesomeIcon icon={faUser}/> {this.state.username}</h2>
-                    </div>
-                </div>
                 <DndProvider backend={HTML5Backend}>
+                    <div id="planner-sidebar" >
+                        <div style={{margin: "2vh 0 4vh 0"}}><a href="/">
+                            <h1 id="planner-sidebar-title" className="white"><span className="gold" style={{"letterSpacing": 0}}>Bruin</span>Planner</h1>
+                        </a></div>
+                        <hr style={{margin: "1vh auto", width: "90%" }}></hr>
+                        <a href={"/account/" + this.state.username}><div class="planner-sidebar-content">
+                            <h2><FontAwesomeIcon icon={faCalendar}/> Planners</h2>
+                        </div></a>
+                        <div class="planner-sidebar-content" onClick={this.logOut}>
+                            <h2><FontAwesomeIcon icon={faSignOutAlt}/> Log-out</h2>
+                        </div>
+                        <RecylingBin removeClass={this.removeClassFromPlanner}/>
+                        <div id="planner-sidebar-user">
+                            <h2><FontAwesomeIcon icon={faUser}/> {this.state.username}</h2>
+                        </div>
+                    </div>
                     <section>
                         <div id="planner">
                             <div id="planner-description">
