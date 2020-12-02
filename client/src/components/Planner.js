@@ -234,6 +234,7 @@ export default class Account extends React.Component {
         },
         plannerIndex: null,
         allCourses: [],
+        fetchingForInitialData: true
     }
 
     logOut = () => {
@@ -278,6 +279,7 @@ export default class Account extends React.Component {
     render () {
         return (
             <div>
+                {this.state.fetchingForInitialData ? <div className="loading-overlay"><FontAwesomeIcon className="spin" style={{fontSize: "18vw", color: "#8BB8E8"}} icon={faSpinner}/></div> : null }
                 <DndProvider backend={HTML5Backend}>
                     <div id="planner-sidebar" >
                         <div style={{margin: "2vh 0 4vh 0"}}><a href="/">
@@ -322,12 +324,6 @@ export default class Account extends React.Component {
         var plannerIndex = path[path.length - 1]//get planner number from url
         var accountUsername = path[path.length - 3] //get account username from url
 
-        axios.get('/getCourses')
-        .then ( res => {
-            console.log( res.data.allCourses )
-            this.setState({ allCourses: res.data.allCourses })
-        })
-
         axios.post ('/getPlannerInfo', { "index" : plannerIndex })
         .then ( res => {
             if (res.data.username === accountUsername)
@@ -339,5 +335,11 @@ export default class Account extends React.Component {
             window.location = '/'
             console.error(err)
         })*/
+        
+        axios.post('/getFilteredCourses', {"index" : plannerIndex })
+        .then ( res => {
+            console.log( res.data.filteredCourses )
+            this.setState({ allCourses: res.data.filteredCourses, fetchingForInitialData: false })
+        })
     }
 }

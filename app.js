@@ -17,7 +17,7 @@ const methodOverride = require('method-override')
 
 // internal package imports 
 const planner = require ('./js/planner-structure')
-//const classes = require ('./js/retrieve-courses')
+const classes = require ('./js/retrieve-courses')
 const allCourses = require ('./courselist.json') //retrieves an array of objects containing all course names and ids
 
 
@@ -63,12 +63,16 @@ app.get('/account/:username/planner/:index', checkAuthenticated, (req, res) => r
 app.get('/log-in', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 app.get('/sign-up', checkNotAuthenticated, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
 
+//get user's username and planners
 app.get('/getUserInfo', checkAuthenticated, async (req, res) => {
     const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
+    console.log('Sending ' + userInfo.user + "'s planner data")
     return res.json({ username: userInfo.user, planners: userInfo.data })
 })
+
+//gets list of ALL courses
 app.get('/getCourses', (req, res) => {
-    console.log( allCourses.length )
+    console.log( "Master list of " + allCourses.length + " courses will be sent" )
     return res.json ({ allCourses : allCourses })
 })
 
@@ -79,13 +83,25 @@ app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html')
 /*Post and Delete Routes */
 //gets specific planner by its index in the list of all planners
 app.post('/getPlannerInfo', checkAuthenticated, async (req, res) => {
-    console.log(req.body)
     const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
+    console.log( 'Retrieving planner with name "' + userInfo.data[req.body.index].name + '" and major "' + userInfo.data[req.body.index].major + '"')
     return res.json({ username: userInfo.user, plannerInfo: userInfo.data[req.body.index] })
 })
 
+//gets list of all courses with courses already in planner filtered out
+app.post('/getFilteredCourses', async (req, res) => {
+    console.log( "Filtering master course list before sending to client" )
+    const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
+    const activePlanner = userInfo.data[req.body.index]
+    const filteredCourses = classes.filterAllCourseData (activePlanner)
+    console.log( "Filtered course list down to " + filteredCourses.length + " courses")
+    return res.json({ filteredCourses: filteredCourses})
+})
+
+app.post('/')
 //save work in progress planner
 app.post('/savePlanner', async (req, res) => {
+    console.log ('Attempting to save planner')
     const userInfo = await db.collection('authCredentials').findOne({"_id": ObjectID(req.session.passport.user)})
     if (userInfo.data[req.body.plannerIndex].name === req.body.planner.name)
     {
@@ -94,15 +110,19 @@ app.post('/savePlanner', async (req, res) => {
             {"_id": ObjectID(req.session.passport.user)},
             { $set: {  [editPlanner] : req.body.planner } }
         )
+        console.log('Save Successful!')
         return res.json({ result: 'saved' })
     }
-    else
+    else{
+        console.log('Save Failure!')
         return res.json();
+    }
 })
 
 
 //create new planner 
 app.post('/create-planner', checkAuthenticated, async (req, res) => {
+    console.log ( 'Creating new planner named' + req.body.name + ' with major ' + req.body.major)
     const newPlanner = planner.getPlannerStructure();
     newPlanner.name = req.body.name;
     newPlanner.major = req.body.major;
@@ -115,6 +135,7 @@ app.post('/create-planner', checkAuthenticated, async (req, res) => {
 
 //modify existing planner 
 app.post('/modify-planner', checkAuthenticated, (req, res) => {
+    console.log ( 'Modifying existing planner' )
     var index = req.body.plannerIndex;
     console.log(index)
     var editName = "data." + index + ".name"
@@ -132,7 +153,7 @@ app.post('/modify-planner', checkAuthenticated, (req, res) => {
 })
 //delete existing planner 
 app.post('/delete-planner', checkAuthenticated, (req, res) => {
-    console.log(req.body.plannerIndex)
+    console.log ( 'Deleting existing planner' )
     var deletePlanner = 'data.' + req.body.plannerIndex;
 
     //deletes an array element entry of a document using index
@@ -153,8 +174,6 @@ app.post('/log-in',
     passport.authenticate('local', { failWithError: true }),
     function(req, res, next) {
         // handle success
-        console.log(req.user.user)
-        console.log(req.user.data)
         return res.json ({ redirect: "/account", username: req.user.user, data: req.user.data })
     },
     function(err, req, res, next) {
