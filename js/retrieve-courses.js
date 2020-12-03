@@ -1,4 +1,4 @@
-const allCourses = require ('../courselist.json') //retrieves an array of objects containing all course names and ids
+const allCourses = require ('../api/master_courseList.json') //retrieves an array of objects containing all course names and ids
 
 const terms = ["Year 1 Fall", "Year 1 Winter", "Year 1 Spring", "Year 2 Fall", "Year 2 Winter", "Year 2 Spring", "Year 3 Fall", "Year 3 Winter", "Year 3 Spring", "Year 4 Fall", "Year 4 Winter", "Year 4 Spring" ]
 

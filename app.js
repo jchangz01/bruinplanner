@@ -18,7 +18,7 @@ const methodOverride = require('method-override')
 // internal package imports 
 const planner = require ('./js/planner-structure')
 const classes = require ('./js/retrieve-courses')
-const allCourses = require ('./courselist.json') //retrieves an array of objects containing all course names and ids
+const allCourses = require ('./api/master_courseList.json') //retrieves an array of objects containing all course names and ids
 
 
 // configure express 

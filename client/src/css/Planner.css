@@ -136,8 +136,6 @@ padding-right: 0.3vw;
 #planner-container {
     width: 83vw;
     margin: 0 auto;
-    border: 0.1vw solid gray;
-    background-color: #C3D7EE;
     height: 54vh;
     display: flex;
     justify-content: space-between;
@@ -145,6 +143,8 @@ padding-right: 0.3vw;
 }
     .planner-quarter {
         width: 6.75vw;
+        height: 2000px;
+        background-color: #C3D7EE;
     }
     .planner-quarter-title {
         font-size: 1vw;
