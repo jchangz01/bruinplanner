@@ -99,6 +99,7 @@ app.post('/sendFeedback', async (req, res) => {
 //gets specific planner by its index in the list of all planners
 app.post('/getPlannerInfo', checkAuthenticated, async (req, res) => {
     const userInfo = await db.collection('authCredentials').findOne({"_id" : ObjectID(req.session.passport.user)})
+    console.log(req.body.index)
     console.log( 'Retrieving planner with name "' + userInfo.data[req.body.index].name + '" and major "' + userInfo.data[req.body.index].major + '"')
     return res.json({ username: userInfo.user, plannerInfo: userInfo.data[req.body.index] })
 })
@@ -136,12 +137,12 @@ app.post('/savePlanner', checkAuthenticated, async (req, res) => {
 
 //create new planner 
 app.post('/create-planner', checkAuthenticated, async (req, res) => {
-    console.log ( 'Creating new planner named' + req.body.name + ' with major ' + req.body.major)
+    console.log ( 'Creating new planner named ' + req.body.name + ' with major ' + req.body.major)
     const newPlanner = planner.getPlannerStructure();
     newPlanner.name = req.body.name;
     newPlanner.major = req.body.major;
     console.log(newPlanner) //display the contents of the new planner created
-    db.collection('authCredentials').findOneAndUpdate({"_id": ObjectID(req.session.passport.user)},{ $addToSet: { data : newPlanner } } )
+    await db.collection('authCredentials').findOneAndUpdate({"_id": ObjectID(req.session.passport.user)},{ $push: { data : newPlanner } } )
 
     const userInfo = await db.collection('authCredentials').findOne({"_id": ObjectID(req.session.passport.user)})
     return res.json( {index: [userInfo.data.length - 1]} )
@@ -151,7 +152,7 @@ app.post('/create-planner', checkAuthenticated, async (req, res) => {
 app.post('/modify-planner', checkAuthenticated, (req, res) => {
     console.log ( 'Modifying existing planner' )
     var index = req.body.plannerIndex;
-    console.log(index)
+    console.log('Current Planner Index: ' + index)
     var editName = "data." + index + ".name"
     var editMajor = "data." + index + ".major"
     console.log(req.body.name)
