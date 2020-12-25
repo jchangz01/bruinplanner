@@ -4,12 +4,12 @@ An interactive app/website for UCLA students that are in the college of engineer
 ## Setup 
 Navigate to your desired directory and clone the Bruinplanner repository.
 ```bash
-git clone https://github.com/jchangz01/CS97-bruinplanner.git
+git clone https://github.com/jchangz01/bruinplanner.git
 ```
 
 Create a .env file in the root directory to define the environment variables.
 ```bash
-cd CS97-bruinplanner
+cd bruinplanner
 touch .env
 ```
 Add the following to the .env file.
