@@ -12,7 +12,7 @@
 
 #home-main-section-description {
     margin: 0 auto;
-    width: 660px;
+    width: 600px;
     line-height: 21px;
     padding-top: 17px;
     color: black;
@@ -96,6 +96,18 @@
 .claim {
     flex-basis: 30%;
 }
+  .claim > h3 {
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  .claim > p {
+    color: white;
+    margin-top: 14px;
+    line-height: 18px;
+    font-size: 16px;
+  }
+
 
 .circle {
     margin: 0 auto;
@@ -112,10 +124,6 @@
     height: auto;
 }
 
-.claim-description {
-    color: white;
-    margin-top: 14px;
-}
 
 /* Final Section */
 #home-final-section-title {

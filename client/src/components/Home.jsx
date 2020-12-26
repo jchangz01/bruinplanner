@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/Home.css'
 import roycehall from '../images/roycehall.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faAddressBook, faAmbulance } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faArrowsAlt, faUserGraduate, faBorderAll } from '@fortawesome/free-solid-svg-icons'
 
 export default class Home extends React.Component {
     render() {
@@ -22,13 +22,11 @@ export default class Home extends React.Component {
                 </header>
                 <section>
                     <div> 
-                        <h2 id="home-main-section-title">It's Finally Here: The UCLA 4 Year Planner
-                            For the Henry Samueli School of Engineering</h2>
+                        <h2 id="home-main-section-title">Plan, organize, and select the courses for your next four years at UCLA with BruinPlanner!</h2>
                         <p id="home-main-section-description"> 
-                            For far too long, Engineering Students at UCLA have had to hunt 
-                            through endless html webpages and outdated course requisite lists. Now, your pains
-                            are lessened, with our app that lets you dynamically construct a 4 Year Plan. Create an account to get started,
-                         	and we'll help with the rest!
+                            Having trouble creating a plan to graduate in 4-years? Our website lets you dynamically construct 
+                            a 4-year plan based on your major. We offer a beautiful grid UI for students to visualize their journey at UCLA with ease. 
+                            Create an account now to get started!
                         </p>
                         <a href="/log-in">
                             <button className="home-main-section-button">GET STARTED</button>
@@ -43,29 +41,32 @@ export default class Home extends React.Component {
                         <div id="home-sub-section-claims">
                             <article className="claim" >
                                 <div className="circle">
-                                    <FontAwesomeIcon className="claim-icon" icon={faCalendar} />
+                                    <FontAwesomeIcon className="claim-icon" icon={faBorderAll} />
                                 </div>
+                                <h3>Grid Style Layout</h3>
                                 <p className="claim-description">
-                                    See your classes displayed on a dynamic calendar instead of on HTML lists. Visualize the schedules that
-                                    you could have, with no fuss and an easy search system to boot.
+                                    See your classes displayed on a grid-formatted calendar instead of a plain HTML lists. Clearly visualize your potential schedules
+                                    with no minimal scrolls and clicks. 
                                 </p>
                             </article>
                             <article className="claim">
                                 <div className="circle">
-                                    <FontAwesomeIcon className="claim-icon" icon={faAddressBook} />
+                                    <FontAwesomeIcon className="claim-icon" icon={faArrowsAlt} style={{width: "120px"}}/>
                                 </div>
+                                <h3>Drag and Drop Capability</h3>
                                 <p className="claim-description">
-                                    Quick and easy sign up through email. Don't worry, we're not selling your data (yet). It just 
-                                    helps you manage your different plans from a centralized hub.
+                                    Quickly and easily alter your plans with the drag and drop interface. Simply search for a course and
+                                    drag it into the planner grid to add it to your 4-year plan!
                                 </p>
                             </article>
                             <article className="claim">
                                 <div className="circle">
-                                    <FontAwesomeIcon className="claim-icon" icon={faAmbulance} />
+                                    <FontAwesomeIcon className="claim-icon" icon={faUserGraduate} />
                                 </div>
+                                <h3>Personal Account</h3>
                                 <p className="claim-description">
-                                    Last minute emergencies? First pass was too late and now your entire plan is in shambles? Don't worry,
-                                    we store your previous plans, so that you can edit whenever you need.
+                                    Don't have access to your personal device? Don't worry! Create your personal account to store your planners
+                                    under your credentials, so you can access them on any device.
                                 </p>
                             </article>
                         </div>
