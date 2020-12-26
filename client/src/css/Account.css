@@ -206,6 +206,7 @@ padding-right: 7px;
     margin-bottom: 20px;
     width: 90%;
     margin: 0 0 20px auto;
+    cursor: pointer;
 }
     .account-main-planner:hover {
         background-color: whitesmoke;
