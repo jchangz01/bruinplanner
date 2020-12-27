@@ -20,7 +20,7 @@ function Message (props)
     return (
         props.message ? 
             //key is used to replay our fade-in animation when form is resubmitted
-            <div key={props.key} className={props.color === "green" ? "success-green-br" : "error-red-br"} id="message-container" style={{position:"absolute"}}>
+            <div key={props.key} className={props.color === "green" ? "success-green-br" : "error-red-br"} id="message-container">
                 <p id="message-container-content" className="white">{props.message}</p>
             </div> 
             : null
@@ -31,10 +31,8 @@ export default class Contact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          firstName: '',
-          lastName:'',
-          email: '',
-          subject:'',
+          name: '',
+          email:'',
           content: '',
           message: '',
           updateKey: 0,
@@ -43,27 +41,31 @@ export default class Contact extends React.Component {
     
       handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state.firstName)
         const feedback = {
-            "firstName": this.state.firstName, 
-            "lastName": this.state.lastName,
+            "name": this.state.name,
             "email": this.state.email,
-            "subject": this.state.subject,
             "content": this.state.content,
         }
 
         axios.post('/sendFeedback', feedback)
         .then (res => {
-            this.setState ({
-                firstName: '', 
-                lastName: '',
-                email: '',
-                subject: '',
-                content: '',
-                message: "Feedback has been successfully sent!",
-                messageColor: "green",
-                updateKey: this.state.updateKey + 1
-            })
+            if ( res.data.status === "sent" ) {
+                this.setState ({
+                    name: '',
+                    email: '',
+                    content: '',
+                    message: "Feedback has been successfully sent!",
+                    messageColor: "green",
+                    updateKey: this.state.updateKey + 1
+                })
+            }
+            else {
+                this.setState ({
+                    message: "An error has occured, please try again",
+                    messageColor: "red",
+                    updateKey: this.state.updateKey + 1
+                })
+            }
         })
         .catch (err => {
             this.setState ({
@@ -89,36 +91,24 @@ export default class Contact extends React.Component {
                         </nav>
                     </div>
                 </header>
-                <Message message={this.state.message} color={this.state.messageColor} key={this.state.updateKey}/>
                 <section>
+                    <Message message={this.state.message} color={this.state.messageColor} key={this.state.updateKey}/>
                     <div id="contact-main-content">
-                        <h2 id="contact-main-heading">Contact Us</h2>
-                        <h3 id="contact-main-subheading">Let us know your questions, comments, or suggestions!</h3>
-                        <form onSubmit={this.handleSubmit} style={{width: "500px"}}>  
+                        <form id="contact-main-form" onSubmit={this.handleSubmit} style={{width: "500px"}}>  
+                            <h2 id="contact-main-heading">Contact Us</h2>
+                            <h3 id="contact-main-subheading">Let us know your questions, comments, or suggestions!</h3>
                             {/* Use ThemeProvider to provide desired color for your Materials-UI elements */}
                             <ThemeProvider theme={theme}>
                                 <TextField 
-                                    onChange={event => this.setState({firstName: event.target.value})} 
-                                    value={this.state.firstName}
-                                    name="firstName" 
-                                    type="text"
-                                    className="contact-name-inputs" 
-                                    label="FirstName"
-                                    inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}}
-                                    margin="normal"
-                                    color="primary"
-                                    variant="outlined"
-                                    required/>
-                                <TextField 
-                                    onChange={event => this.setState({lastName: event.target.value})} 
-                                    value={this.state.lastName}
-                                    name="lastName" 
-                                    type="text"
-                                    className="contact-name-inputs" 
-                                    label="LastName"
-                                    inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}}
-                                    margin="normal"
-                                    color="primary"
+                                    onChange={event => this.setState({name: event.target.value})} 
+                                    value={this.state.name}
+                                    name="name"
+                                    type="name" 
+                                    className="contact-inputs" 
+                                    label="Name" 
+                                    inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} 
+                                    margin="normal"  
+                                    color="primary" 
                                     variant="outlined"
                                     required/>
                                 <TextField 
@@ -128,18 +118,6 @@ export default class Contact extends React.Component {
                                     type="email" 
                                     className="contact-inputs" 
                                     label="Email" 
-                                    inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} 
-                                    margin="normal"  
-                                    color="primary" 
-                                    variant="outlined"
-                                    required/>
-                                <TextField 
-                                    onChange={event => this.setState({subject: event.target.value})} 
-                                    value={this.state.subject} 
-                                    name="subject" 
-                                    type="text" 
-                                    className="contact-inputs" 
-                                    label="Subject" 
                                     inputProps={{ style: { fontFamily: 'Nunito', color: 'black'}}} 
                                     margin="normal"  
                                     color="primary" 
@@ -160,7 +138,7 @@ export default class Contact extends React.Component {
                                     variant="outlined"
                                     required/>
                             </ThemeProvider>
-                            <button type="submit" className="logSign-button blue-br white" style={{float: "center", verticalAlign: "center", width: "250px", marginTop:"30px"}}>Send</button>
+                            <button type="submit" className="contact-submit blue-br white">Send</button>
                         </form>
                     </div>
                 </section>

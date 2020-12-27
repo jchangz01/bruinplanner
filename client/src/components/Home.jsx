@@ -46,7 +46,7 @@ export default class Home extends React.Component {
                                 <h3>Grid Style Layout</h3>
                                 <p className="claim-description">
                                     See your classes displayed on a grid-formatted calendar instead of a plain HTML lists. Clearly visualize your potential schedules
-                                    with no minimal scrolls and clicks. 
+                                    with minimal scrolls and clicks. 
                                 </p>
                             </article>
                             <article className="claim">

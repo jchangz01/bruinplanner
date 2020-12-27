@@ -9,11 +9,17 @@
   color: black;
 }
 
+#contact-main-form {
+  margin: 30px 0 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 0.5rem;
+}
+
 #contact-main-heading {
   font-family: 'Nunito';
-  font-size: 27px;
-  margin-top: 30px;
-  margin-bottom: 10px;
+  font-size: 34px;
+  margin: 30px 0 15px;
 }
 
 #contact-main-subheading {
@@ -22,12 +28,17 @@
   margin: 10px;
 }
 
-
-
-.contact-name-inputs {
-    width: 50%;
-  }
-
 .contact-inputs {
-    width: 100%;
+    width: 80%;
   }
+
+.contact-submit {
+  border: none;
+  border-radius: 3px;
+  padding: 10px 30px ;
+  margin: 12px 0 30px;
+  font-size: 16px;
+  height: 50px;
+  font-weight: bold;
+  width: 36%;
+}

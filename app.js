@@ -19,7 +19,11 @@ const methodOverride = require('method-override')
 const planner = require ('./js/planner-structure')
 const classes = require ('./js/retrieve-courses')
 const allCourses = require ('./api/master_courseList.json') //retrieves an array of objects containing all course names and ids
+const mail = require('./js/contactMail-config.js') 
 
+// configure contact email
+const contactEmail = mail.configureEmail(process.env.CONTACT_EMAIL_ADDRESS, process.env.CONTACT_EMAIL_PASS)
+const contactEmailAddress = process.env.CONTACT_EMAIL_ADDRESS
 
 // configure express 
 app.use (express.urlencoded({ extended: false })); //tells app to access 'name' input fields in req of HTTP calls
@@ -83,17 +87,24 @@ app.get('/*', (req, res) => res.sendFile(__dirname + '/client/build/index.html')
 /*Post and Delete Routes */
 //receive feedback from contact form in the front end
 app.post('/sendFeedback', async (req, res) => {
-    const feedback = {
-        "firstName": req.body.firstName, 
-        "lastName": req.body.lastName,
-        "email": req.body.email,
-        "subject": req.body.subject,
-        "content": req.body.content,
-    }
-
-    db.collection('feedbackData').insertOne (feedback);
-    console.log("Feedback inserted successfully")
-    return res.json();
+    const name = req.body.name;
+    const email = req.body.email;
+    const content = req.body.content; 
+    const mail = {
+        from: email,
+        to: contactEmailAddress,
+        subject: "BruinPlanner Contact Message",
+        html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${content}</p>`,
+    };
+    contactEmail.sendMail(mail, (error) => {
+        if (error) {
+            console.log("Feedback failed to send")
+            res.json({ status: "failed" });
+        } else {
+            console.log("Feedback sent successfully")
+            res.json({ status: "sent" });
+        }
+    });
 })
 
 //gets specific planner by its index in the list of all planners

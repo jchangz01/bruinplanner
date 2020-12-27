@@ -71,7 +71,7 @@
 #message-container {
   line-height: 50px; 
   text-align: center;
-  width: 100vw;
+  width: 100%;
   animation:mymove 2s ease-out forwards;
 
   /* Safari and Chrome */
