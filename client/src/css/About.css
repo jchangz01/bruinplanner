@@ -1,1 +1,50 @@
 /*About navigation header CSS found in App.css */
+
+#about-main-section-title {
+    margin: 0 auto;
+    width: 850px;
+    line-height: 42px;
+    padding-top: 37.5px;
+    color: #2774AE;
+    font-size: 36px;
+}
+
+.about-main-section-description {
+    margin: 0 auto;
+    width: 780px;
+    line-height: 21px;
+    padding-top: 17px;
+    color: black;
+    font-weight: 100;
+    font-size: 16px;
+    font-family: 'Nunito';
+}
+
+#about-main-section-mainimg {
+    width: 800px;
+    height: 400px;
+    z-index: -40;
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+        transform: translatey(0px);
+        box-shadow: 0 5px 15px 0px rgba(255,255,255,0.6);
+    }
+    50% {
+        
+    box-shadow: 0 25px 15px 0px rgba(255,255,255,0.2);
+        transform: translatey(-20px);
+    }
+    100% {
+        box-shadow: 0 5px 15px 0px rgba(255,255,255,0.6);
+        transform: translatey(0px);
+    }
+  }
+  

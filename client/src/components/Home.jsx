@@ -32,7 +32,7 @@ export default class Home extends React.Component {
                             <button className="home-main-section-button">GET STARTED</button>
                         </a>
                     </div>
-                    <img id="home-main-section-mainimg" class="fade-in" src={roycehall} alt="XXX"/>
+                    <img id="home-main-section-mainimg" src={roycehall} alt="ERROR"/>
                     <div class="full-width-box lightblue-br" style={{"marginTop": "-130px"}}></div>
                 </section>
                 <section>
