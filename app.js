@@ -93,7 +93,7 @@ app.post('/sendFeedback', async (req, res) => {
     const mail = {
         from: email,
         to: contactEmailAddress,
-        subject: "BruinPlanner Contact Message",
+        subject: "BruinPlanner Feedback",
         html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${content}</p>`,
     };
     contactEmail.sendMail(mail, (error) => {

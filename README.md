@@ -18,6 +18,16 @@ SESSION_SECRET=secret
 DATABASE_URL=mongodb://localhost/bruinplanner
 ```
 
+OPTIONAL: If you would like to connect the contact page to your gmail,
+Add the following to the .env file in addition to the contents above 
+```
+CONTACT_EMAIL_ADDRESS="YOUR GMAIL ACCOUNT"
+CONTACT_EMAIL_PASS="YOUR GMAIL ACCOUNT PASSWORD"
+```
+To ensure connection, make sure "less secure app access" is enabled on your
+gmail account.
+
+
 Install the dependencies for the backend. These are definined in the package.json file and will be installed into a node_modules folder.
 ```bash
 npm install
