@@ -18,7 +18,8 @@ SESSION_SECRET=secret
 DATABASE_URL=mongodb://localhost/bruinplanner
 ```
 
-OPTIONAL: If you would like to connect the contact page to your gmail,
+
+**OPTIONAL**: If you would like to connect the contact page to your gmail,
 Add the following to the .env file in addition to the contents above 
 ```
 CONTACT_EMAIL_ADDRESS="YOUR GMAIL ACCOUNT"
