@@ -89,7 +89,7 @@ export default class About extends React.Component {
                             and meet the creator below!
                         </p>
                     </div>
-                    <img id="about-section-mainimg" className="float" src={desk} alt="ERROR"/>
+                    <img id="about-section-mainimg" className="float" src={desk} alt="https://www.vecteezy.com/vector-art/203025-vector-designer-s-room-illustration"/>
                     <div className="full-width-box lightblue-br"/>
                 </section>
                 <section>
