@@ -1,28 +1,26 @@
 /*About navigation header CSS found in App.css */
 
-#about-main-section-title {
+.about-section-title {
     margin: 0 auto;
     width: 850px;
     line-height: 42px;
     padding-top: 37.5px;
-    color: #2774AE;
     font-size: 36px;
 }
 
-.about-main-section-description {
+.about-section-description {
     margin: 0 auto;
-    width: 780px;
+    width: 600px;
     line-height: 21px;
     padding-top: 17px;
-    color: black;
     font-weight: 100;
-    font-size: 16px;
+    font-size: 17.1px;
     font-family: 'Nunito';
 }
 
-#about-main-section-mainimg {
-    width: 800px;
-    height: 400px;
+#about-section-mainimg {
+    width: 750px;
+    height: auto;
     z-index: -40;
     margin-top: 20px;
     position: relative;
@@ -48,3 +46,61 @@
     }
   }
   
+/* Meet Creators/Contributors Section */   
+#about-creators-title {
+    text-align: left;
+    font-size: 36px;
+}
+
+#about-creators-title2 {
+    font-size: 28px;
+    text-decoration: underline;
+    margin-top: 50px;
+}
+
+.about-creators-content {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.about-creators-content > div:first-of-type { flex-basis: 35%; position: relative }
+.about-creators-content > div:last-of-type { flex-basis: 62%;  position: relative; text-align: left; }
+
+.about-creators-image {
+    width: 100%; 
+    border-Radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.about-creators-paragraph {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.about-creators-socials {
+    font-size: 36px;
+}
+    .about-creators-socials > * {margin-right: 10px; cursor: pointer;}
+    .about-creators-socials > span { 
+        font-size: 16px; 
+        vertical-align: middle; 
+        cursor: default; 
+        animation:mymove 2s ease-out forwards;
+    }
+    .about-creators-socials > *:hover {
+        opacity: 0.6;
+    }
+
+.about-contributors-content {
+    margin: 30px auto 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.about-contributors-content > div {
+    flex-basis: 26%;
+    position: relative;
+}

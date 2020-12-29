@@ -70,7 +70,7 @@ function OptionsOrPrompt (props)
                     <button className="logSign-button lightblue-br white" style={{float: "left"}} onClick={props.onClick}>Log-in with email</button>
                     <a href="/sign-up"><button className="logSign-button blue-br white" style={{float: "right", border: "#8BB8E8 2px solid"}}>Sign-up</button></a>
                 </div>
-                <p style={{marginTop:"30px", width: "400px", fontSize:"15px"}}>Still unsure about creating an account? <a href='/' className="white" style={{"textDecoration": "underline", fontWeight:"bold"}}>Learn more!</a>
+                <p style={{marginTop:"30px", width: "400px", fontSize:"15px"}}>Still unsure about creating an account? <a href='/about' className="white" style={{"textDecoration": "underline", fontWeight:"bold"}}>Learn more!</a>
                 </p>
             </React.Fragment>
         }
