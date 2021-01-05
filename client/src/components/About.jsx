@@ -5,11 +5,11 @@ import { faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-i
 import { faCalendar, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 //image imports
-import desk from '../images/desk.svg'
-import profile from '../images/justin_kyle_chang_profile.png'
-import nilayShah from '../images/contributors/nilay_shah.jpg'
-import gauravKale from '../images/contributors/gaurav_kale.jpg'
-import davidZhao from '../images/contributors/david_zhao.jpg'
+import desk from '../assets/images/desk.svg'
+import profile from '../assets/images/justin_kyle_chang_profile.png'
+import nilayShah from '../assets/images/contributors/nilay_shah.jpg'
+import gauravKale from '../assets/images/contributors/gaurav_kale.jpg'
+import davidZhao from '../assets/images/contributors/david_zhao.jpg'
 
 function Contributors () {
     return (

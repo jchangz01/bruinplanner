@@ -1,0 +1,76 @@
+{
+    "name": "SAMPLE PLAN",
+    "major": "Civil Engineering",
+    "Year 1 Fall": [
+        {"courseName":"Undergraduate Seminar","courseID":"EC ENGR 1"},
+        {"courseName":"Chemical Structure","courseID":"CHEM 20A"},
+        {"courseName":"English Composition, Rhetoric, and Language","courseID":"ENGCOMP 3"},
+        {"courseName":"Differential and Integral Calculus","courseID":"MATH 31A"}
+    ],
+    "Year 1 Winter": [
+    	{"courseName":"Integration and Infinite Series","courseID":"MATH 31B"},
+    	{"courseName":"Chemical Energetics and Change","courseID":"CHEM 20B"},
+        {"courseName":"General Chemistry Laboratory","courseID":"CHEM 20L"},
+    	{"courseName":"Physics for Scientists and Engineers: Mechanics","courseID":"PHYSICS 1A"},
+    ],
+    "Year 1 Spring": [
+   		{"courseName":"Introduction to Philosophy of Mind","courseID":"PHILOS 7"},
+   		{"courseName":"Calculus of Several Variables","courseID":"MATH 32A"},
+        {"courseName":"Physics Laboratory for Scientists and Engineers: Mechanics","courseID":"PHYSICS 4AL"},
+   		{"courseName":"Physics for Scientists and Engineers: Oscillations, Waves, Electric and Magnetic Fields","courseID":"PHYSICS 1B"}
+    ],
+    "Year 2 Fall": [
+		{"courseName":"Physical Measurement in Materials Engineering","courseID":"MAT SCI 90L"},
+		{"courseName":"Calculus of Several Variables","courseID":"MATH 32B"},
+        {"courseName":"Physics for Scientists and Engineers: Electrodynamics, Optics, and Special Relativity","courseID":"PHYSICS 1C"},
+		{"courseName":"Technology and Society","courseID":"ENGR 182EW"}
+    ],
+    "Year 2 Winter": [
+    	{"courseName":"Linear Algebra and Applications","courseID":"MATH 33A"},
+    	{"courseName":"Thermodynamics of Materials","courseID":"MAT SCI 202"},
+        {"courseName":"Structure, Properties, and Deterioration of Materials: Rock Art, Wall Paintings, Mosaics","courseID":"MAT SCI M214"},
+        {"courseName":"Dislocations and Strengthening Mechanisms in Solids","courseID":"MAT SCI 243C"}
+    	
+    ],
+    "Year 2 Spring": [
+    	{"courseName":"Differential Equations","courseID":"MATH 33B"},
+        {"courseName":"Introduction to Computer Science I","courseID":"COM SCI 31"},
+        {"courseName":"Fluid-Particle and Fluid-Structure Interactions in Microflows","courseID":"BIOENGR C155"}
+    	
+    ],
+    "Year 3 Fall": [
+        {"courseName":"Soils and Environment","courseID":"EE BIOL M127"},
+        {"courseName":"Hydrology","courseID":"GEOG 105"},
+        {"courseName":"Fracture of Structural Materials","courseID":"MAT SCI 243A"},
+        {"courseName":"Environmentalism: Past, Present, and Future","courseID":"URBN PL M165"}
+    ],
+    "Year 3 Winter": [
+    	{"courseName":"Thermodynamics I","courseID":"CH ENGR 102A"},
+        {"courseName":"Molecular Biotechnology Laboratory: From Gene to Product","courseID":"CH ENGR 104DL"},     
+        {"courseName":"Physics of Materials","courseID":"MAT SCI 120"}
+    ],
+    "Year 3 Spring": [
+    	{"courseName":"Applied Numerical Methods","courseID":"MATH 151A"},
+        {"courseName":"Introduction to Probability","courseID":"STATS 100A"},
+        {"courseName":"Cultural Materials Science II: Characterization Methods in Conservation of Materials","courseID":"MAT SCI C112"},
+        {"courseName":"Materials Science of Semiconductors","courseID":"MAT SCI 121"}
+    ],
+    "Year 4 Fall": [
+    	{"courseName":"Structure and Properties of Composite Materials","courseID":"MAT SCI 151"},
+        {"courseName":"Cultural Materials Science II: Characterization Methods in Conservation of Materials","courseID":"MAT SCI CM212"},
+        {"courseName":"Introduction to Computer Science II","courseID":"COM SCI 32"},
+        {"courseName":"Listening","courseID":"MUSCLG 71"}
+    ],
+    "Year 4 Winter": [
+        {"courseName":"African American Literature from Harlem Renaissance to 1960s","courseID":"ENGL M104B"},
+        {"courseName":"Introduction to Discrete Structures","courseID":"MATH 61"},
+        {"courseName":"Introduction to Biomaterials","courseID":"MAT SCI CM280"},
+        {"courseName":"Diffraction Methods in Science of Materials","courseID":"MAT SCI 210"}
+    ],
+    "Year 4 Spring": [
+        {"courseName":"Risk Analysis for Engineers and Scientists","courseID":"MAT SCI 261"},
+        {"courseName":"Introduction to Algorithms and Complexity","courseID":"COM SCI 180"},
+        {"courseName":"History of Asian Americans","courseID":"ASIA AM 10W"},
+        {"courseName":"Surface and Interface Engineering","courseID":"CH ENGR C116"}
+    ]
+}

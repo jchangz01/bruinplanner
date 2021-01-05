@@ -143,6 +143,21 @@
   font-family: 'Nunito';
 }
 
+/*////////////////
+Loading Content 
+////////////////*/
+.loading-overlay {
+  position: fixed;
+  background-color: rgba(255,255,255,0.8);
+  width: 100vw;
+  z-index: 10000;
+  line-height: 100vh;
+  height: 100vh;
+  margin-top: -3vh;
+  padding: none;
+  text-align: center;
+}
+
 /*//////////////////////////////////////
  Popular colors used on this website!
 //////////////////////////////////////*/

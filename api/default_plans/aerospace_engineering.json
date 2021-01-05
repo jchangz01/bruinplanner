@@ -1,0 +1,75 @@
+{
+    "name": "SAMPLE PLAN",
+    "major": "Aerospace Engineering",
+    "Year 1 Fall": [
+        {"courseName":"Undergraduate Seminar","courseID":"EC ENGR 1"},
+        {"courseName":"Chemical Structure","courseID":"CHEM 20A"},
+        {"courseName":"English Composition, Rhetoric, and Language","courseID":"ENGCOMP 3"},
+        {"courseName":"Differential and Integral Calculus","courseID":"MATH 31A"}
+    ],
+    "Year 1 Winter": [
+    	{"courseName":"Integration and Infinite Series","courseID":"MATH 31B"},
+    	{"courseName":"Chemical Energetics and Change","courseID":"CHEM 20B"},
+    	{"courseName":"Physics for Scientists and Engineers: Mechanics","courseID":"PHYSICS 1A"},
+    ],
+    "Year 1 Spring": [
+   		{"courseName":"Introduction to Philosophy of Mind","courseID":"PHILOS 7"},
+   		{"courseName":"Calculus of Several Variables","courseID":"MATH 32A"},
+        {"courseName":"Physics Laboratory for Scientists and Engineers: Mechanics","courseID":"PHYSICS 4AL"},
+   		{"courseName":"Physics for Scientists and Engineers: Oscillations, Waves, Electric and Magnetic Fields","courseID":"PHYSICS 1B"}
+    ],
+    "Year 2 Fall": [
+		{"courseName":"History of Asian Americans","courseID":"ASIA AM 10W"},
+		{"courseName":"Calculus of Several Variables","courseID":"MATH 32B"},
+        {"courseName":"Physics for Scientists and Engineers: Electrodynamics, Optics, and Special Relativity","courseID":"PHYSICS 1C"},
+		{"courseName":"Physics Laboratory for Scientists and Engineers: Electricity and Magnetism","courseID":"PHYSICS 4BL"}
+    ],
+    "Year 2 Winter": [
+    	{"courseName":"Linear Algebra and Applications","courseID":"MATH 33A"},
+    	{"courseName":"Science of Engineering Materials","courseID":"MAT SCI 104"},
+        {"courseName":"Thermodynamics of Materials","courseID":"MAT SCI 202"},
+        {"courseName":"Principles of Nanoscience and Nanotechnology","courseID":"MAT SCI M105"}
+    	
+    ],
+    "Year 2 Spring": [
+    	{"courseName":"Differential Equations","courseID":"MATH 33B"},
+        {"courseName":"Introduction to Computer Science I","courseID":"COM SCI 31"},
+        {"courseName":"Principles of Electronic Materials Processing","courseID":"MAT SCI 122"},
+        {"courseName":"Fluid-Particle and Fluid-Structure Interactions in Microflows","courseID":"BIOENGR C155"}
+    	
+    ],
+    "Year 3 Fall": [
+    	{"courseName":"Technology and Society","courseID":"ENGR 182EW"},
+        {"courseName":"Transport Phenomena II: Heat Transfer","courseID":"CH ENGR 101B"},
+        {"courseName":"Electrical and Electronic Circuits","courseID":"EC ENGR 100"},
+        {"courseName":"Introduction to Materials Characterization A (Crystal Structure, Nanostructures, and X-Ray Scattering)","courseID":"MAT SCI 110"}
+    ],
+    "Year 3 Winter": [
+    	{"courseName":"Thermodynamics I","courseID":"CH ENGR 102A"},
+        {"courseName":"Introduction to Engineering Design: Rockets","courseID":"ENGR 96R"},
+        {"courseName":"Beatles","courseID":"MUSCLG 68"}
+    ],
+    "Year 3 Spring": [
+    	{"courseName":"Radiation and Fluids in Astrophysics","courseID":"ASTR 117"},
+        {"courseName":"Principles of Feedback Control","courseID":"EC ENGR 141"},
+        {"courseName":"Wireless Communications System Design, Modeling, and Implementation","courseID":"EC ENGR 233"},
+    	{"courseName":"Listening","courseID":"MUSCLG 71"}
+    ],
+    "Year 4 Fall": [
+    	{"courseName":"Design of Robotic Systems II","courseID":"EC ENGR 183DB"},
+        {"courseName":"Chemical and Biomolecular Engineering Laboratory I","courseID":"CH ENGR 104A"},
+        {"courseName":"Introduction to Computer Science II","courseID":"COM SCI 32"},
+        {"courseName":"Statistical Mechanics and Its Application to Astrophysics","courseID":"ASTR 115"}
+    ],
+    "Year 4 Winter": [
+        {"courseName":"African American Literature from Harlem Renaissance to 1960s","courseID":"ENGL M104B"},
+        {"courseName":"Introduction to Computer Organization","courseID":"COM SCI 33"},
+        {"courseName":"Introduction to Space Plasma Physics","courseID":"EPS SCI 156"},
+
+    ],
+    "Year 4 Spring": [
+        {"courseName":"Mathematical Aspects of Fluid Mechanics","courseID":"MATH 272B"},
+        {"courseName":"Software Construction Laboratory","courseID":"COM SCI 35L"},
+        {"courseName":"Instrumentation, Data Processing, and Data Analysis in Space Physics","courseID":"EPS SCI 265"}
+    ]
+}

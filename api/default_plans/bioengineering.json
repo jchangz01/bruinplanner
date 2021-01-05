@@ -1,0 +1,151 @@
+{
+    "name": "",
+    "major": "",
+    "Year 1 Fall": [
+        {
+            "courseName":"Introduction to Bioengineering",
+            "courseID":"BIOENGR 10"
+        },
+        {
+            "courseName":"English Composition, Rhetoric, and Language",
+            "courseID":"ENGCOMP 3"
+        },
+        {
+            "courseName":"Chemical Structure",
+            "courseID":"CHEM 20A"
+        },
+        {
+            "courseName":"Differential and Integral Calculus",
+            "courseID":"MATH 31A"
+        }
+    ],
+    "Year 1 Winter": [
+        {
+            "courseName":"Chemical Energetics and Change",
+            "courseID":"CHEM 20B"
+        },
+        {
+            "courseName":"General Chemistry Laboratory",
+            "courseID":"CHEM 20L"
+        },
+        {
+            "courseName":"Integration and Infinite Series",
+            "courseID":"MATH 31B"
+        },
+        {
+            "courseName":"Physics for Scientists and Engineers: Mechanics",
+            "courseID":"PHYSICS 1A"
+        }
+    ],
+    "Year 1 Spring": [
+        {
+            "courseName":"Organic Chemistry I: Structure and Reactivity",
+            "courseID":"CHEM 30A"
+        },
+        {
+            "courseName":"Calculus of Several Variables",
+            "courseID":"MATH 32A"
+        },
+        {
+            "courseName":"Physics for Scientists and Engineers: Oscillations, Waves, Electric and Magnetic Fields",
+            "courseID":"PHYSICS 1B"
+        },
+        {
+            "courseName":"Physics Laboratory for Scientists and Engineers: Mechanics",
+            "courseID":"PHYSICS 4AL"
+        }
+    ],
+    "Year 2 Fall": [
+        {
+            "courseName":"Bioengineering Fundamentals",
+            "courseID":"BIOENGR 100"
+        },
+        {
+            "courseName":"Calculus of Several Variables",
+            "courseID":"MATH 32B"
+        },
+        {
+            "courseName":"Organic Chemistry II: Reactivity, Synthesis, and Spectroscopy",
+            "courseID":"CHEM 30B"
+        },
+        {
+            "courseName":"General Chemistry Laboratory II",
+            "courseID":"CHEM 30AL"
+        }
+    ],
+    "Year 2 Winter": [
+        {
+            "courseName":"Physics for Scientists and Engineers: Electrodynamics, Optics, and Special Relativity",
+            "courseID":"PHYSICS 1C"
+        },
+        {
+            "courseName":"Cell and Molecular Biology",
+            "courseID":"LIFESCI 7A"
+        },
+        {
+            "courseName":"Linear Algebra and Applications",
+            "courseID":"MATH 33A"
+        }
+    ],
+    "Year 2 Spring": [
+        {
+            "courseName":"Bioengineering Laboratory",
+            "courseID":"BIOENGR 167L"
+        },
+        {
+            "courseName":"Introduction to Computer Science I",
+            "courseID":"COM SCI 31"
+        },
+        {
+            "courseName":"Differential Equations",
+            "courseID":"MATH 33B"
+        }
+    ],
+    "Year 3 Fall": [
+        {
+            "courseName":"Technology and Society",
+            "courseID":"ENGR 182EW"
+        },
+        {
+            "courseName":"Electrical and Electronic Circuits",
+            "courseID":"EC ENGR 100"
+        },
+        {
+            "courseName":"Physiology and Human Biology",
+            "courseID":"LIFESCI 7C"
+        }
+    ],
+    "Year 3 Winter": [
+        {
+            "courseName":"Biomedical Transducers",
+            "courseID":"BIOENGR 120"
+        }
+    ],
+    "Year 3 Spring": [
+        {
+            "courseName":"Biotransport and Bioreaction Processes",
+            "courseID":"BIOENGR 110"
+        },
+        {
+            "courseName":"Principles of Biocompatibility",
+            "courseID":"BIOENGR 176"
+        }
+    ],
+    "Year 4 Fall": [
+        {
+            "courseName":"Bioengineering Capstone Design I",
+            "courseID":"BIOENGR 177A"
+        }
+    ],
+    "Year 4 Winter": [
+        {
+            "courseName":"Bioengineering Capstone Design II",
+            "courseID":"BIOENGR 177B"
+        },
+        {
+            "courseName":"System Integration in Biology, Engineering, and Medicine I",
+            "courseID":"BIOENGR 180"
+        }
+    ],
+    "Year 4 Spring": []
+}

@@ -1,0 +1,121 @@
+{
+    "name": "",
+    "major": "",
+    "Year 1 Fall": [
+        {
+            "courseName":"Freshman Computer Science Seminar",
+            "courseID":"COM SCI 1"
+        },
+        {
+            "courseID": "COM SCI 31",
+            "courseName": "Introduction to Computer Science I"
+        },
+        {
+            "courseName":"English Composition, Rhetoric, and Language",
+            "courseID":"ENGCOMP 3"
+        },
+        {
+            "courseName":"Differential and Integral Calculus",
+            "courseID":"MATH 31A"
+        }
+    ],
+    "Year 1 Winter": [
+        {
+            "courseID": "COM SCI 32",
+            "courseName": "Introduction to Computer Science II"
+        },
+        {
+            "courseName":"Integration and Infinite Series",
+            "courseID":"MATH 31B"
+        },
+        {
+            "courseName":"Physics for Scientists and Engineers: Mechanics",
+            "courseID":"PHYSICS 1A"
+        }
+    ],
+    "Year 1 Spring": [
+        {
+            "courseName":"Calculus of Several Variables",
+            "courseID":"MATH 32A"
+        },
+        {
+            "courseName":"Physics for Scientists and Engineers: Oscillations, Waves, Electric and Magnetic Fields",
+            "courseID":"PHYSICS 1B"
+        },
+        {
+            "courseName":"Introduction to Computer Organization",
+            "courseID":"COM SCI 33"
+        },
+        {
+            "courseName":"Introduction to Engineering Design: Internet of Things",
+            "courseID":"ENGR 96C"
+        }
+    ],
+    "Year 2 Fall": [
+        {
+            "courseName":"Introduction to Electrical Engineering",
+            "courseID":"EC ENGR 3"
+        },
+        {
+            "courseName":"Calculus of Several Variables",
+            "courseID":"MATH 32B"
+        },
+        {
+            "courseName":"Linear Algebra and Applications",
+            "courseID":"MATH 33A"
+        },
+        {
+            "courseName":"Physics Laboratory for Scientists and Engineers: Mechanics",
+            "courseID":"PHYSICS 4AL"
+        }
+    ],
+    "Year 2 Winter": [
+        {
+            "courseName":"Software Construction Laboratory",
+            "courseID":"COM SCI 35L"
+        },
+        {
+            "courseName":"Logic Design of Digital Systems",
+            "courseID":"COM SCI M51A"
+        },
+        {
+            "courseName":"Electrical and Electronic Circuits",
+            "courseID":"EC ENGR 100"
+        },
+        {
+            "courseName":"Differential Equations",
+            "courseID":"MATH 33B"
+        }
+    ],
+    "Year 2 Spring": [
+        {
+            "courseName":"Systems and Signals",
+            "courseID":"EC ENGR 102"
+        },
+        {
+            "courseName":"Introduction to Discrete Structures",
+            "courseID":"MATH 61"
+        },
+        {
+            "courseName":"Physics for Scientists and Engineers: Electrodynamics, Optics, and Special Relativity",
+            "courseID":"PHYSICS 1C"
+        }
+    ],
+    "Year 3 Fall": [
+        {"courseName":"Operating Systems Principles","courseID":"COM SCI 111"}
+    ],
+    "Year 3 Winter": [
+        {"courseName":"Computer Network Fundamentals","courseID":"COM SCI 118"},
+        {"courseName":"Introductory Digital Design Laboratory","courseID":"COM SCI M152A"},
+        {"courseName":"Introduction to Algorithms and Complexity","courseID":"COM SCI 180"},
+        {"courseName":"Digital Electronic Circuits","courseID":"EC ENGR 115C"}
+    ],
+    "Year 3 Spring": [
+        {"courseName":"Computer Systems Architecture","courseID":"COM SCI M151B"}
+    ],
+    "Year 4 Fall": [
+        {"courseName":"Digital Signal Processing","courseID":"EC ENGR 113"}
+    ],
+    "Year 4 Winter": [],
+    "Year 4 Spring": []
+}

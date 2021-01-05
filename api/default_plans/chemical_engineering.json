@@ -1,0 +1,72 @@
+{
+    "name": "SAMPLE PLAN",
+    "major": "Chemical Engineering",
+    "Year 1 Fall": [
+        {"courseName":"Introduction to Chemical and Biomolecular Engineering","courseID":"CH ENGR 10"},
+        {"courseName":"Chemical Structure","courseID":"CHEM 20A"},
+        {"courseName":"English Composition, Rhetoric, and Language","courseID":"ENGCOMP 3"},
+        {"courseName":"Differential and Integral Calculus","courseID":"MATH 31A"}
+    ],
+    "Year 1 Winter": [
+    	{"courseName":"Integration and Infinite Series","courseID":"MATH 31B"},
+    	{"courseName":"Chemical Energetics and Change","courseID":"CHEM 20B"},
+        {"courseName":"General Chemistry Laboratory","courseID":"CHEM 20L"},
+    	{"courseName":"Physics for Scientists and Engineers: Mechanics","courseID":"PHYSICS 1A"},
+    ],
+    "Year 1 Spring": [
+        {"courseName":"General Chemistry Laboratory II","courseID":"CHEM 30AL"},
+   		{"courseName":"Calculus of Several Variables","courseID":"MATH 32A"},
+        {"courseName":"Physics Laboratory for Scientists and Engineers: Mechanics","courseID":"PHYSICS 4AL"},
+   		{"courseName":"Physics for Scientists and Engineers: Oscillations, Waves, Electric and Magnetic Fields","courseID":"PHYSICS 1B"}
+    ],
+    "Year 2 Fall": [
+        {"courseName":"Fundamentals of Chemical and Biomolecular Engineering","courseID":"CH ENGR 100"},
+		{"courseName":"Calculus of Several Variables","courseID":"MATH 32B"},
+        {"courseName":"Physics for Scientists and Engineers: Electrodynamics, Optics, and Special Relativity","courseID":"PHYSICS 1C"},
+		{"courseName":"General Chemistry Laboratory II","courseID":"CHEM 30AL"}
+    ],
+    "Year 2 Winter": [
+    	{"courseName":"Linear Algebra and Applications","courseID":"MATH 33A"},
+    	{"courseName":"Organic Chemistry II: Reactivity, Synthesis, and Spectroscopy","courseID":"CHEM 30B"},
+        {"courseName":"Biomolecular Engineering Fundamentals","courseID":"CH ENGR 45"},
+        {"courseName":"Thermodynamics I","courseID":"CH ENGR 102A"}
+    ],
+    "Year 2 Spring": [
+    	{"courseName":"Differential Equations","courseID":"MATH 33B"},
+        {"courseName":"Introduction to Computer Science I","courseID":"COM SCI 31"},
+        {"courseName":"Thermodynamics II","courseID":"CH ENGR 102B"},
+        {"courseName":"Technology and Society","courseID":"ENGR 182EW"}	
+    ],
+    "Year 3 Fall": [
+    	{"courseName":"Transport Phenomena I","courseID":"CH ENGR 101A"},
+        {"courseName":"Introduction to Philosophy of Mind","courseID":"PHILOS 7"},
+        {"courseName":"Numerical and Mathematical Methods in Chemical and Biological Engineering","courseID":"CH ENGR 109"}
+    ],
+    "Year 3 Winter": [
+    	{"courseName":"Chemical and Biomolecular Engineering Laboratory I","courseID":"CH ENGR 104A"},
+        {"courseName":"Transport Phenomena II: Heat Transfer","courseID":"CH ENGR 101B"},
+        {"courseName":"Beatles","courseID":"MUSCLG 68"}
+    ],
+    "Year 3 Spring": [
+    	{"courseName":"Mass Transfer","courseID":"CH ENGR 101C"},
+        {"courseName":"Separation Processes","courseID":"CH ENGR 103"},
+    	{"courseName":"Listening","courseID":"MUSCLG 71"}
+    ],
+    "Year 4 Fall": [
+    	{"courseName":"Chemical and Biomolecular Engineering Laboratory II","courseID":"CH ENGR 104B"},
+        {"courseName":"Chemical Reaction Engineering","courseID":"CH ENGR 106"},
+        {"courseName":"Advanced Engineering Thermodynamics","courseID":"CH ENGR 200"},
+        {"courseName":"Introduction to Computer Science II","courseID":"COM SCI 32"}
+    ],
+    "Year 4 Winter": [
+        {"courseName":"African American Literature from Harlem Renaissance to 1960s","courseID":"ENGL M104B"},
+        {"courseName":"Cryogenics and Low-Temperature Processes","courseID":"CH ENGR C211"},
+        {"courseName":"Process Dynamics and Control","courseID":"CH ENGR 107"},
+        {"courseName":"Process Economics and Analysis","courseID":"CH ENGR 108A"}
+    ],
+    "Year 4 Spring": [
+        {"courseName":"Chemical Process Computer-Aided Design and Analysis","courseID":"CH ENGR 108B"},
+        {"courseName":"Surface and Interface Engineering","courseID":"CH ENGR C116"},
+        {"courseName":"Algorithms in Bioinformatics and Systems Biology","courseID":"COM SCI CM122"}
+    ]
+}

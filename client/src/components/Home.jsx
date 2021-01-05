@@ -1,6 +1,6 @@
 import React from 'react'
 import '../css/Home.css'
-import roycehall from '../images/roycehall.png'
+import roycehall from '../assets/images/roycehall.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faCalendar, faArrowsAlt, faUserGraduate, faBorderAll } from '@fortawesome/free-solid-svg-icons'
