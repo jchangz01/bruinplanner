@@ -1,12 +1,12 @@
 import React from 'react'
 import '../css/About.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faCalendar, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 //image imports
 import desk from '../images/desk.svg'
-import profile from '../images/creator_profile.png'
+import profile from '../images/justin_kyle_chang_profile.png'
 import nilayShah from '../images/contributors/nilay_shah.jpg'
 import gauravKale from '../images/contributors/gaurav_kale.jpg'
 import davidZhao from '../images/contributors/david_zhao.jpg'
@@ -89,7 +89,12 @@ export default class About extends React.Component {
                             and meet the creator below!
                         </p>
                     </div>
-                    <img id="about-section-mainimg" className="float" src={desk} alt="https://www.vecteezy.com/vector-art/203025-vector-designer-s-room-illustration"/>
+                    <div style={{position: "relative"}}>
+                        <img id="about-section-mainimg" className="float" src={desk} alt="https://www.vecteezy.com/vector-art/203025-vector-designer-s-room-illustration"/>
+                        <a target="_blank" rel="noreferrer" href="https://www.vecteezy.com/free-vector/office" style={{position: "absolute", bottom: "0", left: "50%", transform: "translate(-50%, 0)"}}>
+                            Office Vectors by Vecteezy
+                        </a>
+                    </div>
                     <div className="full-width-box lightblue-br"/>
                 </section>
                 <section>
@@ -173,7 +178,18 @@ export default class About extends React.Component {
                     </div>
                 </section>
                 <footer>
-                    <div className="full-width-box darkblue-br" style={{height: "85px"}}></div>
+                    <div className="full-width-box darkblue-br" style={{height: "120px"}}>
+                        <div id="footer">                        
+                            <div id="footer-socials">
+                                <a target="_blank" rel="noreferrer" href="https://github.com/jchangz01/bruinplanner"><FontAwesomeIcon icon={faGithub}/></a>
+                            </div>
+                            <div id="footer-content">
+                                <div>
+                                    <a target="_blank" rel="noreferrer" href="https://www.justinklchang.com/#/"><h2 id="copyright">&#169; justinklchang.com</h2></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </footer>
             </div>
         )

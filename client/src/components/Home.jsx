@@ -2,6 +2,7 @@ import React from 'react'
 import '../css/Home.css'
 import roycehall from '../images/roycehall.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faCalendar, faArrowsAlt, faUserGraduate, faBorderAll } from '@fortawesome/free-solid-svg-icons'
 
 export default class Home extends React.Component {
@@ -81,7 +82,18 @@ export default class Home extends React.Component {
                     </div>
                 </section>
                 <footer>
-                    <div className="full-width-box darkblue-br" style={{height: "85px"}}></div>
+                    <div className="full-width-box darkblue-br" style={{height: "120px"}}>
+                        <div id="footer">                        
+                            <div id="footer-socials">
+                                <a target="_blank" rel="noreferrer" href="https://github.com/jchangz01/bruinplanner"><FontAwesomeIcon icon={faGithub}/></a>
+                            </div>
+                            <div id="footer-content">
+                                <div>
+                                    <a target="_blank" rel="noreferrer" href="https://www.justinklchang.com/#/"><h2 id="copyright">&#169; justinklchang.com</h2></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </footer>
             </div>
         )

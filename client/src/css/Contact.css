@@ -1,6 +1,6 @@
 #contact-main-content {
   margin: 0 auto;
-  min-height: calc(99vh - 125px);
+  min-height: calc(100vh - 79px);
   width: 500px;
   display: flex;
   flex-direction: column;

@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import '../css/Contact.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import {createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import TextField from "@material-ui/core/TextField";
@@ -142,8 +143,21 @@ export default class Contact extends React.Component {
                         </form>
                     </div>
                 </section>
+                <footer>
+                    <div className="full-width-box darkblue-br" style={{height: "120px"}}>
+                        <div id="footer">                        
+                            <div id="footer-socials">
+                                <a target="_blank" rel="noreferrer" href="https://github.com/jchangz01/bruinplanner"><FontAwesomeIcon icon={faGithub}/></a>
+                            </div>
+                            <div id="footer-content">
+                                <div>
+                                    <a target="_blank" rel="noreferrer" href="https://www.justinklchang.com/#/"><h2 id="copyright">&#169; justinklchang.com</h2></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
-                
         )
     }
 }
