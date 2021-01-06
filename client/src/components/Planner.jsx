@@ -91,22 +91,24 @@ class SearchCourses extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        filteredCourses: [],
-        showCourses: false,
-        userInput: ""
+            filteredCourses: [],
+            searchType: "course name",
+            showCourses: false,
+            userInput: ""
         };
     }
 
     onChange = event => {
         const { courses } = this.props;
         const userInput = event.currentTarget.value;
+        const searchType = this.state.searchType === "course name" ? "courseName" : "courseID"
 
         const filteredCourses = []
         var i = 0;
         var filteredCoursesCount = 0;
         while (filteredCoursesCount < 36 && i < courses.length)
         {
-            if (courses[i].courseName.toLowerCase().indexOf(userInput.toLowerCase()) > -1)
+            if (courses[i][searchType].toLowerCase().indexOf(userInput.toLowerCase()) > -1)
             {
                 filteredCourses[filteredCoursesCount] = courses[i]
                 filteredCourses[filteredCoursesCount].courseIndex = i;
@@ -122,6 +124,9 @@ class SearchCourses extends React.Component {
         });
     };
     
+    onChangeSearchType = event => {
+        this.setState ({ searchType: event.target.value })
+    }
     
     render () {
         const {
@@ -158,10 +163,14 @@ class SearchCourses extends React.Component {
                 <div id="search-class-description">
                     <h1 id="search-class-title">Search for Classes </h1>
                     <p id="search-class-title-des">(MAX 36 classes displayed per search)</p>
-                    <input type="search" id="search-class-input" placeholder="Search class by course name" value={this.state.userInput} onChange={this.onChange}></input>
+                    <div id="search-class-type" onChange={this.onChangeSearchType}>
+                        <p>Search By:</p>
+                        <input type="radio" name="searchType" value="course name" checked={this.state.searchType === 'course name'}/><span>Course Name</span>
+                        <input type="radio" name="searchType" value="course ID" checked={this.state.searchType === 'course ID'}/><span>Course ID</span>
+                    </div>
+                    <input type="search" id="search-class-input" placeholder={"Search class by " + this.state.searchType} value={this.state.userInput} onChange={this.onChange}></input>
                 </div>
-                
-            {courseListComponent}
+                {courseListComponent}
             </div>
         )
     }
@@ -217,8 +226,8 @@ export default class Account extends React.Component {
     state = {
         username: "Username",
         planner: {
-            name: "Planner name",
-            major: "Planner major",
+            name: "",
+            major: "",
             "Year 1 Fall": [],
             "Year 1 Winter": [],
             "Year 1 Spring": [],

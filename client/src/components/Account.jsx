@@ -21,11 +21,11 @@ function Message (props)
 function PopupPrompt (props) {
     return (
     <React.Fragment>
-      <div className="popup-box">
-        <div className="popup-box" onClick={props.handleClose} ></div>
-        <form onSubmit={props.handleSubmit} className="box">
-            <h2 id="popup-box-title">{props.title}</h2>
-                <hr></hr>
+        <div className="popup-box">
+            <div className="popup-box" onClick={props.handleClose} ></div>
+            <form onSubmit={props.handleSubmit} className="box">
+                <h2 id="popup-box-title">{props.title}</h2>
+                    <hr></hr>
                 <label className="popup-box-field">Planner Name:</label>
                 <input className="popup-box-input" placeholder="My Planner" value={props.name} onChange={ props.nameChange } required></input>
                 <label className="popup-box-field">Major:</label>
@@ -37,9 +37,9 @@ function PopupPrompt (props) {
                         ) 
                     })}
                 </select>
-            <button className="popup-box-submit blue-br">{props.action}</button>
-        </form>
-      </div>
+                <button className="popup-box-submit blue-br">{props.action}</button>
+            </form>
+        </div>
     </React.Fragment>
     );
   };
@@ -95,8 +95,6 @@ export default class Account extends React.Component {
 
     createPlanner = event => {
         event.preventDefault();
-        console.log(this.state.plannerName)
-        console.log(this.state.plannerMajor)
         const data = {
             name: this.state.plannerName,
             major: this.state.plannerMajor,
@@ -157,7 +155,7 @@ export default class Account extends React.Component {
         })
     }
 
-    enterExitMode = (mode) => {
+    toggleMode = (mode) => {
         this.setState ({
             createMode: mode === "create" ? !this.state.createMode : false,
             modifyMode: mode === "modify" ? !this.state.modifyMode : false,
@@ -179,7 +177,7 @@ export default class Account extends React.Component {
             nameChange={ event => this.setState({plannerName: event.target.value })} 
             major={this.state.plannerMajor} 
             majorChange={ event => this.setState({plannerMajor: event.target.value })} 
-            handleClose={() => this.enterExitMode("create")} 
+            handleClose={() => this.toggleMode("create")} 
             handleSubmit={this.createPlanner}
             /> 
         }
@@ -191,7 +189,7 @@ export default class Account extends React.Component {
                 nameChange={ event => this.setState({plannerName: event.target.value })} 
                 major={this.state.plannerMajor} 
                 majorChange={ event => this.setState({plannerMajor: event.target.value })} 
-                handleClose={() => this.enterExitMode("modify")} 
+                handleClose={() => this.toggleMode("modify")} 
                 handleSubmit={this.modifyPlanner}
             /> 
         }
@@ -226,9 +224,9 @@ export default class Account extends React.Component {
                             <h2 id="account-main-heading">Welcome <span style={{textDecoration: 'underline'}}>{this.state.username}</span>!</h2>
                             <h3 id="account-main-subheading">Modify, create, and delete your UCLA Planners here</h3>
                             <div id="account-main-buttons">
-                                <button className="account-main-button" onClick={() => this.enterExitMode("create")}>Create</button>
-                                <button className={this.state.modifyMode ? "account-main-button selected":"account-main-button"} onClick={() => this.enterExitMode("modify")}>Modify</button>
-                                <button className={this.state.deleteMode ? "account-main-button selected":"account-main-button"} onClick={() => this.enterExitMode("delete")}>Delete</button>
+                                <button className="account-main-button" onClick={() => this.toggleMode("create")}>Create</button>
+                                <button className={this.state.modifyMode ? "account-main-button selected":"account-main-button"} onClick={() => this.toggleMode("modify")}>Modify</button>
+                                <button className={this.state.deleteMode ? "account-main-button selected":"account-main-button"} onClick={() => this.toggleMode("delete")}>Delete</button>
                             </div>
                             <ul id="account-main-planners">
                             {(this.state.plannerList || []).map((plan, index) => (

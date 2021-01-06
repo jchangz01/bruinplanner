@@ -44,7 +44,8 @@ padding-right: 0.3vw;
     line-height: 18vh;
     min-height: 18vh;
     width: 14vw;
-    margin: 45vh auto 0;
+    position: absolute;
+    bottom: 8vh;
     background-color: #C3D7EE;
 }
 
@@ -75,7 +76,7 @@ padding-right: 0.3vw;
 #planner {
     margin-left: 14vw;
     width: calc(100% - 14vw);
-    height: 60vh;
+    height: 55vh;
     margin-top: 3vh;
 }
 
@@ -124,7 +125,7 @@ padding-right: 0.3vw;
 #planner-container {
     width: 83vw;
     margin: 0 auto;
-    height: 54vh;
+    height: 49vh;
     display: flex;
     justify-content: space-between;
     overflow: auto;
@@ -189,11 +190,20 @@ padding-right: 0.3vw;
         display: inline;
     }
 
+    #search-class-type {
+        margin: 5px 0;
+    }
+        #search-class-type > p { display: inline;}
+        #search-class-type > span {
+            font-weight: bold;
+        }
+
+
     #search-class-input {
         width: 100%;
         border-radius: 0.25rem;
         border: 0.1vw solid gray;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         font-size: 1vw;
         height: 4vh;
         display: block;
