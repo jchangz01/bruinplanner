@@ -116,7 +116,6 @@ class SearchCourses extends React.Component {
             }
             i++;
         }
-        console.log(filteredCourses)
         this.setState({
             filteredCourses,
             showCourses: true,
@@ -264,8 +263,6 @@ export default class Account extends React.Component {
         displayedCourses.splice(displayedCoursesIndex, 1) //remove course from search box display
 
         var allCoursesCopy = this.state.allCourses.slice();
-        console.log(allCoursesCopy[allCourseIndex])
-        console.log(allCourseIndex)
         allCoursesCopy.splice(allCourseIndex, 1)
         this.setState({ allCourses: allCoursesCopy }) //remove course from master course list
     }
@@ -349,7 +346,6 @@ export default class Account extends React.Component {
         
         axios.post('/getFilteredCourses', {"index" : plannerIndex })
         .then ( res => {
-            console.log( res.data.filteredCourses )
             this.setState({ allCourses: res.data.filteredCourses, fetchingForInitialData: false })
         })
         .catch ( err => {
