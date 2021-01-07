@@ -280,9 +280,8 @@ async function checkNotAuthenticated(req, res, next)
     next(); 
 }
 
-
 // server port used to run our backend 
-const port = 8080
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
