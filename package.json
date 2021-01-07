@@ -6,13 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon app.js",
-    "start": "node app.js"
+    "start": "./deploy.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jchangz01/bruinplanner.git"
   },
-  "author": "Justin Kyle Chang, Nilay Shah, David Zhao, Gaurav Kale",
+  "author": "Justin Kyle Chang",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jchangz01/bruinplanner/issues"
