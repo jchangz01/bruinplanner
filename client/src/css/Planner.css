@@ -125,10 +125,11 @@ padding-right: 0.3vw;
 #planner-container {
     width: 83vw;
     margin: 0 auto;
-    height: 49vh;
+    height: 48.5vh;
     display: flex;
     justify-content: space-between;
     overflow: auto;
+    border: 0.1vw solid gray;
 }
     .planner-quarter {
         width: 6.75vw;
