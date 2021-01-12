@@ -87,10 +87,7 @@ export default class Account extends React.Component {
             if (res.data.redirect === '/log-in')
                 window.location='/log-in'
         })
-        .catch( err => {
-            
-            console.error(err)
-        })
+        .catch( err => console.error(err) )
     }
 
     createPlanner = event => {

@@ -7,13 +7,15 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // external package imports
-const express = require('express')
+const express = require('express');
 const app = express();
-const bcrypt = require ('bcrypt')
-const passport = require ('passport')
-const flash = require ('express-flash')
-const session = require ('express-session')
-const methodOverride = require('method-override')
+const bcrypt = require ('bcrypt');
+const passport = require ('passport');
+const flash = require ('express-flash');
+const session = require ('express-session');
+const methodOverride = require('method-override');
+const connectMongo = require('connect-mongo');
+const mongoStore = connectMongo(session);
 
 // internal package imports 
 const planner = require ('./js/planner-structure')
@@ -25,6 +27,15 @@ const mail = require('./js/contactMail-config.js')
 const contactEmail = mail.configureEmail(process.env.CONTACT_EMAIL_ADDRESS, process.env.CONTACT_EMAIL_PASS)
 const contactEmailAddress = process.env.CONTACT_EMAIL_ADDRESS
 
+/* Settting up database mongoDb */
+const mongoose = require('mongoose')
+var ObjectID=require('mongodb').ObjectID;
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+const db = mongoose.connection
+db.on('error', error => console.log(error))
+db.once('open', () => console.log('Connected to Mongoose'))
+
+
 // configure express 
 app.use (express.urlencoded({ extended: false })); //tells app to access 'name' input fields in req of HTTP calls
 app.use(express.static(__dirname + '/client/build')); // using react static
@@ -33,20 +44,14 @@ app.use (flash())
 app.use (session ({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new mongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 180 * 60 * 1000 } //session expires in 180 minutes
+
 }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
-
-
-/* Settting up database mongoDb */
-const mongoose = require('mongoose')
-var ObjectID=require('mongodb').ObjectID;
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
-const db = mongoose.connection
-db.on('error', error => console.log(error))
-db.once('open', () => console.log('Connected to Mongoose'))
 
 
 /* initialize authentication passport */
